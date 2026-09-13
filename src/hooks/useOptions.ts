@@ -1,6 +1,5 @@
 "use client";
 
-import { useCallback } from "react";
 import { catalogService, folderService } from "@/services";
 import type { Category, Folder, IaModel, Tag } from "@/types/api";
 import { useAsyncData } from "./useAsyncData";
@@ -10,10 +9,13 @@ import { useAsyncData } from "./useAsyncData";
  *
  * Chargees une fois par ecran, non paginees : le referentiel tient largement
  * dans ce volume, et un selecteur paginerait la ou l'on veut juste choisir.
+ *
+ * `loader` doit deja etre une reference stable (une fonction de module,
+ * jamais une closure recreee a chaque rendu) : c'est le cas de chacune des
+ * fonctions de `services/`.
  */
 function useList<T>(loader: () => Promise<T[]>): T[] {
-  const stable = useCallback(loader, [loader]);
-  const { data } = useAsyncData(stable);
+  const { data } = useAsyncData(loader);
 
   return data ?? [];
 }

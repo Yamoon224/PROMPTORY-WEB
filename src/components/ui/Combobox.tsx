@@ -142,7 +142,6 @@ export function SearchableSelectField({
             disabled={disabled}
             aria-haspopup="listbox"
             aria-expanded={isOpen}
-            aria-invalid={fieldProps["aria-invalid"]}
             onClick={() => setIsOpen((open) => !open)}
             className={cn(
               fieldProps.className,
@@ -262,7 +261,6 @@ export function MultiSelectField({
             disabled={disabled}
             aria-haspopup="listbox"
             aria-expanded={isOpen}
-            aria-invalid={fieldProps["aria-invalid"]}
             onClick={() => setIsOpen((open) => !open)}
             className={cn(
               fieldProps.className,
