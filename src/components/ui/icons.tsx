@@ -98,6 +98,15 @@ export function IconRobot(props: IconProps) {
   );
 }
 
+export function IconArchive(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <rect x="3" y="3.5" width="18" height="5" rx="1.4" />
+      <path d="M4.5 8.5V18a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V8.5M10 13h4" />
+    </Icon>
+  );
+}
+
 export function IconPackage(props: IconProps) {
   return (
     <Icon {...props}>
@@ -113,6 +122,17 @@ export function IconCart(props: IconProps) {
       <path d="M3 4h2l2.2 11.5a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.6L20.5 8H6" />
       <circle cx="9.5" cy="20" r="1.3" />
       <circle cx="17" cy="20" r="1.3" />
+    </Icon>
+  );
+}
+
+export function IconCoins(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <ellipse cx="9" cy="7" rx="6" ry="3.5" />
+      <path d="M3 7v10c0 1.9 2.7 3.5 6 3.5s6-1.6 6-3.5" />
+      <path d="M3 12c0 1.9 2.7 3.5 6 3.5s6-1.6 6-3.5" />
+      <path d="M15 6.3c2.9.4 5 1.7 5 3.2s-2.1 2.8-5 3.2M15 13.5c2.9.4 5 1.7 5 3.2s-2.1 2.8-5 3.2" />
     </Icon>
   );
 }

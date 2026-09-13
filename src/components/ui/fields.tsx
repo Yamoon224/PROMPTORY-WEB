@@ -85,6 +85,55 @@ export function PasswordField({ label, errors, hint, fieldClassName, required, .
   );
 }
 
+export interface NumberFieldProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "id" | "placeholder" | "type" | "value" | "onChange">,
+    CommonFieldProps {
+  placeholder?: string;
+  value: number | "";
+  /** Toujours un nombre a virgule flottante (ou "" pendant la saisie) : jamais un entier arrondi. */
+  onChange: (value: number | "") => void;
+  step?: number;
+}
+
+/**
+ * Champ numerique a virgule (prix, taux…). `step="0.01"` par defaut : un prix
+ * de marketplace se saisit au centime pres, jamais arrondi a l'unite.
+ */
+export function NumberField({
+  label,
+  errors,
+  hint,
+  fieldClassName,
+  required,
+  value,
+  onChange,
+  step = 0.01,
+  placeholder = "0.00",
+  ...props
+}: NumberFieldProps) {
+  return (
+    <Field label={label} errors={errors} hint={hint} required={required} className={fieldClassName}>
+      {(fieldProps) => (
+        <input
+          {...fieldProps}
+          type="number"
+          inputMode="decimal"
+          step={step}
+          min={0}
+          required={required}
+          placeholder={placeholder}
+          value={value}
+          onChange={(event) => {
+            const raw = event.target.value;
+            onChange(raw === "" ? "" : Number.parseFloat(raw));
+          }}
+          {...props}
+        />
+      )}
+    </Field>
+  );
+}
+
 export interface TextareaFieldProps
   extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "id" | "placeholder">,
     CommonFieldProps {
