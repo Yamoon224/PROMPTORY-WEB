@@ -40,8 +40,8 @@
  * ne demande aucun element supplementaire dans chaque mise en page.
  *
  * Clair -> blanc ; Sombre -> gris. Le motif change de nuance avec le theme
- * mais garde le meme pas (10px, un filigrane fin) et le meme angle (135deg)
- * dans les deux cas.
+ * mais garde le meme pas (1px par rayure, un filigrane tres fin) et le meme
+ * angle (135deg) dans les deux cas.
  */
 :root {
   color-scheme: light;
@@ -104,9 +104,9 @@ body {
   background-image: repeating-linear-gradient(
     135deg,
     var(--stripe-a) 0px,
-    var(--stripe-a) 5px,
-    var(--stripe-b) 5px,
-    var(--stripe-b) 10px
+    var(--stripe-a) 1px,
+    var(--stripe-b) 1px,
+    var(--stripe-b) 2px
   );
   background-attachment: fixed;
   color: var(--foreground);
