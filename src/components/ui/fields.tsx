@@ -180,29 +180,29 @@ export function SelectField({ label, errors, hint, fieldClassName, required, chi
 }
 
 /**
- * Recherche de barre d'outils : le seul champ dont le placeholder reste
- * visible. Un libelle flottant au-dessus d'une loupe n'apporterait rien et
- * volerait de la hauteur au tableau.
+ * Recherche, libelle flottant comme tous les autres champs.
+ *
+ * La loupe est un adornment a droite (comme l'oeil de `PasswordField`) plutot
+ * qu'a gauche : un pictogramme a gauche entrerait en collision avec le
+ * libelle flottant, ancre lui aussi a gauche.
  */
 export function SearchInput({
   label = "Rechercher",
+  placeholder = "Rechercher…",
   className,
   ...props
-}: Omit<InputHTMLAttributes<HTMLInputElement>, "type"> & { label?: string }) {
+}: Omit<InputHTMLAttributes<HTMLInputElement>, "type" | "placeholder"> & { label?: string; placeholder?: string }) {
   return (
-    <div className="relative w-full">
-      <IconSearch className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-400" />
-      <input
-        type="search"
-        aria-label={label}
-        className={cn(
-          "w-full rounded-sm border-0 bg-[var(--surface)] py-2.5 pl-9 pr-3 text-sm text-[var(--foreground)]",
-          "ring-1 ring-inset ring-[var(--field-border)] transition-shadow placeholder:text-zinc-400",
-          "focus:outline-none focus:ring-2 focus:ring-brand-500",
-          className,
-        )}
-        {...props}
-      />
-    </div>
+    <Field label={label} adornment={<IconSearch className="h-4 w-4 text-zinc-400" />}>
+      {(fieldProps) => (
+        <input
+          {...fieldProps}
+          type="search"
+          placeholder={placeholder}
+          {...props}
+          className={cn(fieldProps.className, "pr-10", className)}
+        />
+      )}
+    </Field>
   );
 }

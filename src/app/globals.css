@@ -103,9 +103,9 @@ body {
   background-image: repeating-linear-gradient(
     135deg,
     var(--stripe-a) 0px,
-    var(--stripe-a) 18px,
-    var(--stripe-b) 18px,
-    var(--stripe-b) 36px
+    var(--stripe-a) 5px,
+    var(--stripe-b) 5px,
+    var(--stripe-b) 10px
   );
   background-attachment: fixed;
   color: var(--foreground);
