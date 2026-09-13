@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback } from "react";
-import { Badge, Button, Card, CardBody, ErrorState, FormAlert, LoadingState } from "@/components/ui";
+import { useCallback, useState } from "react";
+import { Badge, Button, Card, CardBody, ErrorState, LoadingState } from "@/components/ui";
 import { useAuth } from "@/features/auth/AuthContext";
+import { PaymentMethodModal } from "@/features/payments/PaymentMethodModal";
+import type { PaymentSubmission } from "@/features/payments/PaymentMethodModal";
 import { useAsyncData } from "@/hooks/useAsyncData";
 import { useMutation } from "@/hooks/useMutation";
 import { formatMoney } from "@/lib/format";
@@ -13,12 +15,21 @@ export function PackDetail({ slug }: { slug: string }) {
   const { user } = useAuth();
   const loadPack = useCallback(() => packService.getPack(slug), [slug]);
   const { data: pack, isLoading, error, reload } = useAsyncData(loadPack);
-  const purchase = useMutation(() => saleService.purchasePack(pack!.id));
+  const purchase = useMutation((submission: PaymentSubmission) => saleService.purchasePack(pack!.id, submission));
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
 
   if (isLoading) return <LoadingState label="Chargement du pack…" />;
   if (error || !pack) return <ErrorState error={error} onRetry={reload} />;
 
   const isOwner = user?.id === pack.creator?.id;
+
+  async function onBuy(submission: PaymentSubmission) {
+    const sale = await purchase.run(submission);
+    if (sale) {
+      setIsPaymentModalOpen(false);
+      reload();
+    }
+  }
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_20rem]">
@@ -57,17 +68,18 @@ export function PackDetail({ slug }: { slug: string }) {
             <p className="text-sm text-[var(--muted)]">Vous etes le createur de ce pack.</p>
           ) : user ? (
             <>
-              {purchase.error ? <FormAlert>Le paiement a echoue. Reessayez.</FormAlert> : null}
-              <Button
-                size="lg"
-                className="w-full"
-                isLoading={purchase.isPending}
-                onClick={async () => {
-                  await purchase.run(undefined);
-                }}
-              >
+              <Button size="lg" className="w-full" onClick={() => setIsPaymentModalOpen(true)}>
                 Acheter le pack
               </Button>
+              <PaymentMethodModal
+                isOpen={isPaymentModalOpen}
+                onClose={() => setIsPaymentModalOpen(false)}
+                title="Acheter ce pack"
+                amountLabel={formatMoney(pack.price)}
+                onConfirm={onBuy}
+                isPending={purchase.isPending}
+                error={purchase.error}
+              />
             </>
           ) : (
             <p className="text-sm text-[var(--muted)]">

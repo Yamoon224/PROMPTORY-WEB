@@ -5,6 +5,8 @@ import type { FormEvent } from "react";
 import { Badge, Button, Card, CardBody, ErrorState, FormAlert, LoadingState, TextareaField } from "@/components/ui";
 import { IconCopy, IconLock, IconStar } from "@/components/ui/icons";
 import { useAuth } from "@/features/auth/AuthContext";
+import { PaymentMethodModal } from "@/features/payments/PaymentMethodModal";
+import type { PaymentSubmission } from "@/features/payments/PaymentMethodModal";
 import { useAsyncData } from "@/hooks/useAsyncData";
 import { useMutation } from "@/hooks/useMutation";
 import { formatDate, formatMoney } from "@/lib/format";
@@ -27,8 +29,9 @@ export function PromptDetail({ slug }: { slug: string }) {
   const loadReviews = useCallback(() => (prompt ? reviewService.listReviews(prompt.id) : Promise.resolve({ data: [], meta: { current_page: 1, last_page: 1, per_page: 15, total: 0 } })), [prompt]);
   const { data: reviewPage, reload: reloadReviews } = useAsyncData(loadReviews);
 
-  const purchase = useMutation(() => saleService.purchasePrompt(prompt!.id));
+  const purchase = useMutation((submission: PaymentSubmission) => saleService.purchasePrompt(prompt!.id, submission));
   const [copied, setCopied] = useState(false);
+  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
 
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");
@@ -54,9 +57,12 @@ export function PromptDetail({ slug }: { slug: string }) {
     }
   }
 
-  async function onBuy() {
-    const sale = await purchase.run(undefined);
-    if (sale) reload();
+  async function onBuy(submission: PaymentSubmission) {
+    const sale = await purchase.run(submission);
+    if (sale) {
+      setIsPaymentModalOpen(false);
+      reload();
+    }
   }
 
   async function onReview(event: FormEvent) {
@@ -204,10 +210,18 @@ export function PromptDetail({ slug }: { slug: string }) {
               </p>
             ) : user ? (
               <>
-                {purchase.error ? <FormAlert>Le paiement a echoue. Reessayez.</FormAlert> : null}
-                <Button size="lg" className="w-full" onClick={onBuy} isLoading={purchase.isPending}>
+                <Button size="lg" className="w-full" onClick={() => setIsPaymentModalOpen(true)}>
                   Acheter pour {formatMoney(prompt.price)}
                 </Button>
+                <PaymentMethodModal
+                  isOpen={isPaymentModalOpen}
+                  onClose={() => setIsPaymentModalOpen(false)}
+                  title="Acheter ce prompt"
+                  amountLabel={formatMoney(prompt.price)}
+                  onConfirm={onBuy}
+                  isPending={purchase.isPending}
+                  error={purchase.error}
+                />
               </>
             ) : (
               <p className="text-sm text-[var(--muted)]">

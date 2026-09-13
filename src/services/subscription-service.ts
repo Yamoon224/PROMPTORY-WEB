@@ -1,11 +1,17 @@
 import { apiFetch } from "@/lib/api-client";
 import type { ListParams, Paginated, Single, Subscription, SubscriptionType } from "@/types/api";
 
-export async function subscribe(type: SubscriptionType, paymentToken?: string | null): Promise<Subscription> {
+export interface SubscribeInput {
+  type: SubscriptionType;
+  payment_method: "stripe" | "paypal";
+  payment_token?: string | null;
+}
+
+export async function subscribe(input: SubscribeInput): Promise<Subscription> {
   return (
     await apiFetch<Single<Subscription>>("/subscriptions", {
       method: "POST",
-      body: { type, payment_token: paymentToken ?? null },
+      body: { ...input, payment_token: input.payment_token ?? null },
     })
   ).data;
 }
