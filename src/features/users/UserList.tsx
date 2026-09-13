@@ -172,8 +172,8 @@ function UserFormModal({ user, onClose, onSaved }: { user: User | null; onClose:
       }
     >
       <div className="flex flex-col gap-4">
-        <TextField label="Nom complet" value={name} onChange={(event) => setName(event.target.value)} errors={fieldErrors.name} required autoFocus />
-        <TextField label="Adresse e-mail" type="email" value={email} onChange={(event) => setEmail(event.target.value)} errors={fieldErrors.email} required />
+        <TextField label="Nom complet" placeholder="Camille Createur" value={name} onChange={(event) => setName(event.target.value)} errors={fieldErrors.name} required autoFocus />
+        <TextField label="Adresse e-mail" type="email" placeholder="vous@exemple.com" value={email} onChange={(event) => setEmail(event.target.value)} errors={fieldErrors.email} required />
         <PasswordField
           label={user ? "Nouveau mot de passe (facultatif)" : "Mot de passe"}
           placeholder={user ? "Laisser vide pour ne pas changer" : "8 caracteres minimum"}
