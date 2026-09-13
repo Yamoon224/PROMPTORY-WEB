@@ -1,0 +1,367 @@
+@import "tailwindcss";
+
+/*
+ * Trois modes de theme - clair, sombre, systeme - pilotes par une classe sur
+ * <html> plutot que par la seule media query : une personne doit pouvoir
+ * choisir l'inverse de son systeme, et ce choix doit survivre au rechargement.
+ * La variante `dark:` de Tailwind est donc rebranchee sur `.dark`.
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Code", Menlo, monospace;
+
+  /*
+   * Violet du produit, decline en une seule rampe. Les surfaces restent
+   * neutres (blanc ou gris) ; le violet est reserve a ce qui doit attirer
+   * l'oeil - action principale, etat actif, mise en avant d'un prompt.
+   */
+  --color-brand-50: #f2f1fe;
+  --color-brand-100: #e5e2fd;
+  --color-brand-200: #cbc5fb;
+  --color-brand-300: #a89ef7;
+  --color-brand-400: #8b7cf4;
+  --color-brand-500: #6d5ef8;
+  --color-brand-600: #5a47e6;
+  --color-brand-700: #4735c2;
+  --color-brand-800: #392b96;
+  --color-brand-900: #2c2273;
+
+  /* Vert, reserve aux etats de succes : achat confirme, prompt approuve.
+     Il ne sert jamais de decoration. */
+  --color-flag-green: #16a34a;
+}
+
+/*
+ * Filigrane de fond : rayures diagonales contigues (sans espace entre elles),
+ * dans une seule teinte quasi imperceptible. Le motif vit sur `body` et non
+ * sur un calque separe : il defile avec la page, ne capte jamais le clic, et
+ * ne demande aucun element supplementaire dans chaque mise en page.
+ *
+ * Clair -> blanc ; Sombre -> gris. Le motif change de nuance avec le theme
+ * mais garde le meme pas (36px) et le meme angle (135deg) dans les deux cas.
+ */
+:root {
+  color-scheme: light;
+  --canvas: #ffffff;
+  --stripe-a: #ffffff;
+  --stripe-b: #f4f4f6;
+  --surface: #ffffff;
+  --surface-muted: #f6f6f8;
+  --foreground: #18181b;
+  --muted: #6b6b76;
+  --hairline: #e4e4e8;
+  --card-border-top: #d4d4db;
+  --card-shadow: 0 1px 2px rgb(24 24 27 / 0.05), 0 12px 28px -14px rgb(24 24 27 / 0.16);
+  --card-shadow-hover: 0 2px 4px rgb(24 24 27 / 0.06), 0 18px 38px -16px rgb(109 94 248 / 0.28);
+}
+
+.dark {
+  color-scheme: dark;
+  --canvas: #17181c;
+  --stripe-a: #17181c;
+  --stripe-b: #1d1e24;
+  --surface: #202127;
+  --surface-muted: #26272e;
+  --foreground: #f2f2f5;
+  --muted: #a1a1ac;
+  --hairline: #34343d;
+  --card-border-top: #4a4a56;
+  --card-shadow: 0 1px 2px rgb(0 0 0 / 0.5), 0 12px 30px -14px rgb(0 0 0 / 0.85);
+  --card-shadow-hover: 0 2px 6px rgb(0 0 0 / 0.55), 0 20px 42px -16px rgb(109 94 248 / 0.35);
+}
+
+/*
+ * Couleurs des graphiques.
+ *
+ * Trois teintes categorielles, dans un ordre fixe valide en paires completes
+ * (daltonisme protan/deutan et vision normale) contre les surfaces reelles des
+ * cartes, en clair comme en sombre. Le vert n'y figure pas : il est reserve
+ * aux etats de succes.
+ */
+:root {
+  --series-1: #5a47e6;
+  --series-2: #d6862c;
+  --series-3: #1baf7a;
+  --chart-grid: #e4e4e8;
+  --chart-axis: #d4d4db;
+  --meter-track: #e5e2fd;
+}
+
+.dark {
+  --series-1: #8b7cf4;
+  --series-2: #e5993f;
+  --series-3: #34c98e;
+  --chart-grid: #34343d;
+  --chart-axis: #4a4a56;
+  --meter-track: #392b96;
+}
+
+body {
+  background-color: var(--canvas);
+  background-image: repeating-linear-gradient(
+    135deg,
+    var(--stripe-a) 0px,
+    var(--stripe-a) 18px,
+    var(--stripe-b) 18px,
+    var(--stripe-b) 36px
+  );
+  background-attachment: fixed;
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Le degrade de marque, toujours diagonal : une seule definition, reprise par
+   les boutons, les en-tetes de tableau et l'etat actif. */
+@utility grad-brand {
+  background-image: linear-gradient(135deg, #8b7cf4 0%, #6d5ef8 50%, #5a47e6 100%);
+}
+
+@utility grad-brand-hover {
+  background-image: linear-gradient(135deg, #6d5ef8 0%, #5a47e6 50%, #4735c2 100%);
+}
+
+@utility grad-brand-soft {
+  background-image: linear-gradient(135deg, rgb(109 94 248 / 0.14) 0%, rgb(90 71 230 / 0.06) 100%);
+}
+
+@utility grad-brand-text {
+  background-image: linear-gradient(135deg, #6d5ef8 0%, #4735c2 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@utility shadow-card {
+  box-shadow: var(--card-shadow);
+}
+
+@utility shadow-card-hover {
+  box-shadow: var(--card-shadow-hover);
+}
+
+@keyframes fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility animate-fade-rise {
+  animation: fade-rise 0.24s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--foreground) 22%, transparent) transparent;
+}
+
+::selection {
+  background-color: rgb(109 94 248 / 0.22);
+}
+
+/* ---------------------------------------------------------------------------
+ * Champ a libelle flottant, contour unique, coins rounded-sm
+ * ---------------------------------------------------------------------------
+ *
+ * Le contour n'est pas porte par le controle mais par un <fieldset> pose
+ * par-dessus. Sa <legend> decoupe un vrai trou dans le trait au moment ou le
+ * libelle monte : rien n'est masque derriere un fond opaque, donc aucun
+ * « double trait » quand le champ vit dans une carte teintee ou un dialogue.
+ */
+
+:root {
+  --field-border: #d4d4db;
+  --field-border-hover: #b0b0ba;
+  --field-border-focus: #6d5ef8;
+  --field-border-error: #e11d48;
+  --field-label: #71717a;
+  --field-label-focus: #5a47e6;
+  --field-placeholder: #a1a1ac;
+  --field-disabled-bg: #f6f6f8;
+}
+
+.dark {
+  --field-border: #4a4a56;
+  --field-border-hover: #63636f;
+  --field-border-focus: #8b7cf4;
+  --field-border-error: #fb7185;
+  --field-label: #a1a1ac;
+  --field-label-focus: #a89ef7;
+  --field-placeholder: #71717a;
+  --field-disabled-bg: #26272e;
+}
+
+@layer components {
+  .field-shell {
+    position: relative;
+    display: block;
+    margin-top: 0.4rem;
+  }
+
+  .field-control {
+    display: block;
+    width: 100%;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background-color: transparent;
+    padding: 0.75rem 0.8rem;
+    font-size: 0.9rem;
+    line-height: 1.35rem;
+    color: var(--foreground);
+    outline: none;
+  }
+
+  .field-control::placeholder {
+    color: transparent;
+    transition: color 0.12s ease-out;
+  }
+
+  /* Le placeholder n'apparait qu'une fois le libelle monte : les deux textes ne
+     se superposent jamais. */
+  .field-control:focus::placeholder {
+    color: var(--field-placeholder);
+  }
+
+  .field-control:disabled {
+    cursor: not-allowed;
+    background-color: var(--field-disabled-bg);
+    color: color-mix(in srgb, var(--foreground) 55%, transparent);
+  }
+
+  .field-outline {
+    position: absolute;
+    inset: -0.4rem 0 0 0;
+    margin: 0;
+    padding: 0 0.55rem;
+    min-width: 0;
+    pointer-events: none;
+    border: 1px solid var(--field-border);
+    border-radius: var(--radius-sm);
+    transition:
+      border-color 0.15s ease-out,
+      box-shadow 0.15s ease-out;
+  }
+
+  .field-outline > legend {
+    display: block;
+    float: none;
+    width: auto;
+    max-width: 0.01px;
+    height: 0.8rem;
+    padding: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    visibility: hidden;
+    font-size: 0.7rem;
+    transition: max-width 0.12s ease-out;
+  }
+
+  .field-outline > legend > span {
+    display: inline-block;
+    padding: 0 0.3rem;
+    opacity: 0;
+    visibility: visible;
+  }
+
+  .field-shell:hover .field-outline {
+    border-color: var(--field-border-hover);
+  }
+
+  .field-label {
+    position: absolute;
+    left: 0.85rem;
+    top: 50%;
+    z-index: 1;
+    max-width: calc(100% - 1.7rem);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 0.9rem;
+    line-height: 1;
+    color: var(--field-label);
+    transition:
+      top 0.12s ease-out,
+      font-size 0.12s ease-out,
+      color 0.12s ease-out;
+  }
+
+  .field-shell--textarea .field-label {
+    top: 1.45rem;
+  }
+
+  /* Etat monte : au focus, ou des qu'une valeur est presente. Les <select> et
+     champs de date ne connaissent pas `:placeholder-shown` : `:not()` les rend
+     flottants en permanence, ce qui est voulu - ils affichent toujours quelque
+     chose. */
+  .field-control:focus ~ .field-outline > legend,
+  .field-control:not(:placeholder-shown) ~ .field-outline > legend,
+  .field-control--filled ~ .field-outline > legend {
+    max-width: 100%;
+  }
+
+  .field-control:focus ~ .field-label,
+  .field-control:not(:placeholder-shown) ~ .field-label,
+  .field-control--filled ~ .field-label {
+    top: -0.4rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+  }
+
+  .field-control:focus ~ .field-label {
+    color: var(--field-label-focus);
+  }
+
+  .field-control:focus ~ .field-outline {
+    border-color: var(--field-border-focus);
+    box-shadow: inset 0 0 0 1px var(--field-border-focus);
+  }
+
+  .field-control--filled::placeholder {
+    color: var(--foreground);
+    font-weight: 500;
+  }
+
+  .field-control[aria-invalid="true"] ~ .field-outline {
+    border-color: var(--field-border-error);
+  }
+
+  .field-control[aria-invalid="true"]:focus ~ .field-outline {
+    box-shadow: inset 0 0 0 1px var(--field-border-error);
+  }
+
+  .field-control[aria-invalid="true"] ~ .field-label {
+    color: var(--field-border-error);
+  }
+
+  .field-control:disabled ~ .field-outline {
+    border-color: color-mix(in srgb, var(--field-border) 55%, transparent);
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+  }
+}
