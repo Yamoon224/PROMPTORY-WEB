@@ -40,7 +40,8 @@
  * ne demande aucun element supplementaire dans chaque mise en page.
  *
  * Clair -> blanc ; Sombre -> gris. Le motif change de nuance avec le theme
- * mais garde le meme pas (36px) et le meme angle (135deg) dans les deux cas.
+ * mais garde le meme pas (10px, un filigrane fin) et le meme angle (135deg)
+ * dans les deux cas.
  */
 :root {
   color-scheme: light;
