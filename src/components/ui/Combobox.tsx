@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
-import type { ReactNode } from "react";
+import { forwardRef, useEffect, useMemo, useRef, useState } from "react";
+import type { ReactNode, RefObject } from "react";
 import { cn } from "@/lib/cn";
 import { Field } from "./Field";
 import { IconCheck, IconChevronDown, IconClose, IconSearch } from "./icons";
@@ -25,13 +25,16 @@ interface ComboboxShellProps {
  * fermeture au clic exterieur ou a Echap, et champ de recherche focalise a
  * l'ouverture.
  *
- * Le control lui-meme est un `<button>`, jamais un `<select>` ni un `<input>` :
- * un bouton ne declenche jamais `:placeholder-shown`, exactement comme un
- * `<select>` natif, ce qui suffit a maintenir le libelle flottant en
- * permanence (voir la regle dediee dans `globals.css`) sans classe
- * supplementaire.
+ * Rendue directement comme enfant de `.field-shell` (jamais dans un `<div>`
+ * intermediaire) : elle se positionne grace au `position: relative` deja
+ * porte par `.field-shell`, et n'a donc pas besoin d'un conteneur a elle —
+ * conteneur qui casserait la relation de fraternite CSS exigee par le libelle
+ * flottant (voir le commentaire sur `.field-control` plus bas).
  */
-function ComboboxPanel({ isOpen, onOpenChange, query, onQueryChange, searchPlaceholder, children }: ComboboxShellProps) {
+const ComboboxPanel = forwardRef<HTMLDivElement, ComboboxShellProps>(function ComboboxPanel(
+  { isOpen, onOpenChange, query, onQueryChange, searchPlaceholder, children },
+  ref,
+) {
   const searchRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -41,7 +44,7 @@ function ComboboxPanel({ isOpen, onOpenChange, query, onQueryChange, searchPlace
   if (!isOpen) return null;
 
   return (
-    <div className="absolute z-20 mt-1 w-full overflow-hidden rounded-sm border border-[var(--hairline)] bg-[var(--surface)] shadow-card">
+    <div ref={ref} className="absolute inset-x-0 top-full z-20 mt-1 overflow-hidden rounded-sm border border-[var(--hairline)] bg-[var(--surface)] shadow-card">
       <div className="relative border-b border-[var(--hairline)] p-1.5">
         <IconSearch className="pointer-events-none absolute left-4 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-zinc-400" />
         <input
@@ -61,23 +64,23 @@ function ComboboxPanel({ isOpen, onOpenChange, query, onQueryChange, searchPlace
       </ul>
     </div>
   );
-}
+});
 
-function useOutsideClose(isOpen: boolean, onClose: () => void) {
-  const ref = useRef<HTMLDivElement>(null);
-
+/** Ferme le panneau au clic en dehors de l'un ou l'autre des elements references. */
+function useOutsideClose(isOpen: boolean, onClose: () => void, refs: Array<RefObject<HTMLElement | null>>) {
   useEffect(() => {
     if (!isOpen) return;
 
     function onPointerDown(event: MouseEvent) {
-      if (ref.current && !ref.current.contains(event.target as Node)) onClose();
+      const target = event.target as Node;
+      const isInside = refs.some((ref) => ref.current?.contains(target));
+      if (!isInside) onClose();
     }
 
     document.addEventListener("mousedown", onPointerDown);
     return () => document.removeEventListener("mousedown", onPointerDown);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- `refs` est un tableau litteral stable en pratique (memes objets ref a chaque rendu)
   }, [isOpen, onClose]);
-
-  return ref;
 }
 
 interface SearchableSelectFieldProps {
@@ -101,6 +104,14 @@ interface SearchableSelectFieldProps {
  * vingtaine d'entrees (categories, dossiers) : ce composant ajoute un champ de
  * recherche au sommet de la liste deroulante, sans changer la forme de la
  * valeur (une chaine, comme un `<select>`).
+ *
+ * Le control est un `<button>` rendu **directement** comme frere de la
+ * `<legend>` et du `<label>` flottant de `Field` — jamais enveloppe dans un
+ * `<div>` a soi. `.field-control:not(:placeholder-shown) ~ .field-label` (voir
+ * `globals.css`) est un selecteur de **fraternite** : un bouton ne declenche
+ * jamais `:placeholder-shown`, ce qui suffit a maintenir le libelle flottant en
+ * permanence, exactement comme pour un `<select>` natif — mais seulement si le
+ * bouton et le libelle partagent le meme parent direct.
  */
 export function SearchableSelectField({
   label,
@@ -117,7 +128,9 @@ export function SearchableSelectField({
 }: SearchableSelectFieldProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const containerRef = useOutsideClose(isOpen, () => setIsOpen(false));
+  const controlRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  useOutsideClose(isOpen, () => setIsOpen(false), [controlRef, panelRef]);
 
   const selected = options.find((option) => option.value === value) ?? null;
 
@@ -135,8 +148,9 @@ export function SearchableSelectField({
   return (
     <Field label={label} errors={errors} hint={hint} required={required} variant="select">
       {(fieldProps) => (
-        <div ref={containerRef} className="relative">
+        <>
           <button
+            ref={controlRef}
             type="button"
             id={fieldProps.id}
             disabled={disabled}
@@ -154,7 +168,7 @@ export function SearchableSelectField({
             </span>
           </button>
 
-          <div className="pointer-events-none absolute inset-y-0 right-1.5 flex items-center gap-1">
+          <div className="pointer-events-none absolute inset-y-0 right-1.5 z-[2] flex items-center gap-1">
             {clearable && selected ? (
               <button
                 type="button"
@@ -172,6 +186,7 @@ export function SearchableSelectField({
           </div>
 
           <ComboboxPanel
+            ref={panelRef}
             isOpen={isOpen}
             onOpenChange={setIsOpen}
             query={query}
@@ -200,7 +215,7 @@ export function SearchableSelectField({
               ))
             )}
           </ComboboxPanel>
-        </div>
+        </>
       )}
     </Field>
   );
@@ -223,6 +238,9 @@ interface MultiSelectFieldProps {
  * Selecteur multiple avec recherche : tags, categories ou outils IA d'un
  * prompt. Les valeurs choisies restent visibles sous forme de jetons dans le
  * control, chacun retirable sans rouvrir la liste.
+ *
+ * Meme remarque que `SearchableSelectField` : le `<button>` est un frere
+ * direct du libelle flottant, pas un enfant d'un `<div>` intermediaire.
  */
 export function MultiSelectField({
   label,
@@ -238,7 +256,9 @@ export function MultiSelectField({
 }: MultiSelectFieldProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const containerRef = useOutsideClose(isOpen, () => setIsOpen(false));
+  const controlRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  useOutsideClose(isOpen, () => setIsOpen(false), [controlRef, panelRef]);
 
   const selectedOptions = options.filter((option) => values.includes(option.value));
 
@@ -254,8 +274,9 @@ export function MultiSelectField({
   return (
     <Field label={label} errors={errors} hint={hint} required={required} variant="select">
       {(fieldProps) => (
-        <div ref={containerRef} className="relative">
+        <>
           <button
+            ref={controlRef}
             type="button"
             id={fieldProps.id}
             disabled={disabled}
@@ -299,9 +320,10 @@ export function MultiSelectField({
             )}
           </button>
 
-          <IconChevronDown className="pointer-events-none absolute right-2.5 top-4 h-4 w-4 text-zinc-400" />
+          <IconChevronDown className="pointer-events-none absolute right-2.5 top-4 z-[2] h-4 w-4 text-zinc-400" />
 
           <ComboboxPanel
+            ref={panelRef}
             isOpen={isOpen}
             onOpenChange={setIsOpen}
             query={query}
@@ -334,7 +356,7 @@ export function MultiSelectField({
               })
             )}
           </ComboboxPanel>
-        </div>
+        </>
       )}
     </Field>
   );

@@ -99,7 +99,7 @@ export function PromptDetail({ slug }: { slug: string }) {
               ))}
             </div>
 
-            {prompt.average_rating !== null ? (
+            {typeof prompt.average_rating === "number" ? (
               <p className="flex items-center gap-1 text-sm font-semibold text-amber-600 dark:text-amber-400">
                 <IconStar className="h-4 w-4" />
                 {prompt.average_rating.toFixed(1)} sur 5

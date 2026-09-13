@@ -33,7 +33,7 @@ export function PromptCard({ prompt }: { prompt: Prompt }) {
             </div>
           ) : null}
 
-          {prompt.average_rating !== null ? (
+          {typeof prompt.average_rating === "number" ? (
             <p className="flex items-center gap-1 text-xs font-semibold text-amber-600 dark:text-amber-400">
               <IconStar className="h-3.5 w-3.5" />
               {prompt.average_rating.toFixed(1)}
