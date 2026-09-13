@@ -49,3 +49,37 @@ export async function logout(): Promise<void> {
 export async function me(): Promise<AuthenticatedUser> {
   return (await apiFetch<Single<AuthenticatedUser>>("/me")).data;
 }
+
+export interface UpdateProfileInput {
+  name?: string;
+  email?: string;
+}
+
+export async function updateProfile(input: UpdateProfileInput): Promise<AuthenticatedUser> {
+  return (await apiFetch<Single<AuthenticatedUser>>("/me", { method: "PUT", body: input })).data;
+}
+
+export interface UpdatePasswordInput {
+  current_password: string;
+  password: string;
+  password_confirmation: string;
+}
+
+export async function updatePassword(input: UpdatePasswordInput): Promise<void> {
+  await apiFetch<void>("/me/password", { method: "PUT", body: input });
+}
+
+export async function forgotPassword(email: string): Promise<{ message: string }> {
+  return apiFetch<{ message: string }>("/forgot-password", { method: "POST", body: { email } });
+}
+
+export interface ResetPasswordInput {
+  email: string;
+  token: string;
+  password: string;
+  password_confirmation: string;
+}
+
+export async function resetPassword(input: ResetPasswordInput): Promise<{ message: string }> {
+  return apiFetch<{ message: string }>("/reset-password", { method: "POST", body: input });
+}

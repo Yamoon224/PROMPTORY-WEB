@@ -62,6 +62,12 @@ export function LoginForm({ next }: { next?: string }) {
         required
       />
 
+      <p className="-mt-2 text-right text-xs">
+        <Link href="/mot-de-passe-oublie" className="font-semibold text-brand-600">
+          Mot de passe oublie ?
+        </Link>
+      </p>
+
       {error && !(error instanceof ApiError && error.status === 422) ? <FormAlert>{errorMessage(error)}</FormAlert> : null}
 
       <Button type="submit" size="lg" className="w-full" isLoading={isPending}>
