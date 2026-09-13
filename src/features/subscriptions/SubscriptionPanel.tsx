@@ -1,13 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { Badge, Button, Card, CardBody, CardHeader, ConfirmDialog, ErrorState, FormAlert, LoadingState } from "@/components/ui";
+import { Badge, Button, Card, CardBody, CardHeader, ConfirmDialog, ErrorState, LoadingState } from "@/components/ui";
 import { IconCreditCard } from "@/components/ui/icons";
+import { PaymentMethodModal } from "@/features/payments/PaymentMethodModal";
+import type { PaymentSubmission } from "@/features/payments/PaymentMethodModal";
 import { useAsyncData } from "@/hooks/useAsyncData";
 import { useMutation } from "@/hooks/useMutation";
 import { formatDate, formatMoney } from "@/lib/format";
 import { SUBSCRIPTION_STATUS_LABEL, SUBSCRIPTION_STATUS_TONE, SUBSCRIPTION_TYPE_LABEL } from "@/lib/labels";
 import { subscriptionService } from "@/services";
+import type { SubscribeInput } from "@/services/subscription-service";
 import type { SubscriptionType } from "@/types/api";
 
 const PLANS: Array<{ type: SubscriptionType; price: number; description: string }> = [
@@ -18,14 +21,25 @@ const PLANS: Array<{ type: SubscriptionType; price: number; description: string 
 /** Abonnements premium createur et extension, avec souscription et annulation en libre-service. */
 export function SubscriptionPanel() {
   const { data: subscriptions, isLoading, error, reload } = useAsyncData(() => subscriptionService.listMySubscriptions({ per_page: 50 }));
-  const subscribeMutation = useMutation((type: SubscriptionType) => subscriptionService.subscribe(type));
+  const subscribeMutation = useMutation((input: SubscribeInput) => subscriptionService.subscribe(input));
   const cancelMutation = useMutation((id: number) => subscriptionService.cancelSubscription(id));
   const [pendingCancelId, setPendingCancelId] = useState<number | null>(null);
+  const [subscribingTo, setSubscribingTo] = useState<(typeof PLANS)[number] | null>(null);
 
   if (isLoading) return <LoadingState label="Chargement de vos abonnements…" />;
   if (error) return <ErrorState error={error} onRetry={reload} />;
 
   const activeByType = new Map((subscriptions?.data ?? []).filter((sub) => sub.is_active).map((sub) => [sub.type, sub]));
+
+  async function onSubscribe(submission: PaymentSubmission) {
+    if (!subscribingTo) return;
+
+    const subscription = await subscribeMutation.run({ type: subscribingTo.type, ...submission });
+    if (subscription) {
+      setSubscribingTo(null);
+      reload();
+    }
+  }
 
   return (
     <div className="flex flex-col gap-6">
@@ -54,14 +68,7 @@ export function SubscriptionPanel() {
                     </Button>
                   </>
                 ) : (
-                  <Button
-                    size="sm"
-                    className="self-start"
-                    isLoading={subscribeMutation.isPending}
-                    onClick={async () => {
-                      if (await subscribeMutation.run(plan.type)) reload();
-                    }}
-                  >
+                  <Button size="sm" className="self-start" onClick={() => setSubscribingTo(plan)}>
                     S&apos;abonner
                   </Button>
                 )}
@@ -71,7 +78,17 @@ export function SubscriptionPanel() {
         })}
       </div>
 
-      {subscribeMutation.error ? <FormAlert>Le paiement a echoue. Reessayez.</FormAlert> : null}
+      {subscribingTo ? (
+        <PaymentMethodModal
+          isOpen
+          onClose={() => setSubscribingTo(null)}
+          title={`S'abonner — ${SUBSCRIPTION_TYPE_LABEL[subscribingTo.type]}`}
+          amountLabel={`${formatMoney(subscribingTo.price)} / mois`}
+          onConfirm={onSubscribe}
+          isPending={subscribeMutation.isPending}
+          error={subscribeMutation.error}
+        />
+      ) : null}
 
       <ConfirmDialog
         isOpen={pendingCancelId !== null}
