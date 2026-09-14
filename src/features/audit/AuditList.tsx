@@ -23,7 +23,7 @@ const ACTION_LABEL: Record<ActivityAction, string> = {
 /** Journal d'activite de la plateforme (analytics produit, back-office). */
 export function AuditList() {
   const fetcher = useCallback((page: number, perPage: number) => activityService.listActivity({ page, per_page: perPage }), []);
-  const { items, meta, setPage, isLoading, error, reload } = usePaginatedData(fetcher);
+  const { items, meta, setPage, setPerPage, isLoading, error, reload } = usePaginatedData(fetcher);
 
   const columns: Array<Column<ActivityLogEntry>> = [
     { key: "action", header: "Action", cell: (entry) => <Badge tone="brand">{ACTION_LABEL[entry.action]}</Badge> },
@@ -46,6 +46,7 @@ export function AuditList() {
       emptyTitle="Aucun evenement enregistre"
       meta={meta}
       onPageChange={setPage}
+      onPerPageChange={setPerPage}
     />
   );
 }

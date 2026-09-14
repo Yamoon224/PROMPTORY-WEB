@@ -13,7 +13,7 @@ import type { Prompt } from "@/types/api";
 /** File d'attente de moderation des prompts soumis a validation. */
 export function PromptModerationQueue() {
   const fetcher = useCallback((page: number, perPage: number) => promptService.listPendingPrompts({ page, per_page: perPage }), []);
-  const { items, meta, setPage, isLoading, error, reload } = usePaginatedData(fetcher);
+  const { items, meta, setPage, setPerPage, isLoading, error, reload } = usePaginatedData(fetcher);
 
   const approveMutation = useMutation((id: number) => promptService.approvePrompt(id));
   const [rejecting, setRejecting] = useState<Prompt | null>(null);
@@ -67,6 +67,7 @@ export function PromptModerationQueue() {
         emptyTitle="Aucun prompt en attente de validation"
         meta={meta}
         onPageChange={setPage}
+        onPerPageChange={setPerPage}
       />
 
       {rejecting ? (

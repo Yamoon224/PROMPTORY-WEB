@@ -35,7 +35,7 @@ export function PromptList() {
     [debouncedSearch, status, sortParams],
   );
 
-  const { items, meta, setPage, isLoading, error, reload } = usePaginatedData(fetcher);
+  const { items, meta, setPage, setPerPage, isLoading, error, reload } = usePaginatedData(fetcher);
 
   const submitMutation = useMutation((id: number) => promptService.submitPrompt(id));
   const archiveMutation = useMutation((id: number) => promptService.archivePrompt(id));
@@ -161,6 +161,7 @@ export function PromptList() {
         onSortChange={setSort}
         meta={meta}
         onPageChange={setPage}
+        onPerPageChange={setPerPage}
       />
 
       <ConfirmDialog

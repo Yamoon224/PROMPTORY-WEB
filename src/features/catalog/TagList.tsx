@@ -24,7 +24,7 @@ export function TagList() {
     [debouncedSearch, sortParams],
   );
 
-  const { items, meta, setPage, isLoading, error, reload } = usePaginatedData(fetcher);
+  const { items, meta, setPage, setPerPage, isLoading, error, reload } = usePaginatedData(fetcher);
   const deleteMutation = useMutation((id: number) => catalogService.deleteTag(id));
 
   const columns: Array<Column<Tag>> = [
@@ -67,6 +67,7 @@ export function TagList() {
         onSortChange={setSort}
         meta={meta}
         onPageChange={setPage}
+        onPerPageChange={setPerPage}
       />
 
       {editing !== null ? (

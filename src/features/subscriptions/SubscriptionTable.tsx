@@ -13,7 +13,7 @@ import type { Subscription } from "@/types/api";
 /** Tous les abonnements de la plateforme (back-office). */
 export function SubscriptionTable() {
   const fetcher = useCallback((page: number, perPage: number) => subscriptionService.listAllSubscriptions({ page, per_page: perPage }), []);
-  const { items, meta, setPage, isLoading, error, reload } = usePaginatedData(fetcher);
+  const { items, meta, setPage, setPerPage, isLoading, error, reload } = usePaginatedData(fetcher);
 
   const columns: Array<Column<Subscription>> = [
     { key: "user", header: "Compte", cell: (subscription) => subscription.user?.name ?? "—" },
@@ -41,6 +41,7 @@ export function SubscriptionTable() {
       emptyTitle="Aucun abonnement"
       meta={meta}
       onPageChange={setPage}
+      onPerPageChange={setPerPage}
     />
   );
 }

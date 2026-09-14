@@ -52,7 +52,7 @@ export function PromptBrowser() {
     [debouncedSearch, category, tag, iaModel, freeOnly, sort],
   );
 
-  const { items, meta, setPage, isLoading, error, reload, isEmpty } = usePaginatedData(fetcher);
+  const { items, meta, setPage, setPerPage, isLoading, error, reload, isEmpty } = usePaginatedData(fetcher);
 
   return (
     <div className="flex flex-col gap-6">
@@ -119,7 +119,7 @@ export function PromptBrowser() {
         </div>
       ) : null}
 
-      {meta && meta.total > 0 ? <Pagination meta={meta} onPageChange={setPage} /> : null}
+      {meta && meta.total > 0 ? <Pagination meta={meta} onPageChange={setPage} onPerPageChange={setPerPage} /> : null}
     </div>
   );
 }

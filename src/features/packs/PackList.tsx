@@ -24,7 +24,7 @@ export function PackList() {
   const [pendingDelete, setPendingDelete] = useState<Pack | null>(null);
 
   const fetcher = useCallback((page: number, perPage: number) => packService.listMyPacks({ page, per_page: perPage, status: status || undefined }), [status]);
-  const { items, meta, setPage, isLoading, error, reload } = usePaginatedData(fetcher);
+  const { items, meta, setPage, setPerPage, isLoading, error, reload } = usePaginatedData(fetcher);
 
   const archiveMutation = useMutation((id: number) => packService.archivePack(id));
   const resubmitMutation = useMutation((id: number) => packService.resubmitPack(id));
@@ -114,6 +114,7 @@ export function PackList() {
         }
         meta={meta}
         onPageChange={setPage}
+        onPerPageChange={setPerPage}
       />
 
       <ConfirmDialog

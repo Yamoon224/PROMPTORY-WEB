@@ -28,7 +28,7 @@ export function CategoryList() {
     [debouncedSearch, sortParams],
   );
 
-  const { items, meta, setPage, isLoading, error, reload } = usePaginatedData(fetcher);
+  const { items, meta, setPage, setPerPage, isLoading, error, reload } = usePaginatedData(fetcher);
   const { data: allCategories } = useAsyncData(catalogService.allCategories);
   const deleteMutation = useMutation((id: number) => catalogService.deleteCategory(id));
 
@@ -73,6 +73,7 @@ export function CategoryList() {
         onSortChange={setSort}
         meta={meta}
         onPageChange={setPage}
+        onPerPageChange={setPerPage}
       />
 
       {editing !== null ? (

@@ -31,7 +31,7 @@ export function UserList() {
     [debouncedSearch, sortParams],
   );
 
-  const { items, meta, setPage, isLoading, error, reload } = usePaginatedData(fetcher);
+  const { items, meta, setPage, setPerPage, isLoading, error, reload } = usePaginatedData(fetcher);
   const deleteMutation = useMutation((id: number) => userService.deleteUser(id));
 
   const columns: Array<Column<User>> = [
@@ -104,6 +104,7 @@ export function UserList() {
         onSortChange={setSort}
         meta={meta}
         onPageChange={setPage}
+        onPerPageChange={setPerPage}
       />
 
       {editing !== null ? (

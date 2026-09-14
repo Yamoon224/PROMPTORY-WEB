@@ -40,7 +40,7 @@ const DATE_COLUMN: Column<Sale> = {
 /** Historique de mes achats : ce que j'ai paye, a qui, et pour combien. */
 export function MyPurchasesTable() {
   const fetcher = useCallback((page: number, perPage: number) => saleService.listMyPurchases({ page, per_page: perPage }), []);
-  const { items, meta, setPage, isLoading, error, reload } = usePaginatedData(fetcher);
+  const { items, meta, setPage, setPerPage, isLoading, error, reload } = usePaginatedData(fetcher);
 
   const columns: Array<Column<Sale>> = [
     ITEM_COLUMN,
@@ -64,6 +64,7 @@ export function MyPurchasesTable() {
       emptyTitle="Vous n'avez encore rien achete"
       meta={meta}
       onPageChange={setPage}
+      onPerPageChange={setPerPage}
     />
   );
 }
@@ -71,7 +72,7 @@ export function MyPurchasesTable() {
 /** Ventes en tant que createur : revenu brut, commission et net par transaction. */
 export function MyEarningsTable() {
   const fetcher = useCallback((page: number, perPage: number) => saleService.listMyEarnings({ page, per_page: perPage }), []);
-  const { items, meta, setPage, isLoading, error, reload } = usePaginatedData(fetcher);
+  const { items, meta, setPage, setPerPage, isLoading, error, reload } = usePaginatedData(fetcher);
 
   const columns: Array<Column<Sale>> = [
     ITEM_COLUMN,
@@ -97,6 +98,7 @@ export function MyEarningsTable() {
       emptyTitle="Aucune vente pour l'instant"
       meta={meta}
       onPageChange={setPage}
+      onPerPageChange={setPerPage}
     />
   );
 }
@@ -108,7 +110,7 @@ export function AllSalesTable() {
     (page: number, perPage: number) => saleService.listAllSales({ page, per_page: perPage, payment_status: status || undefined }),
     [status],
   );
-  const { items, meta, setPage, isLoading, error, reload } = usePaginatedData(fetcher);
+  const { items, meta, setPage, setPerPage, isLoading, error, reload } = usePaginatedData(fetcher);
 
   const columns: Array<Column<Sale>> = [
     ITEM_COLUMN,
@@ -147,6 +149,7 @@ export function AllSalesTable() {
       }
       meta={meta}
       onPageChange={setPage}
+      onPerPageChange={setPerPage}
     />
   );
 }

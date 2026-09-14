@@ -13,7 +13,7 @@ import type { Pack } from "@/types/api";
 /** File d'attente de moderation des packs. */
 export function PackModerationQueue() {
   const fetcher = useCallback((page: number, perPage: number) => packService.listPendingPacks({ page, per_page: perPage }), []);
-  const { items, meta, setPage, isLoading, error, reload } = usePaginatedData(fetcher);
+  const { items, meta, setPage, setPerPage, isLoading, error, reload } = usePaginatedData(fetcher);
 
   const approveMutation = useMutation((id: number) => packService.approvePack(id));
   const [rejecting, setRejecting] = useState<Pack | null>(null);
@@ -62,6 +62,7 @@ export function PackModerationQueue() {
         emptyTitle="Aucun pack en attente de validation"
         meta={meta}
         onPageChange={setPage}
+        onPerPageChange={setPerPage}
       />
 
       {rejecting ? (

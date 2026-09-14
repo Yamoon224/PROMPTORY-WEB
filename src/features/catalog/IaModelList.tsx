@@ -25,7 +25,7 @@ export function IaModelList() {
     [debouncedSearch, sortParams],
   );
 
-  const { items, meta, setPage, isLoading, error, reload } = usePaginatedData(fetcher);
+  const { items, meta, setPage, setPerPage, isLoading, error, reload } = usePaginatedData(fetcher);
   const deleteMutation = useMutation((id: number) => catalogService.deleteIaModel(id));
 
   const columns: Array<Column<IaModel>> = [
@@ -69,6 +69,7 @@ export function IaModelList() {
         onSortChange={setSort}
         meta={meta}
         onPageChange={setPage}
+        onPerPageChange={setPerPage}
       />
 
       {editing !== null ? (
