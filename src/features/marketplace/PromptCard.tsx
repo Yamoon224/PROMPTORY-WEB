@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Badge, Card, CardBody, CardFooter } from "@/components/ui";
 import { IconStar } from "@/components/ui/icons";
+import { AddToCartButton } from "@/features/cart/AddToCartButton";
 import { formatMoney } from "@/lib/format";
 import type { Prompt } from "@/types/api";
 
@@ -10,11 +11,18 @@ import type { Prompt } from "@/types/api";
  * L'ordre de lecture reprend celui d'une fiche produit : titre, createur,
  * categories, puis prix — la seule information que l'oeil cherche en dernier,
  * une fois convaincu par le reste.
+ *
+ * Le bouton panier est un frere du lien de navigation, pas un enfant : un
+ * `<a>` ne peut pas contenir de bouton, seul le pied de carte (prix + panier)
+ * en sort donc.
  */
 export function PromptCard({ prompt }: { prompt: Prompt }) {
   return (
-    <Link href={`/prompts/${prompt.slug}`} className="block h-full rounded-sm focus-visible:outline-2 focus-visible:outline-brand-500">
-      <Card interactive className="h-full">
+    <Card interactive className="h-full">
+      <Link
+        href={`/prompts/${prompt.slug}`}
+        className="flex flex-1 flex-col rounded-t-sm focus-visible:outline-2 focus-visible:outline-brand-500"
+      >
         <CardBody className="flex flex-1 flex-col gap-3">
           <div className="flex items-start justify-between gap-2">
             <h3 className="text-sm font-bold leading-snug text-zinc-900 dark:text-zinc-50">{prompt.title}</h3>
@@ -41,13 +49,26 @@ export function PromptCard({ prompt }: { prompt: Prompt }) {
             </p>
           ) : null}
         </CardBody>
-        <CardFooter className="justify-between">
-          <span className="text-xs text-[var(--muted)]">{prompt.downloads_count} telechargements</span>
+      </Link>
+      <CardFooter className="justify-between">
+        <span className="text-xs text-[var(--muted)]">{prompt.downloads_count} telechargements</span>
+        <div className="flex items-center gap-2">
           <span className="text-base font-extrabold tabular-nums text-brand-700 dark:text-brand-400">
             {prompt.is_free ? "Gratuit" : formatMoney(prompt.price)}
           </span>
-        </CardFooter>
-      </Card>
-    </Link>
+          <AddToCartButton
+            item={{
+              kind: "prompt",
+              id: prompt.id,
+              title: prompt.title,
+              slug: prompt.slug,
+              price: prompt.price,
+              isFree: prompt.is_free,
+              creatorName: prompt.creator?.name ?? "Createur inconnu",
+            }}
+          />
+        </div>
+      </CardFooter>
+    </Card>
   );
 }

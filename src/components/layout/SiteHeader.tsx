@@ -6,8 +6,9 @@ import { useState } from "react";
 import { Logo } from "@/components/brand/Logo";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { LinkButton } from "@/components/ui";
-import { IconClose, IconMenu, IconPackage, IconUser } from "@/components/ui/icons";
+import { IconCart, IconClose, IconMenu, IconPackage, IconUser } from "@/components/ui/icons";
 import { useAuth } from "@/features/auth/AuthContext";
+import { useCart } from "@/features/cart/CartContext";
 import { cn } from "@/lib/cn";
 
 const LINKS = [
@@ -24,6 +25,7 @@ const LINKS = [
 export function SiteHeader() {
   const pathname = usePathname();
   const { user } = useAuth();
+  const { count } = useCart();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -52,6 +54,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
+          <CartLink count={count} />
           <ThemeToggle />
           {user ? (
             <LinkButton href="/espace" variant="secondary" size="sm" icon={<IconUser className="h-3.5 w-3.5" />}>
@@ -64,15 +67,18 @@ export function SiteHeader() {
           )}
         </div>
 
-        <button
-          type="button"
-          onClick={() => setIsOpen((open) => !open)}
-          aria-expanded={isOpen}
-          aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
-          className="rounded-sm p-2 text-zinc-600 hover:bg-zinc-100 md:hidden dark:text-zinc-300 dark:hover:bg-zinc-800"
-        >
-          {isOpen ? <IconClose className="h-5 w-5" /> : <IconMenu className="h-5 w-5" />}
-        </button>
+        <div className="flex items-center gap-1 md:hidden">
+          <CartLink count={count} />
+          <button
+            type="button"
+            onClick={() => setIsOpen((open) => !open)}
+            aria-expanded={isOpen}
+            aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
+            className="rounded-sm p-2 text-zinc-600 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
+          >
+            {isOpen ? <IconClose className="h-5 w-5" /> : <IconMenu className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
       {isOpen ? (
@@ -105,5 +111,23 @@ export function SiteHeader() {
         </div>
       ) : null}
     </header>
+  );
+}
+
+/** Lien vers le panier, avec le compte d'articles en pastille des qu'il n'est pas vide. */
+function CartLink({ count }: { count: number }) {
+  return (
+    <Link
+      href="/panier"
+      aria-label={count > 0 ? `Panier, ${count} article${count > 1 ? "s" : ""}` : "Panier"}
+      className="relative flex h-9 w-9 items-center justify-center rounded-sm text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-50"
+    >
+      <IconCart className="h-5 w-5" />
+      {count > 0 ? (
+        <span className="grad-brand absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full px-1 text-[10px] font-bold leading-none text-white">
+          {count > 9 ? "9+" : count}
+        </span>
+      ) : null}
+    </Link>
   );
 }
