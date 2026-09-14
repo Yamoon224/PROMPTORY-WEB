@@ -13,20 +13,23 @@
   --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Code", Menlo, monospace;
 
   /*
-   * Violet du produit, decline en une seule rampe. Les surfaces restent
-   * neutres (blanc ou gris) ; le violet est reserve a ce qui doit attirer
-   * l'oeil - action principale, etat actif, mise en avant d'un prompt.
+   * Indigo Promptory, decline en une seule rampe (charte graphique v1.0).
+   * Les surfaces restent neutres (blanc ou gris) ; l'indigo est reserve a ce
+   * qui doit attirer l'oeil - action principale, etat actif, mise en avant
+   * d'un prompt. #4A47C1 (500) et #343085 (700, "Indigo profond") sont les
+   * deux teintes officielles de la charte ; le reste de la rampe est
+   * interpole autour d'elles.
    */
-  --color-brand-50: #f2f1fe;
-  --color-brand-100: #e5e2fd;
-  --color-brand-200: #cbc5fb;
-  --color-brand-300: #a89ef7;
-  --color-brand-400: #8b7cf4;
-  --color-brand-500: #6d5ef8;
-  --color-brand-600: #5a47e6;
-  --color-brand-700: #4735c2;
-  --color-brand-800: #392b96;
-  --color-brand-900: #2c2273;
+  --color-brand-50: #f1f0fa;
+  --color-brand-100: #dedef4;
+  --color-brand-200: #bab9e7;
+  --color-brand-300: #9291da;
+  --color-brand-400: #6e6ccd;
+  --color-brand-500: #4a47c1;
+  --color-brand-600: #3f3ba3;
+  --color-brand-700: #343085;
+  --color-brand-800: #292567;
+  --color-brand-900: #1e1a49;
 
   /* Vert, reserve aux etats de succes : achat confirme, prompt approuve.
      Il ne sert jamais de decoration. */
@@ -47,15 +50,15 @@
   color-scheme: light;
   --canvas: #ffffff;
   --stripe-a: #ffffff;
-  --stripe-b: #f4f4f6;
+  --stripe-b: #f4f4f8;
   --surface: #ffffff;
-  --surface-muted: #f6f6f8;
-  --foreground: #18181b;
+  --surface-muted: #f4f4f8;
+  --foreground: #0a0a0f;
   --muted: #6b6b76;
   --hairline: #e4e4e8;
   --card-border-top: #d4d4db;
   --card-shadow: 0 1px 2px rgb(24 24 27 / 0.05), 0 12px 28px -14px rgb(24 24 27 / 0.16);
-  --card-shadow-hover: 0 2px 4px rgb(24 24 27 / 0.06), 0 18px 38px -16px rgb(109 94 248 / 0.28);
+  --card-shadow-hover: 0 2px 4px rgb(24 24 27 / 0.06), 0 18px 38px -16px rgb(74 71 193 / 0.28);
 }
 
 .dark {
@@ -70,7 +73,7 @@
   --hairline: #34343d;
   --card-border-top: #4a4a56;
   --card-shadow: 0 1px 2px rgb(0 0 0 / 0.5), 0 12px 30px -14px rgb(0 0 0 / 0.85);
-  --card-shadow-hover: 0 2px 6px rgb(0 0 0 / 0.55), 0 20px 42px -16px rgb(109 94 248 / 0.35);
+  --card-shadow-hover: 0 2px 6px rgb(0 0 0 / 0.55), 0 20px 42px -16px rgb(74 71 193 / 0.35);
 }
 
 /*
@@ -82,21 +85,21 @@
  * aux etats de succes.
  */
 :root {
-  --series-1: #5a47e6;
+  --series-1: #3f3ba3;
   --series-2: #d6862c;
   --series-3: #1baf7a;
   --chart-grid: #e4e4e8;
   --chart-axis: #d4d4db;
-  --meter-track: #e5e2fd;
+  --meter-track: #dedef4;
 }
 
 .dark {
-  --series-1: #8b7cf4;
+  --series-1: #6e6ccd;
   --series-2: #e5993f;
   --series-3: #34c98e;
   --chart-grid: #34343d;
   --chart-axis: #4a4a56;
-  --meter-track: #392b96;
+  --meter-track: #292567;
 }
 
 body {
@@ -117,19 +120,19 @@ body {
 /* Le degrade de marque, toujours diagonal : une seule definition, reprise par
    les boutons, les en-tetes de tableau et l'etat actif. */
 @utility grad-brand {
-  background-image: linear-gradient(135deg, #8b7cf4 0%, #6d5ef8 50%, #5a47e6 100%);
+  background-image: linear-gradient(135deg, #6e6ccd 0%, #4a47c1 50%, #3f3ba3 100%);
 }
 
 @utility grad-brand-hover {
-  background-image: linear-gradient(135deg, #6d5ef8 0%, #5a47e6 50%, #4735c2 100%);
+  background-image: linear-gradient(135deg, #4a47c1 0%, #3f3ba3 50%, #343085 100%);
 }
 
 @utility grad-brand-soft {
-  background-image: linear-gradient(135deg, rgb(109 94 248 / 0.14) 0%, rgb(90 71 230 / 0.06) 100%);
+  background-image: linear-gradient(135deg, rgb(74 71 193 / 0.14) 0%, rgb(63 60 163 / 0.06) 100%);
 }
 
 @utility grad-brand-text {
-  background-image: linear-gradient(135deg, #6d5ef8 0%, #4735c2 100%);
+  background-image: linear-gradient(135deg, #4a47c1 0%, #343085 100%);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -173,7 +176,7 @@ body {
 }
 
 ::selection {
-  background-color: rgb(109 94 248 / 0.22);
+  background-color: rgb(74 71 193 / 0.22);
 }
 
 /* ---------------------------------------------------------------------------
@@ -189,21 +192,21 @@ body {
 :root {
   --field-border: #d4d4db;
   --field-border-hover: #b0b0ba;
-  --field-border-focus: #6d5ef8;
+  --field-border-focus: #4a47c1;
   --field-border-error: #e11d48;
   --field-label: #71717a;
-  --field-label-focus: #5a47e6;
+  --field-label-focus: #3f3ba3;
   --field-placeholder: #a1a1ac;
-  --field-disabled-bg: #f6f6f8;
+  --field-disabled-bg: #f4f4f8;
 }
 
 .dark {
   --field-border: #4a4a56;
   --field-border-hover: #63636f;
-  --field-border-focus: #8b7cf4;
+  --field-border-focus: #6e6ccd;
   --field-border-error: #fb7185;
   --field-label: #a1a1ac;
-  --field-label-focus: #a89ef7;
+  --field-label-focus: #9291da;
   --field-placeholder: #71717a;
   --field-disabled-bg: #26272e;
 }
