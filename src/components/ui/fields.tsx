@@ -66,7 +66,7 @@ export function PasswordField({ label, errors, hint, fieldClassName, required, .
           onClick={() => setIsVisible((visible) => !visible)}
           aria-pressed={isVisible}
           aria-label={isVisible ? "masquer le mot de passe" : "afficher le mot de passe"}
-          className="flex h-8 w-8 items-center justify-center rounded-2xl text-zinc-400 transition-colors hover:text-brand-600"
+          className="flex h-8 w-8 items-center justify-center rounded-full text-zinc-400 transition-colors hover:text-brand-600"
         >
           {isVisible ? <IconEyeOff /> : <IconEye />}
         </button>

@@ -4,9 +4,9 @@ import { cn } from "@/lib/cn";
 /**
  * Carte : coins rounded-lg, ombre franche, lisere en tete.
  *
- * Rayon plus genereux que les controles qu'elle contient (boutons, badges
- * restent rounded-sm) : une hierarchie a deux niveaux, grande surface douce
- * et commandes nettes a l'interieur, plutot qu'un seul rayon partout.
+ * Rayon intermediaire entre les badges (rounded-sm) et les boutons/champs
+ * (entierement arrondis) : une hierarchie a plusieurs niveaux plutot qu'un
+ * seul rayon partout.
  *
  * Le lisere est porte par la bordure superieure elle-meme (`border-t`), pas
  * par un calque ajoute : il ne recouvre jamais le contenu et n'ajoute aucun

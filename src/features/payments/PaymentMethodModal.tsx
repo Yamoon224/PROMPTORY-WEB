@@ -109,7 +109,7 @@ export function PaymentMethodModal({
             aria-selected={method === "stripe"}
             onClick={() => setMethod("stripe")}
             className={cn(
-              "flex items-center justify-center gap-2 rounded-2xl border px-3 py-2.5 text-sm font-semibold transition-colors",
+              "flex items-center justify-center gap-2 rounded-full border px-3 py-2.5 text-sm font-semibold transition-colors",
               method === "stripe"
                 ? "border-brand-500 bg-brand-50 text-brand-700 dark:bg-brand-900/30 dark:text-brand-300"
                 : "border-[var(--hairline)] text-zinc-600 hover:bg-zinc-50 dark:text-zinc-300 dark:hover:bg-zinc-800",
@@ -124,7 +124,7 @@ export function PaymentMethodModal({
             aria-selected={method === "paypal"}
             onClick={() => setMethod("paypal")}
             className={cn(
-              "flex items-center justify-center gap-2 rounded-2xl border px-3 py-2.5 text-sm font-bold transition-colors",
+              "flex items-center justify-center gap-2 rounded-full border px-3 py-2.5 text-sm font-bold transition-colors",
               method === "paypal"
                 ? "border-[#0070ba] bg-[#f5faff] text-[#003087] dark:bg-[#0a2540] dark:text-[#4d9fff]"
                 : "border-[var(--hairline)] text-zinc-600 hover:bg-zinc-50 dark:text-zinc-300 dark:hover:bg-zinc-800",
@@ -190,7 +190,7 @@ export function PaymentMethodModal({
               type="button"
               onClick={submitPaypal}
               disabled={isPending}
-              className="flex h-11 w-full max-w-xs items-center justify-center rounded-2xl bg-[#ffc439] text-base font-bold text-[#003087] transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+              className="flex h-11 w-full max-w-xs items-center justify-center rounded-full bg-[#ffc439] text-base font-bold text-[#003087] transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isPending ? (
                 "Redirection…"

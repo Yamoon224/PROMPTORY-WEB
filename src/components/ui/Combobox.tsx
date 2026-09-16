@@ -177,7 +177,7 @@ export function SearchableSelectField({
                   event.stopPropagation();
                   select(null);
                 }}
-                className="pointer-events-auto rounded-2xl p-1 text-zinc-400 hover:text-rose-600"
+                className="pointer-events-auto rounded-full p-1 text-zinc-400 hover:text-rose-600"
               >
                 <IconClose className="h-3.5 w-3.5" />
               </button>

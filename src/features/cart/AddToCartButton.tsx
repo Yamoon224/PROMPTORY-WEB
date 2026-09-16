@@ -22,7 +22,7 @@ export function AddToCartButton({ item, className }: { item: CartItem; className
       aria-label={inCart ? `Retirer « ${item.title} » du panier` : `Ajouter « ${item.title} » au panier`}
       title={inCart ? "Retirer du panier" : "Ajouter au panier"}
       className={cn(
-        "inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-2xl transition-colors",
+        "inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors",
         inCart
           ? "bg-brand-500 text-white hover:bg-brand-600"
           : "bg-[var(--surface-muted)] text-[var(--muted)] hover:bg-brand-50 hover:text-brand-600 dark:hover:bg-zinc-800 dark:hover:text-brand-400",
