@@ -135,7 +135,7 @@ export function PromptBrowser() {
       ) : null}
 
       {!isLoading && !error && items.length > 0 ? (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {items.map((prompt) => (
             <PromptCard key={prompt.id} prompt={prompt} />
           ))}

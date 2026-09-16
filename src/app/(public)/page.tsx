@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Suspense } from "react";
-import { Card, CardBody, LinkButton } from "@/components/ui";
+import { Card, CardBody } from "@/components/ui";
 import { IconCoins, IconRobot, IconSparkle } from "@/components/ui/icons";
 import { CategoryExplorer } from "@/features/marketplace/CategoryExplorer";
 import { FeaturedPrompts } from "@/features/marketplace/FeaturedPrompts";
@@ -58,23 +58,19 @@ export default function HomePage() {
             </Suspense>
           </div>
 
-          <div className="mt-5 flex flex-wrap items-center gap-4">
-            <div className="flex flex-wrap gap-3">
-              <LinkButton href="#browser" variant="secondary" size="md">
-                Explorer les prompts
-              </LinkButton>
-              <Link
-                href="/inscription"
-                className="inline-flex h-10 items-center justify-center rounded-sm border border-white/40 px-4 text-sm font-semibold text-white transition-colors hover:bg-white/15"
-              >
-                Vendre mes prompts
-              </Link>
-            </div>
-          </div>
-
           <div className="mt-6">
             <MarketplaceStats />
           </div>
+
+          <p className="mt-4 text-sm text-white/80">
+            Vous etes createur ?{" "}
+            <Link
+              href="/inscription"
+              className="font-semibold text-white underline decoration-white/50 underline-offset-4 hover:decoration-white"
+            >
+              Vendez vos prompts sur Promptory →
+            </Link>
+          </p>
         </div>
       </section>
 
@@ -86,8 +82,22 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="pb-10">
-        <ol className="grid gap-5 md:grid-cols-3">
+      <FeaturedPrompts />
+
+      <section id="browser" className="scroll-mt-20 pb-10">
+        <h2 className="text-xl font-extrabold tracking-tight">Explorer tous les prompts</h2>
+        <span aria-hidden="true" className="grad-brand mt-2 block h-[3px] w-12 rounded-full" />
+        <div className="mt-6">
+          <Suspense fallback={null}>
+            <PromptBrowser />
+          </Suspense>
+        </div>
+      </section>
+
+      <section className="rounded-sm bg-[var(--surface-muted)] px-4 py-10 sm:px-8">
+        <h2 className="text-xl font-extrabold tracking-tight">Comment ca marche</h2>
+        <span aria-hidden="true" className="grad-brand mt-2 block h-[3px] w-12 rounded-full" />
+        <ol className="mt-6 grid gap-5 md:grid-cols-3">
           {STEPS.map((step, index) => (
             <li key={step.title}>
               <Card interactive className="h-full">
@@ -105,18 +115,6 @@ export default function HomePage() {
             </li>
           ))}
         </ol>
-      </section>
-
-      <FeaturedPrompts />
-
-      <section id="browser" className="scroll-mt-20 pb-10">
-        <h2 className="text-xl font-extrabold tracking-tight">Explorer tous les prompts</h2>
-        <span aria-hidden="true" className="grad-brand mt-2 block h-[3px] w-12 rounded-full" />
-        <div className="mt-6">
-          <Suspense fallback={null}>
-            <PromptBrowser />
-          </Suspense>
-        </div>
       </section>
     </>
   );

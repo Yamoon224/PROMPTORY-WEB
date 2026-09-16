@@ -2,12 +2,9 @@
 
 import Link from "next/link";
 import { Skeleton } from "@/components/ui";
-import { IconArchive, IconGrid, IconPrompt, IconRobot, IconSparkle, IconTag } from "@/components/ui/icons";
 import { useCategoryOptions } from "@/hooks/useOptions";
 import { cn } from "@/lib/cn";
-
-/** Rotation decorative, sans lien avec le contenu des categories elles-memes. */
-const ICONS = [IconSparkle, IconRobot, IconPrompt, IconGrid, IconTag, IconArchive];
+import { DECORATIVE_ICONS } from "./marketplace-icons";
 
 const MAX_VISIBLE = 8;
 
@@ -30,8 +27,8 @@ export function CategoryExplorer() {
 
   return (
     <ul className="flex flex-wrap gap-2.5">
-      {sorted.map((category, index) => {
-        const Icon = ICONS[index % ICONS.length];
+      {sorted.map((category) => {
+        const Icon = DECORATIVE_ICONS[Math.abs(category.id) % DECORATIVE_ICONS.length];
 
         return (
           <li key={category.id}>

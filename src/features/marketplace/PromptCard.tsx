@@ -4,36 +4,63 @@ import { IconStar } from "@/components/ui/icons";
 import { AddToCartButton } from "@/features/cart/AddToCartButton";
 import { formatMoney } from "@/lib/format";
 import type { Prompt } from "@/types/api";
+import { DECORATIVE_ICONS } from "./marketplace-icons";
 
 /**
  * Vignette d'un prompt dans une grille de resultats.
  *
+ * Sans photo produit (un prompt n'en a pas), la couverture reprend le
+ * dégradé de marque en fond et une icône décorative — le même repère que les
+ * chips de catégorie — pour que la carte se lise comme une fiche produit et
+ * non comme une simple ligne de liste.
+ *
  * L'ordre de lecture reprend celui d'une fiche produit : titre, createur,
- * categories, puis prix — la seule information que l'oeil cherche en dernier,
- * une fois convaincu par le reste.
+ * outils IA / categories, puis prix — la seule information que l'oeil
+ * cherche en dernier, une fois convaincu par le reste.
  *
  * Le bouton panier est un frere du lien de navigation, pas un enfant : un
  * `<a>` ne peut pas contenir de bouton, seul le pied de carte (prix + panier)
  * en sort donc.
  */
 export function PromptCard({ prompt }: { prompt: Prompt }) {
+  const Icon = DECORATIVE_ICONS[Math.abs(prompt.id) % DECORATIVE_ICONS.length];
+
   return (
     <Card interactive className="h-full">
       <Link
         href={`/prompts/${prompt.slug}`}
         className="flex flex-1 flex-col rounded-t-sm focus-visible:outline-2 focus-visible:outline-brand-500"
       >
+        <div className="relative flex h-24 shrink-0 items-center justify-center overflow-hidden grad-brand-soft">
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 opacity-[0.35]"
+            style={{
+              backgroundImage:
+                "repeating-linear-gradient(135deg, transparent 0 10px, rgb(74 71 193 / 0.07) 10px 11px)",
+            }}
+          />
+          <Icon className="relative h-9 w-9 text-brand-400/70 dark:text-brand-400/40" />
+          {prompt.is_free ? (
+            <Badge tone="success" className="absolute right-2 top-2">
+              Gratuit
+            </Badge>
+          ) : null}
+        </div>
+
         <CardBody className="flex flex-1 flex-col gap-3">
-          <div className="flex items-start justify-between gap-2">
-            <h3 className="text-sm font-bold leading-snug text-zinc-900 dark:text-zinc-50">{prompt.title}</h3>
-            {prompt.is_free ? <Badge tone="success">Gratuit</Badge> : null}
-          </div>
+          <h3 className="text-sm font-bold leading-snug text-zinc-900 dark:text-zinc-50">{prompt.title}</h3>
 
           <p className="text-xs text-[var(--muted)]">Par {prompt.creator?.name ?? "Createur inconnu"}</p>
 
-          {prompt.categories && prompt.categories.length > 0 ? (
+          {(prompt.ia_models && prompt.ia_models.length > 0) || (prompt.categories && prompt.categories.length > 0) ? (
             <div className="flex flex-wrap gap-1.5">
-              {prompt.categories.slice(0, 2).map((category) => (
+              {prompt.ia_models?.slice(0, 1).map((iaModel) => (
+                <Badge key={`ia-${iaModel.id}`} tone="info">
+                  {iaModel.name}
+                </Badge>
+              ))}
+              {prompt.categories?.slice(0, 2).map((category) => (
                 <Badge key={category.id} tone="brand">
                   {category.name}
                 </Badge>
