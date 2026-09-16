@@ -36,7 +36,7 @@ export function Pagination({
     : [...PER_PAGE_OPTIONS, meta.per_page].sort((a, b) => a - b);
 
   const pageButton = cn(
-    "inline-flex h-8 items-center gap-1 rounded-sm px-2.5 text-xs font-semibold transition-all",
+    "inline-flex h-8 items-center gap-1 rounded-2xl px-2.5 text-xs font-semibold transition-all",
     "grad-brand text-white shadow-sm hover:grad-brand-hover active:translate-y-px",
     "disabled:cursor-not-allowed disabled:bg-none disabled:bg-zinc-200 disabled:text-zinc-400 disabled:shadow-none",
     "dark:disabled:bg-zinc-800 dark:disabled:text-zinc-500",
@@ -57,7 +57,7 @@ export function Pagination({
             value={meta.per_page}
             disabled={!onPerPageChange}
             onChange={(event) => onPerPageChange?.(Number(event.target.value))}
-            className="appearance-none rounded-sm bg-[var(--surface)] py-1.5 pl-2.5 pr-7 text-xs font-semibold tabular-nums ring-1 ring-inset ring-[var(--field-border)] focus:outline-none focus:ring-2 focus:ring-brand-500"
+            className="appearance-none rounded-2xl bg-[var(--surface)] py-1.5 pl-2.5 pr-7 text-xs font-semibold tabular-nums ring-1 ring-inset ring-[var(--field-border)] focus:outline-none focus:ring-2 focus:ring-brand-500"
           >
             {options.map((option) => (
               <option key={option} value={option}>

@@ -118,7 +118,7 @@ export function PromptBrowser() {
               type="checkbox"
               checked={freeOnly}
               onChange={(event) => setFreeOnly(event.target.checked)}
-              className="h-4 w-4 rounded-sm border-[var(--field-border)] text-brand-600 focus:ring-brand-500"
+              className="h-4 w-4 rounded-2xl border-[var(--field-border)] text-brand-600 focus:ring-brand-500"
             />
             Prompts gratuits uniquement
           </label>

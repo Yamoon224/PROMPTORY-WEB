@@ -75,7 +75,7 @@ export function Modal({
           type="button"
           onClick={onClose}
           aria-label="Fermer"
-          className="-mr-1 -mt-1 shrink-0 rounded-sm p-2 text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-700 focus-visible:outline-2 focus-visible:outline-brand-500 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
+          className="-mr-1 -mt-1 shrink-0 rounded-2xl p-2 text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-700 focus-visible:outline-2 focus-visible:outline-brand-500 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
         >
           <IconClose className="h-4 w-4" />
         </button>

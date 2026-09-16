@@ -44,7 +44,7 @@ const ComboboxPanel = forwardRef<HTMLDivElement, ComboboxShellProps>(function Co
   if (!isOpen) return null;
 
   return (
-    <div ref={ref} className="absolute inset-x-0 top-full z-20 mt-1 overflow-hidden rounded-sm border border-[var(--hairline)] bg-[var(--surface)] shadow-card">
+    <div ref={ref} className="absolute inset-x-0 top-full z-20 mt-1 overflow-hidden rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] shadow-card">
       <div className="relative border-b border-[var(--hairline)] p-1.5">
         <IconSearch className="pointer-events-none absolute left-4 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-zinc-400" />
         <input
@@ -56,7 +56,7 @@ const ComboboxPanel = forwardRef<HTMLDivElement, ComboboxShellProps>(function Co
             if (event.key === "Escape") onOpenChange(false);
           }}
           placeholder={searchPlaceholder}
-          className="w-full rounded-sm bg-transparent py-1.5 pl-7 pr-2 text-sm text-[var(--foreground)] outline-none placeholder:text-zinc-400"
+          className="w-full rounded-2xl bg-transparent py-1.5 pl-7 pr-2 text-sm text-[var(--foreground)] outline-none placeholder:text-zinc-400"
         />
       </div>
       <ul role="listbox" className="max-h-56 overflow-y-auto py-1">
@@ -177,7 +177,7 @@ export function SearchableSelectField({
                   event.stopPropagation();
                   select(null);
                 }}
-                className="pointer-events-auto rounded-sm p-1 text-zinc-400 hover:text-rose-600"
+                className="pointer-events-auto rounded-2xl p-1 text-zinc-400 hover:text-rose-600"
               >
                 <IconClose className="h-3.5 w-3.5" />
               </button>

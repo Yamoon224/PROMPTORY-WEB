@@ -19,7 +19,7 @@ export function ToolbarSelect({
     <div className={cn("relative", className)}>
       <select
         aria-label={label}
-        className="h-10 w-full appearance-none rounded-sm bg-[var(--surface)] pl-3 pr-8 text-sm font-medium ring-1 ring-inset ring-[var(--field-border)] focus:outline-none focus:ring-2 focus:ring-brand-500"
+        className="h-10 w-full appearance-none rounded-2xl bg-[var(--surface)] pl-3 pr-8 text-sm font-medium ring-1 ring-inset ring-[var(--field-border)] focus:outline-none focus:ring-2 focus:ring-brand-500"
         {...props}
       >
         {children}

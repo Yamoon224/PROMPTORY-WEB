@@ -65,7 +65,7 @@ export function Sidebar({
             type="button"
             onClick={onCloseMobile}
             aria-label="Fermer la navigation"
-            className="rounded-sm p-2 text-zinc-400 hover:bg-zinc-100 md:hidden dark:hover:bg-zinc-800"
+            className="rounded-2xl p-2 text-zinc-400 hover:bg-zinc-100 md:hidden dark:hover:bg-zinc-800"
           >
             <IconClose />
           </button>

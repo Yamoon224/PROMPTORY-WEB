@@ -152,7 +152,7 @@ export function PromptDetail({ slug }: { slug: string }) {
                       type="button"
                       aria-label={`${value} etoile(s)`}
                       onClick={() => setRating(value)}
-                      className="rounded-sm p-0.5"
+                      className="rounded-2xl p-0.5"
                     >
                       <IconStar className={value <= rating ? "h-5 w-5 text-amber-500" : "h-5 w-5 text-zinc-300 dark:text-zinc-700"} />
                     </button>

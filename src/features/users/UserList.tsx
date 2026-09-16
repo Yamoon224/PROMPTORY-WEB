@@ -195,7 +195,7 @@ function UserFormModal({ user, onClose, onSaved }: { user: User | null; onClose:
             type="checkbox"
             checked={status === "active"}
             onChange={(event) => setStatus(event.target.checked ? "active" : "inactive")}
-            className="h-4 w-4 rounded-sm border-[var(--field-border)] text-brand-600 focus:ring-brand-500"
+            className="h-4 w-4 rounded-2xl border-[var(--field-border)] text-brand-600 focus:ring-brand-500"
           />
           Compte actif
         </label>

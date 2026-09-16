@@ -141,7 +141,7 @@ function IaModelFormModal({ model, onClose, onSaved }: { model: IaModel | null; 
             type="checkbox"
             checked={isActive}
             onChange={(event) => setIsActive(event.target.checked)}
-            className="h-4 w-4 rounded-sm border-[var(--field-border)] text-brand-600 focus:ring-brand-500"
+            className="h-4 w-4 rounded-2xl border-[var(--field-border)] text-brand-600 focus:ring-brand-500"
           />
           Actif (propose dans les selecteurs)
         </label>
