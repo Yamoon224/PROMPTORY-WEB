@@ -33,14 +33,14 @@ export function MarketplaceStats() {
   ];
 
   return (
-    <div className="flex flex-wrap items-center gap-3">
+    <div className="flex flex-wrap items-center justify-center gap-3">
       {items.map((item) => (
         <span
           key={item.label}
-          className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3.5 py-1.5 text-sm font-semibold text-white ring-1 ring-white/20 backdrop-blur"
+          className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3.5 py-1.5 text-sm font-semibold text-brand-700 ring-1 ring-brand-200 dark:bg-brand-900/40 dark:text-brand-300 dark:ring-brand-800"
         >
           {isLoading ? (
-            <span aria-hidden="true" className="block h-4 w-6 animate-pulse rounded-full bg-white/30" />
+            <span aria-hidden="true" className="block h-4 w-6 animate-pulse rounded-full bg-brand-200 dark:bg-brand-800" />
           ) : (
             <span className="tabular-nums">{item.value}</span>
           )}

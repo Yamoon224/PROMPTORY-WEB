@@ -1,10 +1,10 @@
-import Link from "next/link";
 import { Suspense } from "react";
+import { LinkButton } from "@/components/ui";
 import { IconCheckCircle, IconDownload, IconLock, IconSparkle } from "@/components/ui/icons";
 import { CategoryExplorer } from "@/features/marketplace/CategoryExplorer";
 import { DualAudience } from "@/features/marketplace/DualAudience";
 import { FeaturedPrompts } from "@/features/marketplace/FeaturedPrompts";
-import { MarketplaceSearchForm } from "@/features/marketplace/MarketplaceSearchForm";
+import { HeroPromptMockups } from "@/features/marketplace/HeroPromptMockups";
 import { MarketplaceStats } from "@/features/marketplace/MarketplaceStats";
 import { PromptBrowser } from "@/features/marketplace/PromptBrowser";
 import { SellerBanner } from "@/features/marketplace/SellerBanner";
@@ -31,61 +31,53 @@ const CREATOR_STEPS = [
 export default function HomePage() {
   return (
     <>
-      <section className="relative overflow-hidden rounded-2xl">
-        <div aria-hidden="true" className="grad-brand absolute inset-x-0 top-0 h-[28rem] sm:h-[26rem]" />
-        <div
-          aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-[28rem] opacity-[0.12] sm:h-[26rem]"
-          style={{ backgroundImage: "repeating-linear-gradient(135deg, #fff 0 18px, transparent 18px 36px)" }}
-        />
-        {/* Lueurs douces pour donner du relief au degrade plat, sans introduire de
-            nouvelle teinte : blanc translucide, comme la texture rayee ci-dessus. */}
-        <div aria-hidden="true" className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-white/20 blur-3xl" />
-        <div aria-hidden="true" className="absolute -bottom-32 -left-20 h-96 w-96 rounded-full bg-white/10 blur-3xl" />
+      <section className="relative overflow-hidden rounded-2xl border border-[var(--hairline)] bg-[var(--surface)]">
+        {/* Lueurs douces plutot que le motif raye : un lavis de marque tres
+            attenue, jamais une texture qui capte l'oeil avant le texte. */}
+        <div aria-hidden="true" className="grad-brand-soft absolute inset-0" />
+        <div aria-hidden="true" className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-brand-300/30 blur-3xl dark:bg-brand-700/20" />
+        <div aria-hidden="true" className="absolute -bottom-32 -left-20 h-96 w-96 rounded-full bg-brand-200/40 blur-3xl dark:bg-brand-800/20" />
 
-        <div className="relative px-4 pb-12 pt-12 sm:px-10 sm:pt-16">
-          <div className="max-w-2xl text-white">
-            <p className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider ring-1 ring-white/25 backdrop-blur">
-              <IconSparkle className="h-3.5 w-3.5" />
-              Marketplace de prompts IA
-            </p>
-            <h1 className="mt-5 text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-              Des prompts qui marchent, prets a copier-coller.
-            </h1>
-            <p className="mt-4 max-w-xl text-base text-white/90 sm:text-lg">
-              Redaction, marketing, developpement, image : trouvez le prompt qu&apos;il vous faut, ou vendez les
-              votres.
-            </p>
+        <div className="relative flex flex-col items-center px-4 pb-14 pt-12 text-center sm:px-10 sm:pt-16">
+          <p className="inline-flex items-center gap-2 rounded-full bg-brand-100 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider text-brand-700 ring-1 ring-brand-200 dark:bg-brand-900/40 dark:text-brand-300 dark:ring-brand-800">
+            <IconSparkle className="h-3.5 w-3.5" />
+            Marketplace de prompts IA
+          </p>
+
+          <h1 className="mt-5 max-w-3xl text-4xl font-extrabold leading-[1.05] tracking-tight text-zinc-900 sm:text-5xl lg:text-6xl dark:text-zinc-50">
+            Bienvenue sur Promptory
+            <span className="mt-2 block text-2xl font-bold text-brand-600 sm:text-3xl dark:text-brand-400">
+              Des prompts qui marchent, prets a copier-coller
+            </span>
+          </h1>
+          <p className="mt-4 max-w-xl text-base text-[var(--muted)] sm:text-lg">
+            Les acheteurs trouvent le prompt qu&apos;il leur faut, les createurs le fournissent. Paiement securise par
+            carte ou PayPal, aucune donnee bancaire stockee.
+          </p>
+
+          <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
+            <LinkButton href="#browser" size="lg">
+              Explorer les prompts
+            </LinkButton>
+            <LinkButton href="/inscription" variant="secondary" size="lg">
+              Vendre mes prompts
+            </LinkButton>
           </div>
 
-          <div className="mt-7 max-w-xl">
-            <Suspense fallback={<div className="h-14 w-full rounded-full bg-white/15" />}>
-              <MarketplaceSearchForm variant="hero" />
-            </Suspense>
-          </div>
-
-          <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-2">
+          <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
             {TRUST_BADGES.map((badge) => (
-              <li key={badge.label} className="flex items-center gap-1.5 text-sm font-medium text-white/85">
-                {badge.icon}
+              <li key={badge.label} className="flex items-center gap-1.5 text-sm font-medium text-[var(--muted)]">
+                <span className="text-brand-600 dark:text-brand-400">{badge.icon}</span>
                 {badge.label}
               </li>
             ))}
           </ul>
 
-          <div className="mt-7">
+          <div className="mt-6">
             <MarketplaceStats />
           </div>
 
-          <p className="mt-5 text-sm text-white/80">
-            Vous etes createur ?{" "}
-            <Link
-              href="/inscription"
-              className="font-semibold text-white underline decoration-white/50 underline-offset-4 hover:decoration-white"
-            >
-              Vendez vos prompts sur Promptory →
-            </Link>
-          </p>
+          <HeroPromptMockups />
         </div>
       </section>
 
