@@ -56,7 +56,7 @@ const ComboboxPanel = forwardRef<HTMLDivElement, ComboboxShellProps>(function Co
             if (event.key === "Escape") onOpenChange(false);
           }}
           placeholder={searchPlaceholder}
-          className="w-full rounded-2xl bg-transparent py-1.5 pl-7 pr-2 text-sm text-[var(--foreground)] outline-none placeholder:text-zinc-400"
+          className="w-full rounded-full bg-transparent py-1.5 pl-7 pr-2 text-sm text-[var(--foreground)] outline-none placeholder:text-zinc-400"
         />
       </div>
       <ul role="listbox" className="max-h-56 overflow-y-auto py-1">

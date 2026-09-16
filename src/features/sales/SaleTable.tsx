@@ -139,7 +139,7 @@ export function AllSalesTable() {
           value={status}
           onChange={(event) => setStatus(event.target.value)}
           aria-label="Filtrer par statut de paiement"
-          className="h-10 rounded-2xl bg-[var(--surface)] px-3 text-sm font-medium ring-1 ring-inset ring-[var(--field-border)] focus:outline-none focus:ring-2 focus:ring-brand-500"
+          className="h-10 rounded-full bg-[var(--surface)] px-3 text-sm font-medium ring-1 ring-inset ring-[var(--field-border)] focus:outline-none focus:ring-2 focus:ring-brand-500"
         >
           <option value="">Tous les statuts</option>
           <option value="pending">En attente</option>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
+import { PaymentLogos } from "@/components/brand/PaymentLogos";
 
 const COLUMNS: Array<{ title: string; links: Array<{ href: string; label: string }> }> = [
   {
@@ -32,22 +33,22 @@ export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="no-print mt-16 border-t border-[var(--hairline)] bg-[var(--surface)]">
+    <footer className="no-print mt-16 bg-brand-500">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
-          <Logo tagline />
-          <p className="mt-4 max-w-sm text-sm leading-relaxed text-[var(--muted)]">
+          <Logo tagline tone="onBrand" />
+          <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/70">
             Trouvez, achetez et vendez des prompts IA prets a l&apos;emploi pour
             ChatGPT, Claude, Midjourney et bien d&apos;autres outils.
           </p>
         </div>
         {COLUMNS.map((column) => (
           <div key={column.title}>
-            <p className="text-xs font-bold uppercase tracking-wider text-[var(--muted)]">{column.title}</p>
+            <p className="text-xs font-bold uppercase tracking-wider text-white/60">{column.title}</p>
             <ul className="mt-3 space-y-2 text-sm">
               {column.links.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-zinc-600 hover:text-brand-600 dark:text-zinc-300 dark:hover:text-brand-400">
+                  <Link href={link.href} className="text-white/80 hover:text-white">
                     {link.label}
                   </Link>
                 </li>
@@ -56,10 +57,15 @@ export function SiteFooter() {
           </div>
         ))}
       </div>
-      <div className="border-t border-[var(--hairline)] px-4 py-4 sm:px-6">
-        <p className="mx-auto max-w-6xl text-xs text-[var(--muted)]">© {year} Promptory. Tous droits reserves.</p>
+      <div className="border-t border-white/15 px-4 py-4 sm:px-6">
+        <div className="mx-auto flex max-w-6xl flex-col-reverse items-center justify-between gap-4 sm:flex-row">
+          <p className="text-xs text-white/60">© {year} Promptory. Tous droits reserves.</p>
+          <div className="flex items-center gap-3">
+            <span className="text-xs font-semibold uppercase tracking-wider text-white/60">Paiement securise</span>
+            <PaymentLogos />
+          </div>
+        </div>
       </div>
-      <div className="h-1 grad-brand" />
     </footer>
   );
 }

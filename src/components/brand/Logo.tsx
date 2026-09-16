@@ -25,23 +25,40 @@ export function LogoMark({ size = "md", className }: { size?: "sm" | "md" | "lg"
   );
 }
 
-export function Logo({ size = "md", className, tagline = false }: { size?: "sm" | "md" | "lg"; className?: string; tagline?: boolean }) {
+export function Logo({
+  size = "md",
+  className,
+  tagline = false,
+  tone = "default",
+}: {
+  size?: "sm" | "md" | "lg";
+  className?: string;
+  tagline?: boolean;
+  /** `onBrand` : wordmark en blanc, pour une pose sur un fond indigo (ex. pied de page). */
+  tone?: "default" | "onBrand";
+}) {
   return (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
-      <LogoMark size={size} />
+      <LogoMark size={size} className={tone === "onBrand" ? "ring-1 ring-white/25" : undefined} />
       <span className="flex flex-col leading-none">
         {/* Toujours en bas-de-casse integral, jamais en italique : la casse
             basse fait partie de l'identite du mot-symbole. */}
         <span
           className={cn(
-            "font-extrabold lowercase tracking-tight text-zinc-900 dark:text-zinc-50",
+            "font-extrabold lowercase tracking-tight",
+            tone === "onBrand" ? "text-white" : "text-zinc-900 dark:text-zinc-50",
             size === "lg" ? "text-2xl" : "text-lg",
           )}
         >
           promptory
         </span>
         {tagline ? (
-          <span className="mt-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--muted)]">
+          <span
+            className={cn(
+              "mt-1 text-[10px] font-semibold uppercase tracking-[0.18em]",
+              tone === "onBrand" ? "text-white/70" : "text-[var(--muted)]",
+            )}
+          >
             Marketplace de prompts IA
           </span>
         ) : null}
