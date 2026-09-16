@@ -1,5 +1,11 @@
-import { Card, CardBody } from "@/components/ui";
+import Link from "next/link";
+import { Suspense } from "react";
+import { Card, CardBody, LinkButton } from "@/components/ui";
 import { IconCoins, IconRobot, IconSparkle } from "@/components/ui/icons";
+import { CategoryExplorer } from "@/features/marketplace/CategoryExplorer";
+import { FeaturedPrompts } from "@/features/marketplace/FeaturedPrompts";
+import { MarketplaceSearchForm } from "@/features/marketplace/MarketplaceSearchForm";
+import { MarketplaceStats } from "@/features/marketplace/MarketplaceStats";
 import { PromptBrowser } from "@/features/marketplace/PromptBrowser";
 
 const STEPS = [
@@ -24,10 +30,10 @@ export default function HomePage() {
   return (
     <>
       <section className="relative overflow-hidden rounded-sm">
-        <div aria-hidden="true" className="grad-brand absolute inset-x-0 top-0 h-[22rem] rounded-sm sm:h-[20rem]" />
+        <div aria-hidden="true" className="grad-brand absolute inset-x-0 top-0 h-[26rem] rounded-sm sm:h-[24rem]" />
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-[22rem] rounded-sm opacity-[0.12] sm:h-[20rem]"
+          className="absolute inset-x-0 top-0 h-[26rem] rounded-sm opacity-[0.12] sm:h-[24rem]"
           style={{ backgroundImage: "repeating-linear-gradient(135deg, #fff 0 18px, transparent 18px 36px)" }}
         />
 
@@ -45,10 +51,42 @@ export default function HomePage() {
               votres.
             </p>
           </div>
+
+          <div className="mt-6 max-w-xl">
+            <Suspense fallback={<div className="h-12 w-full rounded-sm bg-white/15" />}>
+              <MarketplaceSearchForm variant="hero" />
+            </Suspense>
+          </div>
+
+          <div className="mt-5 flex flex-wrap items-center gap-4">
+            <div className="flex flex-wrap gap-3">
+              <LinkButton href="#browser" variant="secondary" size="md">
+                Explorer les prompts
+              </LinkButton>
+              <Link
+                href="/inscription"
+                className="inline-flex h-10 items-center justify-center rounded-sm border border-white/40 px-4 text-sm font-semibold text-white transition-colors hover:bg-white/15"
+              >
+                Vendre mes prompts
+              </Link>
+            </div>
+          </div>
+
+          <div className="mt-6">
+            <MarketplaceStats />
+          </div>
         </div>
       </section>
 
-      <section className="py-10">
+      <section id="categories" className="scroll-mt-20 py-10">
+        <h2 className="text-xl font-extrabold tracking-tight">Explorer par categorie</h2>
+        <span aria-hidden="true" className="grad-brand mt-2 block h-[3px] w-12 rounded-full" />
+        <div className="mt-6">
+          <CategoryExplorer />
+        </div>
+      </section>
+
+      <section className="pb-10">
         <ol className="grid gap-5 md:grid-cols-3">
           {STEPS.map((step, index) => (
             <li key={step.title}>
@@ -69,11 +107,15 @@ export default function HomePage() {
         </ol>
       </section>
 
-      <section className="pb-10">
-        <h2 className="text-xl font-extrabold tracking-tight">Explorer les prompts</h2>
+      <FeaturedPrompts />
+
+      <section id="browser" className="scroll-mt-20 pb-10">
+        <h2 className="text-xl font-extrabold tracking-tight">Explorer tous les prompts</h2>
         <span aria-hidden="true" className="grad-brand mt-2 block h-[3px] w-12 rounded-full" />
         <div className="mt-6">
-          <PromptBrowser />
+          <Suspense fallback={null}>
+            <PromptBrowser />
+          </Suspense>
         </div>
       </section>
     </>

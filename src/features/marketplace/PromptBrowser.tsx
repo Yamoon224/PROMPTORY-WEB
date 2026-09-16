@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
 import { EmptyState, ErrorState, LoadingState, Pagination, SearchInput } from "@/components/ui";
 import { SearchableSelectField } from "@/components/ui/Combobox";
@@ -24,13 +25,35 @@ const SORT_OPTIONS = [
  * que la page ne fasse que le necessaire (metadonnees, mise en page).
  */
 export function PromptBrowser() {
-  const [search, setSearch] = useState("");
+  const searchParams = useSearchParams();
+  const urlSearch = searchParams.get("q");
+  const urlCategory = searchParams.get("category");
+
+  const [search, setSearch] = useState(urlSearch ?? "");
   const debouncedSearch = useDebouncedValue(search);
-  const [category, setCategory] = useState<string | null>(null);
+  const [category, setCategory] = useState<string | null>(urlCategory);
   const [tag, setTag] = useState<string | null>(null);
   const [iaModel, setIaModel] = useState<string | null>(null);
   const [sort, setSort] = useState("created_at");
   const [freeOnly, setFreeOnly] = useState(false);
+
+  // Le hero et le header pilotent cette grille depuis l'exterieur via
+  // `?q=`/`?category=` (recherche globale, chip de categorie). Un second clic
+  // depuis le header ne remonte pas ce composant (meme route), donc l'etat
+  // initial seul ne suffit pas : on compare a la derniere URL vue et on
+  // ajuste l'etat pendant le rendu (pattern React recommande pour deriver un
+  // etat d'un prop/signal externe, sans passer par un effet).
+  const [lastUrlSearch, setLastUrlSearch] = useState(urlSearch);
+  if (urlSearch !== lastUrlSearch) {
+    setLastUrlSearch(urlSearch);
+    if (urlSearch !== null) setSearch(urlSearch);
+  }
+
+  const [lastUrlCategory, setLastUrlCategory] = useState(urlCategory);
+  if (urlCategory !== lastUrlCategory) {
+    setLastUrlCategory(urlCategory);
+    if (urlCategory !== null) setCategory(urlCategory);
+  }
 
   const categories = useCategoryOptions();
   const tags = useTagOptions();

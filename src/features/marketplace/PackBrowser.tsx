@@ -21,8 +21,16 @@ export function PackBrowser() {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="max-w-xs">
-        <SearchInput value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Rechercher un pack…" />
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div className="max-w-xs flex-1">
+          <SearchInput value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Rechercher un pack…" />
+        </div>
+        {meta ? (
+          <p className="pb-2.5 text-sm font-medium text-[var(--muted)]">
+            <span className="font-bold text-zinc-800 dark:text-zinc-100">{meta.total}</span> pack{meta.total > 1 ? "s" : ""}{" "}
+            disponible{meta.total > 1 ? "s" : ""}
+          </p>
+        ) : null}
       </div>
 
       {isLoading ? <LoadingState label="Chargement des packs…" /> : null}
