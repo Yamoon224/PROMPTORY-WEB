@@ -105,15 +105,24 @@ export function PromptBrowser() {
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <label className="flex items-center gap-2 text-sm font-medium text-zinc-700 dark:text-zinc-300">
-          <input
-            type="checkbox"
-            checked={freeOnly}
-            onChange={(event) => setFreeOnly(event.target.checked)}
-            className="h-4 w-4 rounded-sm border-[var(--field-border)] text-brand-600 focus:ring-brand-500"
-          />
-          Prompts gratuits uniquement
-        </label>
+        <div className="flex flex-wrap items-center gap-4">
+          {meta ? (
+            <p className="text-sm font-medium text-[var(--muted)]">
+              <span className="font-bold text-zinc-800 dark:text-zinc-100">{meta.total}</span> prompt{meta.total > 1 ? "s" : ""}{" "}
+              disponible{meta.total > 1 ? "s" : ""}
+            </p>
+          ) : null}
+
+          <label className="flex items-center gap-2 text-sm font-medium text-zinc-700 dark:text-zinc-300">
+            <input
+              type="checkbox"
+              checked={freeOnly}
+              onChange={(event) => setFreeOnly(event.target.checked)}
+              className="h-4 w-4 rounded-sm border-[var(--field-border)] text-brand-600 focus:ring-brand-500"
+            />
+            Prompts gratuits uniquement
+          </label>
+        </div>
 
         <ToolbarSelect label="Trier par" value={sort} onChange={(event) => setSort(event.target.value)} className="w-48">
           {SORT_OPTIONS.map((option) => (

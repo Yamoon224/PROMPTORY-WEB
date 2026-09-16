@@ -1,29 +1,31 @@
 import Link from "next/link";
 import { Suspense } from "react";
-import { Card, CardBody } from "@/components/ui";
-import { IconCoins, IconRobot, IconSparkle } from "@/components/ui/icons";
+import { IconCheckCircle, IconDownload, IconLock, IconSparkle } from "@/components/ui/icons";
 import { CategoryExplorer } from "@/features/marketplace/CategoryExplorer";
+import { DualAudience } from "@/features/marketplace/DualAudience";
 import { FeaturedPrompts } from "@/features/marketplace/FeaturedPrompts";
 import { MarketplaceSearchForm } from "@/features/marketplace/MarketplaceSearchForm";
 import { MarketplaceStats } from "@/features/marketplace/MarketplaceStats";
 import { PromptBrowser } from "@/features/marketplace/PromptBrowser";
+import { SellerBanner } from "@/features/marketplace/SellerBanner";
+import { WhyPromptory } from "@/features/marketplace/WhyPromptory";
 
-const STEPS = [
-  {
-    icon: <IconSparkle className="h-5 w-5" />,
-    title: "Trouvez le bon prompt",
-    text: "Filtrez par categorie, tag ou outil IA et lisez les avis d'autres utilisateurs avant d'acheter.",
-  },
-  {
-    icon: <IconCoins className="h-5 w-5" />,
-    title: "Achetez en un clic",
-    text: "Paiement securise, sans stocker vos donnees bancaires. Votre achat est immediatement disponible.",
-  },
-  {
-    icon: <IconRobot className="h-5 w-5" />,
-    title: "Utilisez-le partout",
-    text: "Copiez le prompt et collez-le dans ChatGPT, Claude, Midjourney ou tout autre outil IA.",
-  },
+const TRUST_BADGES = [
+  { icon: <IconLock className="h-4 w-4" />, label: "Paiement securise" },
+  { icon: <IconCheckCircle className="h-4 w-4" />, label: "Createurs moderes" },
+  { icon: <IconDownload className="h-4 w-4" />, label: "Acces immediat" },
+];
+
+const BUYER_STEPS = [
+  "Parcourez le catalogue et filtrez par categorie, tag ou outil IA.",
+  "Payez en toute securite par carte bancaire ou PayPal.",
+  "Recuperez votre prompt immediatement, pret a copier-coller.",
+];
+
+const CREATOR_STEPS = [
+  "Creez votre compte createur en quelques minutes.",
+  "Publiez vos prompts ou packs : chacun passe par une moderation avant mise en ligne.",
+  "Suivez vos ventes et vos revenus depuis votre espace createur.",
 ];
 
 export default function HomePage() {
@@ -62,6 +64,15 @@ export default function HomePage() {
             </Suspense>
           </div>
 
+          <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-2">
+            {TRUST_BADGES.map((badge) => (
+              <li key={badge.label} className="flex items-center gap-1.5 text-sm font-medium text-white/85">
+                {badge.icon}
+                {badge.label}
+              </li>
+            ))}
+          </ul>
+
           <div className="mt-7">
             <MarketplaceStats />
           </div>
@@ -88,6 +99,8 @@ export default function HomePage() {
 
       <FeaturedPrompts />
 
+      <DualAudience />
+
       <section id="browser" className="scroll-mt-20 pb-10">
         <h2 className="text-xl font-extrabold tracking-tight">Explorer tous les prompts</h2>
         <span aria-hidden="true" className="grad-brand mt-2 block h-[3px] w-12 rounded-full" />
@@ -98,27 +111,45 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="rounded-sm bg-[var(--surface-muted)] px-4 py-10 sm:px-8">
+      <WhyPromptory />
+
+      <section className="py-10">
+        <SellerBanner />
+      </section>
+
+      <section className="rounded-2xl bg-[var(--surface-muted)] px-4 py-10 sm:px-8">
         <h2 className="text-xl font-extrabold tracking-tight">Comment ca marche</h2>
         <span aria-hidden="true" className="grad-brand mt-2 block h-[3px] w-12 rounded-full" />
-        <ol className="mt-6 grid gap-5 md:grid-cols-3">
-          {STEPS.map((step, index) => (
-            <li key={step.title}>
-              <Card interactive className="h-full">
-                <CardBody className="p-5 sm:p-6">
-                  <div className="flex items-center gap-3">
-                    <span className="grad-brand flex h-11 w-11 items-center justify-center rounded-sm text-white shadow-card">
-                      {step.icon}
-                    </span>
-                    <span className="text-4xl font-extrabold text-brand-100 dark:text-zinc-800">0{index + 1}</span>
-                  </div>
-                  <h3 className="mt-4 text-base font-bold">{step.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">{step.text}</p>
-                </CardBody>
-              </Card>
-            </li>
-          ))}
-        </ol>
+
+        <div className="mt-7 grid gap-8 md:grid-cols-2">
+          <div>
+            <h3 className="text-sm font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400">Cote acheteur</h3>
+            <ol className="mt-4 flex flex-col gap-4">
+              {BUYER_STEPS.map((step, index) => (
+                <li key={step} className="flex items-start gap-3">
+                  <span className="grad-brand flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white">
+                    {index + 1}
+                  </span>
+                  <p className="pt-0.5 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">{step}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <div>
+            <h3 className="text-sm font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400">Cote createur</h3>
+            <ol className="mt-4 flex flex-col gap-4">
+              {CREATOR_STEPS.map((step, index) => (
+                <li key={step} className="flex items-start gap-3">
+                  <span className="grad-brand flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white">
+                    {index + 1}
+                  </span>
+                  <p className="pt-0.5 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">{step}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
       </section>
     </>
   );
