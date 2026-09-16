@@ -5,6 +5,7 @@ import { CategoryExplorer } from "@/features/marketplace/CategoryExplorer";
 import { DualAudience } from "@/features/marketplace/DualAudience";
 import { FeaturedPrompts } from "@/features/marketplace/FeaturedPrompts";
 import { HeroPromptMockups } from "@/features/marketplace/HeroPromptMockups";
+import { MarketplaceSearchBar } from "@/features/marketplace/MarketplaceSearchBar";
 import { MarketplaceStats } from "@/features/marketplace/MarketplaceStats";
 import { PromptBrowser } from "@/features/marketplace/PromptBrowser";
 import { SellerBanner } from "@/features/marketplace/SellerBanner";
@@ -82,16 +83,15 @@ export default function HomePage() {
       </section>
 
       <section id="categories" className="scroll-mt-20 py-10">
-        <h2 className="text-xl font-extrabold tracking-tight">Explorer par categorie</h2>
-        <span aria-hidden="true" className="grad-brand mt-2 block h-[3px] w-12 rounded-full" />
-        <div className="mt-6">
-          <CategoryExplorer />
+        <Suspense fallback={<div className="mx-auto h-14 w-full max-w-2xl rounded-2xl bg-[var(--surface-muted)]" />}>
+          <MarketplaceSearchBar />
+        </Suspense>
+        <div className="mt-5">
+          <Suspense fallback={null}>
+            <CategoryExplorer />
+          </Suspense>
         </div>
       </section>
-
-      <FeaturedPrompts />
-
-      <DualAudience />
 
       <section id="browser" className="scroll-mt-20 pb-10">
         <h2 className="text-xl font-extrabold tracking-tight">Explorer tous les prompts</h2>
@@ -102,6 +102,10 @@ export default function HomePage() {
           </Suspense>
         </div>
       </section>
+
+      <FeaturedPrompts />
+
+      <DualAudience />
 
       <WhyPromptory />
 

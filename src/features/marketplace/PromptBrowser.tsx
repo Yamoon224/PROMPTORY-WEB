@@ -26,9 +26,10 @@ const SORT_OPTIONS = [
  */
 export function PromptBrowser() {
   const searchParams = useSearchParams();
+  const urlSearch = searchParams.get("q");
   const urlCategory = searchParams.get("category");
 
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(urlSearch ?? "");
   const debouncedSearch = useDebouncedValue(search);
   const [category, setCategory] = useState<string | null>(urlCategory);
   const [tag, setTag] = useState<string | null>(null);
@@ -36,16 +37,22 @@ export function PromptBrowser() {
   const [sort, setSort] = useState("created_at");
   const [freeOnly, setFreeOnly] = useState(false);
 
-  // Les chips de categorie pilotent cette grille depuis l'exterieur via
-  // `?category=`. Un second clic depuis un chip ne remonte pas ce composant
-  // (meme route), donc l'etat initial seul ne suffit pas : on compare a la
-  // derniere URL vue et on ajuste l'etat pendant le rendu (pattern React
-  // recommande pour deriver un etat d'un signal externe, sans passer par un
-  // effet).
+  // La barre de recherche et les puces de categorie pilotent cette grille
+  // depuis l'exterieur via `?q=`/`?category=`. Un second clic ne remonte pas
+  // ce composant (meme route), donc l'etat initial seul ne suffit pas : on
+  // compare a la derniere URL vue et on ajuste l'etat pendant le rendu
+  // (pattern React recommande pour deriver un etat d'un signal externe, sans
+  // passer par un effet) — y compris pour revenir a vide (« Tout »).
+  const [lastUrlSearch, setLastUrlSearch] = useState(urlSearch);
+  if (urlSearch !== lastUrlSearch) {
+    setLastUrlSearch(urlSearch);
+    setSearch(urlSearch ?? "");
+  }
+
   const [lastUrlCategory, setLastUrlCategory] = useState(urlCategory);
   if (urlCategory !== lastUrlCategory) {
     setLastUrlCategory(urlCategory);
-    if (urlCategory !== null) setCategory(urlCategory);
+    setCategory(urlCategory);
   }
 
   const categories = useCategoryOptions();

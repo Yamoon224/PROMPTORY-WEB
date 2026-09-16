@@ -1,14 +1,22 @@
 "use client";
 
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { Skeleton } from "@/components/ui";
+import { buttonClasses } from "@/components/ui/Button";
 import { useCategoryOptions } from "@/hooks/useOptions";
-import { DECORATIVE_ICONS } from "./marketplace-icons";
 
-const MAX_VISIBLE = 12;
+const MAX_VISIBLE = 11;
 
+/**
+ * Filtre rapide par categorie, sous forme de puces bouton (meme habillage
+ * que `Button`, `size="md"`) plutot que de cartes : ici on choisit un filtre,
+ * on n'explore pas une fiche.
+ */
 export function CategoryExplorer() {
   const categories = useCategoryOptions();
+  const searchParams = useSearchParams();
+  const activeCategory = searchParams.get("category");
 
   const sorted = [...categories]
     .sort((a, b) => (b.prompts_count ?? 0) - (a.prompts_count ?? 0))
@@ -16,34 +24,31 @@ export function CategoryExplorer() {
 
   if (categories.length === 0) {
     return (
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+      <div className="flex flex-wrap justify-center gap-2">
         {Array.from({ length: 6 }).map((_, index) => (
-          <Skeleton key={index} className="h-28" />
+          <Skeleton key={index} className="h-10 w-28 rounded-2xl" />
         ))}
       </div>
     );
   }
 
   return (
-    <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
+    <ul className="flex flex-wrap items-center justify-center gap-2">
+      <li>
+        <Link href="/#browser" className={buttonClasses({ variant: activeCategory ? "secondary" : "primary", size: "md" })}>
+          Tout
+        </Link>
+      </li>
       {sorted.map((category) => {
-        const Icon = DECORATIVE_ICONS[Math.abs(category.id) % DECORATIVE_ICONS.length];
+        const isActive = activeCategory === category.slug;
 
         return (
           <li key={category.id}>
             <Link
               href={`/?category=${encodeURIComponent(category.slug)}#browser`}
-              className="group flex h-full flex-col items-center gap-2.5 rounded-lg border border-[var(--hairline)] bg-[var(--surface)] px-3 py-5 text-center shadow-card transition-all duration-200 hover:-translate-y-1 hover:border-brand-300 hover:shadow-card-hover dark:hover:border-brand-700"
+              className={buttonClasses({ variant: isActive ? "primary" : "secondary", size: "md" })}
             >
-              <span className="grad-brand-soft flex h-12 w-12 items-center justify-center rounded-2xl text-brand-600 transition-transform duration-200 group-hover:scale-110 dark:text-brand-400">
-                <Icon className="h-5 w-5" />
-              </span>
-              <span className="text-sm font-bold leading-snug text-zinc-800 dark:text-zinc-100">{category.name}</span>
-              {typeof category.prompts_count === "number" ? (
-                <span className="text-xs text-[var(--muted)]">
-                  {category.prompts_count} prompt{category.prompts_count > 1 ? "s" : ""}
-                </span>
-              ) : null}
+              {category.name}
             </Link>
           </li>
         );
