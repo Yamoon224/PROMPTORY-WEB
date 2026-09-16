@@ -12,11 +12,8 @@ export function SellerBanner() {
   return (
     <section className="relative overflow-hidden rounded-2xl">
       <div aria-hidden="true" className="grad-brand absolute inset-0" />
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 opacity-[0.12]"
-        style={{ backgroundImage: "repeating-linear-gradient(135deg, #fff 0 18px, transparent 18px 36px)" }}
-      />
+      <div aria-hidden="true" className="absolute -right-16 -top-20 h-64 w-64 rounded-full bg-white/15 blur-3xl" />
+      <div aria-hidden="true" className="absolute -bottom-24 -left-10 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
 
       <div className="relative flex flex-col gap-6 px-5 py-10 sm:px-10 sm:py-12 lg:flex-row lg:items-center lg:justify-between">
         <div className="max-w-xl text-white">

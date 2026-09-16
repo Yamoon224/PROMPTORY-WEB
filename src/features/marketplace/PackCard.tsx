@@ -15,14 +15,6 @@ export function PackCard({ pack }: { pack: Pack }) {
         className="flex flex-1 flex-col rounded-t-lg focus-visible:outline-2 focus-visible:outline-brand-500"
       >
         <div className="relative flex h-24 shrink-0 items-center justify-center overflow-hidden grad-brand-soft">
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 opacity-[0.35]"
-            style={{
-              backgroundImage:
-                "repeating-linear-gradient(135deg, transparent 0 10px, rgb(74 71 193 / 0.07) 10px 11px)",
-            }}
-          />
           <IconPackage className="relative h-9 w-9 text-brand-400/70 dark:text-brand-400/40" />
           <Badge tone="brand" className="absolute right-2 top-2">
             {promptsCount} prompt{promptsCount > 1 ? "s" : ""}

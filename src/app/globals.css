@@ -36,21 +36,9 @@
   --color-flag-green: #16a34a;
 }
 
-/*
- * Filigrane de fond : rayures diagonales contigues (sans espace entre elles),
- * dans une seule teinte quasi imperceptible. Le motif vit sur `body` et non
- * sur un calque separe : il defile avec la page, ne capte jamais le clic, et
- * ne demande aucun element supplementaire dans chaque mise en page.
- *
- * Clair -> blanc ; Sombre -> gris. Le motif change de nuance avec le theme
- * mais garde le meme pas (1px par rayure, un filigrane tres fin) et le meme
- * angle (135deg) dans les deux cas.
- */
 :root {
   color-scheme: light;
   --canvas: #ffffff;
-  --stripe-a: #ffffff;
-  --stripe-b: #f4f4f8;
   --surface: #ffffff;
   --surface-muted: #f4f4f8;
   --foreground: #0a0a0f;
@@ -64,8 +52,6 @@
 .dark {
   color-scheme: dark;
   --canvas: #17181c;
-  --stripe-a: #17181c;
-  --stripe-b: #1d1e24;
   --surface: #202127;
   --surface-muted: #26272e;
   --foreground: #f2f2f5;
@@ -104,14 +90,6 @@
 
 body {
   background-color: var(--canvas);
-  background-image: repeating-linear-gradient(
-    135deg,
-    var(--stripe-a) 0px,
-    var(--stripe-a) 1px,
-    var(--stripe-b) 1px,
-    var(--stripe-b) 2px
-  );
-  background-attachment: fixed;
   color: var(--foreground);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
