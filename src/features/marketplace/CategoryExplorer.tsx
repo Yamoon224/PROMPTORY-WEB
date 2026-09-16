@@ -26,7 +26,7 @@ export function CategoryExplorer() {
     return (
       <div className="flex flex-wrap justify-center gap-2">
         {Array.from({ length: 6 }).map((_, index) => (
-          <Skeleton key={index} className="h-10 w-28 rounded-2xl" />
+          <Skeleton key={index} className="h-10 w-28 rounded-full" />
         ))}
       </div>
     );
@@ -35,7 +35,10 @@ export function CategoryExplorer() {
   return (
     <ul className="flex flex-wrap items-center justify-center gap-2">
       <li>
-        <Link href="/#browser" className={buttonClasses({ variant: activeCategory ? "secondary" : "primary", size: "md" })}>
+        <Link
+          href="/#browser"
+          className={buttonClasses({ variant: activeCategory ? "secondary" : "primary", size: "md", className: "!rounded-full" })}
+        >
           Tout
         </Link>
       </li>
@@ -46,7 +49,7 @@ export function CategoryExplorer() {
           <li key={category.id}>
             <Link
               href={`/?category=${encodeURIComponent(category.slug)}#browser`}
-              className={buttonClasses({ variant: isActive ? "primary" : "secondary", size: "md" })}
+              className={buttonClasses({ variant: isActive ? "primary" : "secondary", size: "md", className: "!rounded-full" })}
             >
               {category.name}
             </Link>

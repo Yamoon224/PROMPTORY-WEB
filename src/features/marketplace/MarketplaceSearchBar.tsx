@@ -25,7 +25,7 @@ export function MarketplaceSearchBar() {
     <form
       role="search"
       onSubmit={handleSubmit}
-      className="mx-auto flex w-full max-w-2xl items-center gap-2 rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-2 shadow-card"
+      className="mx-auto flex w-full max-w-2xl items-center gap-2 rounded-full border border-[var(--hairline)] bg-[var(--surface)] p-2 shadow-card"
     >
       <IconSearch className="ml-2.5 h-5 w-5 shrink-0 text-zinc-400" />
       <input
@@ -38,7 +38,7 @@ export function MarketplaceSearchBar() {
       />
       <button
         type="submit"
-        className="grad-brand inline-flex shrink-0 items-center gap-1.5 rounded-2xl px-5 py-2.5 text-sm font-semibold text-white transition-all hover:grad-brand-hover"
+        className="grad-brand inline-flex shrink-0 items-center gap-1.5 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-all hover:grad-brand-hover"
       >
         <IconSearch className="h-4 w-4 sm:hidden" />
         <span className="hidden sm:inline">Rechercher</span>
