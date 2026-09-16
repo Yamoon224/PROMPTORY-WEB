@@ -25,7 +25,7 @@ export function MarketplaceSearchBar() {
     <form
       role="search"
       onSubmit={handleSubmit}
-      className="mx-auto flex w-full max-w-2xl items-center gap-2 rounded-full border border-[var(--hairline)] bg-[var(--surface)] p-2 shadow-card"
+      className="mx-auto flex w-full max-w-2xl items-center gap-2 rounded-full border border-brand-500/30 bg-[var(--surface)] p-2 shadow-card dark:border-brand-400/30"
     >
       <IconSearch className="ml-2.5 h-5 w-5 shrink-0 text-zinc-400" />
       <input
