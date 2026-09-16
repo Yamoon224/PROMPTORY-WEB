@@ -2,14 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Suspense, useState } from "react";
+import { useState } from "react";
 import { Logo } from "@/components/brand/Logo";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { LinkButton } from "@/components/ui";
 import { IconCart, IconClose, IconMenu, IconPackage, IconUser } from "@/components/ui/icons";
 import { useAuth } from "@/features/auth/AuthContext";
 import { useCart } from "@/features/cart/CartContext";
-import { MarketplaceSearchForm } from "@/features/marketplace/MarketplaceSearchForm";
 import { cn } from "@/lib/cn";
 
 const LINKS = [
@@ -54,12 +53,6 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="hidden min-w-0 flex-1 justify-center lg:flex">
-          <Suspense fallback={<div className="h-9 w-full max-w-sm" />}>
-            <MarketplaceSearchForm variant="header" className="w-full max-w-sm" />
-          </Suspense>
-        </div>
-
         <div className="hidden items-center gap-3 md:flex">
           <CartLink count={count} />
           <ThemeToggle />
@@ -90,10 +83,7 @@ export function SiteHeader() {
 
       {isOpen ? (
         <div className="animate-fade-rise border-t border-[var(--hairline)] bg-[var(--surface)] px-4 py-4 md:hidden">
-          <Suspense fallback={<div className="h-9 w-full" />}>
-            <MarketplaceSearchForm variant="header" className="w-full" onNavigate={() => setIsOpen(false)} />
-          </Suspense>
-          <nav aria-label="Navigation mobile" className="mt-4 flex flex-col gap-1">
+          <nav aria-label="Navigation mobile" className="flex flex-col gap-1">
             {LINKS.map((link) => (
               <Link
                 key={link.href}
