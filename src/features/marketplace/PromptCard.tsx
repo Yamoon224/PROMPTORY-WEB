@@ -29,7 +29,7 @@ export function PromptCard({ prompt }: { prompt: Prompt }) {
     <Card interactive className="h-full">
       <Link
         href={`/prompts/${prompt.slug}`}
-        className="flex flex-1 flex-col rounded-t-sm focus-visible:outline-2 focus-visible:outline-brand-500"
+        className="flex flex-1 flex-col rounded-t-lg focus-visible:outline-2 focus-visible:outline-brand-500"
       >
         <div className="relative flex h-24 shrink-0 items-center justify-center overflow-hidden grad-brand-soft">
           <div

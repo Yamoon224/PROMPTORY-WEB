@@ -37,10 +37,10 @@ export function MarketplaceStats() {
       {items.map((item) => (
         <span
           key={item.label}
-          className="inline-flex items-center gap-1.5 rounded-sm bg-white/15 px-3 py-1.5 text-sm font-semibold text-white backdrop-blur"
+          className="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3.5 py-1.5 text-sm font-semibold text-white ring-1 ring-white/20 backdrop-blur"
         >
           {isLoading ? (
-            <span aria-hidden="true" className="block h-4 w-6 animate-pulse rounded-sm bg-white/30" />
+            <span aria-hidden="true" className="block h-4 w-6 animate-pulse rounded-full bg-white/30" />
           ) : (
             <span className="tabular-nums">{item.value}</span>
           )}

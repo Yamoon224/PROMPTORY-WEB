@@ -20,7 +20,7 @@ const TONE_ICON: Record<Tone, string> = {
   info: "bg-sky-50 text-sky-600 dark:bg-sky-950/60 dark:text-sky-400",
 };
 
-/** Meme habillage que `Card` (rounded-sm, lisere superieur neutre) : une
+/** Meme habillage que `Card` (rounded-lg, lisere superieur neutre) : une
  * tuile de chiffre reste une carte parmi les autres. */
 export function StatCard({
   label,
@@ -36,7 +36,7 @@ export function StatCard({
   icon?: ReactNode;
 }) {
   return (
-    <div className="group flex flex-1 items-start justify-between gap-3 overflow-hidden rounded-sm border border-[var(--hairline)] border-t-2 border-t-[var(--card-border-top)] bg-[var(--surface)] px-4 py-4 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card-hover sm:px-5">
+    <div className="group flex flex-1 items-start justify-between gap-3 overflow-hidden rounded-lg border border-[var(--hairline)] border-t-2 border-t-[var(--card-border-top)] bg-[var(--surface)] px-4 py-4 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card-hover sm:px-5">
       <div className="min-w-0">
         <p className="text-[11px] font-bold uppercase tracking-wider text-[var(--muted)]">{label}</p>
         <p className={cn("mt-2 text-xl font-extrabold tabular-nums tracking-tight", TONE_VALUE[tone])}>{value}</p>

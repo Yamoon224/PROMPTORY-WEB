@@ -2,7 +2,11 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
 /**
- * Carte : coins rounded-sm, ombre franche, lisere en tete.
+ * Carte : coins rounded-lg, ombre franche, lisere en tete.
+ *
+ * Rayon plus genereux que les controles qu'elle contient (boutons, badges
+ * restent rounded-sm) : une hierarchie a deux niveaux, grande surface douce
+ * et commandes nettes a l'interieur, plutot qu'un seul rayon partout.
  *
  * Le lisere est porte par la bordure superieure elle-meme (`border-t`), pas
  * par un calque ajoute : il ne recouvre jamais le contenu et n'ajoute aucun
@@ -23,7 +27,7 @@ export function Card({
   return (
     <section
       className={cn(
-        "flex flex-col overflow-hidden rounded-sm border border-[var(--hairline)] border-t-2 border-t-[var(--card-border-top)] bg-[var(--surface)] shadow-card",
+        "flex flex-col overflow-hidden rounded-lg border border-[var(--hairline)] border-t-2 border-t-[var(--card-border-top)] bg-[var(--surface)] shadow-card",
         interactive && "transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card-hover",
         className,
       )}

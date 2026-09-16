@@ -29,40 +29,44 @@ const STEPS = [
 export default function HomePage() {
   return (
     <>
-      <section className="relative overflow-hidden rounded-sm">
-        <div aria-hidden="true" className="grad-brand absolute inset-x-0 top-0 h-[26rem] rounded-sm sm:h-[24rem]" />
+      <section className="relative overflow-hidden rounded-2xl">
+        <div aria-hidden="true" className="grad-brand absolute inset-x-0 top-0 h-[28rem] sm:h-[26rem]" />
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-[26rem] rounded-sm opacity-[0.12] sm:h-[24rem]"
+          className="absolute inset-x-0 top-0 h-[28rem] opacity-[0.12] sm:h-[26rem]"
           style={{ backgroundImage: "repeating-linear-gradient(135deg, #fff 0 18px, transparent 18px 36px)" }}
         />
+        {/* Lueurs douces pour donner du relief au degrade plat, sans introduire de
+            nouvelle teinte : blanc translucide, comme la texture rayee ci-dessus. */}
+        <div aria-hidden="true" className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-white/20 blur-3xl" />
+        <div aria-hidden="true" className="absolute -bottom-32 -left-20 h-96 w-96 rounded-full bg-white/10 blur-3xl" />
 
-        <div className="relative px-4 pb-10 pt-10 sm:px-8 sm:pt-14">
+        <div className="relative px-4 pb-12 pt-12 sm:px-10 sm:pt-16">
           <div className="max-w-2xl text-white">
-            <p className="inline-flex items-center gap-2 rounded-sm bg-white/15 px-3 py-1 text-xs font-bold uppercase tracking-wider backdrop-blur">
+            <p className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider ring-1 ring-white/25 backdrop-blur">
               <IconSparkle className="h-3.5 w-3.5" />
               Marketplace de prompts IA
             </p>
-            <h1 className="mt-4 text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl">
+            <h1 className="mt-5 text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
               Des prompts qui marchent, prets a copier-coller.
             </h1>
-            <p className="mt-3 max-w-xl text-base text-white/90 sm:text-lg">
+            <p className="mt-4 max-w-xl text-base text-white/90 sm:text-lg">
               Redaction, marketing, developpement, image : trouvez le prompt qu&apos;il vous faut, ou vendez les
               votres.
             </p>
           </div>
 
-          <div className="mt-6 max-w-xl">
-            <Suspense fallback={<div className="h-12 w-full rounded-sm bg-white/15" />}>
+          <div className="mt-7 max-w-xl">
+            <Suspense fallback={<div className="h-14 w-full rounded-full bg-white/15" />}>
               <MarketplaceSearchForm variant="hero" />
             </Suspense>
           </div>
 
-          <div className="mt-6">
+          <div className="mt-7">
             <MarketplaceStats />
           </div>
 
-          <p className="mt-4 text-sm text-white/80">
+          <p className="mt-5 text-sm text-white/80">
             Vous etes createur ?{" "}
             <Link
               href="/inscription"
