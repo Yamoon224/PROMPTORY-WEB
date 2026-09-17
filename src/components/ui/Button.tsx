@@ -2,13 +2,17 @@ import { forwardRef } from "react";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
-export type ButtonVariant = "primary" | "secondary" | "danger" | "ghost";
+export type ButtonVariant = "primary" | "secondary" | "danger" | "ghost" | "onDark" | "onDarkOutline";
 export type ButtonSize = "sm" | "md" | "lg" | "icon";
 
 /**
  * Le violet de marque n'apparait qu'en degrade diagonal sur l'action
  * principale : c'est ce qui la rend reconnaissable d'un ecran a l'autre, de
  * la fiche prompt au formulaire d'edition.
+ *
+ * `onDark`/`onDarkOutline` servent aux rares surfaces deja teintees de marque
+ * (le hero) : le degrade s'y fondrait, donc l'action principale passe en
+ * blanc plein et la secondaire en verre depoli.
  */
 const VARIANT_CLASSES: Record<ButtonVariant, string> = {
   primary: "grad-brand text-white shadow-sm hover:grad-brand-hover hover:shadow-md active:translate-y-px",
@@ -16,6 +20,8 @@ const VARIANT_CLASSES: Record<ButtonVariant, string> = {
     "bg-[var(--surface)] text-zinc-700 ring-1 ring-inset ring-zinc-300 hover:bg-brand-50 hover:text-brand-700 hover:ring-brand-300 dark:text-zinc-200 dark:ring-zinc-600 dark:hover:bg-zinc-800 dark:hover:text-brand-300 dark:hover:ring-brand-700",
   danger: "bg-rose-600 text-white shadow-sm hover:bg-rose-700 active:translate-y-px disabled:hover:bg-rose-600",
   ghost: "text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-50",
+  onDark: "bg-white text-brand-700 shadow-sm hover:bg-brand-50 active:translate-y-px",
+  onDarkOutline: "border border-white/40 bg-white/10 text-white backdrop-blur hover:bg-white/20 active:translate-y-px",
 };
 
 const SIZE_CLASSES: Record<ButtonSize, string> = {
