@@ -27,9 +27,10 @@ export interface PaginatedState<T> {
  */
 export function usePaginatedData<T>(
   fetcher: (page: number, perPage: number) => Promise<Paginated<T>>,
+  initialPerPage: number = config.defaultPageSize,
 ): PaginatedState<T> {
   const [page, setPage] = useState(1);
-  const [perPage, setPerPageState] = useState<number>(config.defaultPageSize);
+  const [perPage, setPerPageState] = useState<number>(initialPerPage);
 
   const loader = useCallback(() => fetcher(page, perPage), [fetcher, page, perPage]);
   const { data, isLoading, error, reload } = useAsyncData(loader);

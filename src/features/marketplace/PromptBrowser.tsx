@@ -75,7 +75,7 @@ export function PromptBrowser() {
     [debouncedSearch, category, tag, iaModel, freeOnly, sort],
   );
 
-  const { items, meta, setPage, setPerPage, isLoading, error, reload, isEmpty } = usePaginatedData(fetcher);
+  const { items, meta, setPage, setPerPage, isLoading, error, reload, isEmpty } = usePaginatedData(fetcher, 16);
 
   return (
     <div className="flex flex-col gap-6">
