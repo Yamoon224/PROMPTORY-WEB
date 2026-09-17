@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { LinkButton } from "@/components/ui";
 import { IconCheckCircle, IconDownload, IconLock, IconSparkle } from "@/components/ui/icons";
+import { AIExperienceGallery } from "@/features/marketplace/AIExperienceGallery";
 import { CategoryExplorer } from "@/features/marketplace/CategoryExplorer";
 import { DualAudience } from "@/features/marketplace/DualAudience";
 import { FeaturedPrompts } from "@/features/marketplace/FeaturedPrompts";
@@ -106,6 +107,8 @@ export default function HomePage() {
       <FeaturedPrompts />
 
       <DualAudience />
+
+      <AIExperienceGallery />
 
       <WhyPromptory />
 
