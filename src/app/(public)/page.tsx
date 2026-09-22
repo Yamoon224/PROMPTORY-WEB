@@ -33,40 +33,35 @@ const CREATOR_STEPS = [
 export default function HomePage() {
   return (
     <>
-      <section className="relative overflow-hidden rounded-2xl bg-brand-900 text-white">
-        <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-14 sm:px-10 sm:py-16 md:grid-cols-2">
+      <section className="relative">
+        <div className="grid items-center gap-10 py-4 sm:py-8 md:grid-cols-[1.1fr_1fr] md:gap-16">
           <div className="animate-fade-rise text-center md:text-left">
-            <p className="flex items-center justify-center gap-2 text-sm font-semibold text-brand-200 md:justify-start">
+            <p className="flex items-center justify-center gap-2 text-sm font-semibold text-brand-600 dark:text-brand-400 md:justify-start">
               <IconSparkle className="h-4 w-4" />
               Marketplace de prompts IA
             </p>
 
-            <h1 className="font-display mt-4 text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]">
+            <h1 className="font-display mt-4 text-[2.75rem] font-semibold leading-[1.05] tracking-tight text-[var(--foreground)] sm:text-6xl lg:text-[4rem]">
               Des prompts qui marchent, prets a copier-coller
             </h1>
-            <p className="mx-auto mt-4 max-w-xl text-base text-white/90 sm:text-lg md:mx-0">
+            <p className="mx-auto mt-5 max-w-md text-base leading-relaxed text-[var(--muted)] sm:text-lg md:mx-0">
               Les acheteurs trouvent le prompt qu&apos;il leur faut, les createurs le fournissent. Paiement securise
               par carte ou PayPal, aucune donnee bancaire stockee.
             </p>
 
             <div className="mt-7 flex flex-wrap items-center justify-center gap-3 md:justify-start">
-              <LinkButton href="#browser" variant="onDark" size="lg" icon={<IconCart className="h-5 w-5" />}>
+              <LinkButton href="#browser" size="lg" icon={<IconCart className="h-5 w-5" />}>
                 Explorer les prompts
               </LinkButton>
-              <LinkButton
-                href="/inscription"
-                variant="onDarkOutline"
-                size="lg"
-                icon={<IconCoins className="h-5 w-5" />}
-              >
+              <LinkButton href="/inscription" variant="secondary" size="lg" icon={<IconCoins className="h-5 w-5" />}>
                 Vendre mes prompts
               </LinkButton>
             </div>
 
-            <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 md:justify-start">
+            <ul className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 md:justify-start">
               {TRUST_BADGES.map((badge) => (
-                <li key={badge.label} className="flex items-center gap-1.5 text-sm font-medium text-white/90">
-                  <span className="text-brand-200">{badge.icon}</span>
+                <li key={badge.label} className="flex items-center gap-1.5 text-sm font-medium text-[var(--muted)]">
+                  <span className="text-brand-600 dark:text-brand-400">{badge.icon}</span>
                   {badge.label}
                 </li>
               ))}

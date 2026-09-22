@@ -110,7 +110,7 @@ export function HeroSlider() {
           </div>
         ))}
 
-        <div className="absolute -left-3 top-8 z-10 rounded-2xl bg-white px-3 py-2 text-xs font-semibold text-brand-700 shadow-xl animate-float-fast">
+        <div className="absolute -left-3 top-8 z-10 rounded-2xl bg-white px-3 py-2 text-xs font-semibold text-brand-700 shadow-xl ring-1 ring-[var(--hairline)] animate-float-fast">
           <span className="flex items-center gap-2">
             <IconCreditCard className="h-4 w-4 text-brand-500" />
             Carte / PayPal
@@ -122,7 +122,7 @@ export function HeroSlider() {
             Createurs verifies
           </span>
         </div>
-        <div className="absolute -bottom-2 left-1/4 z-10 rounded-2xl bg-white px-3 py-2 text-xs font-semibold text-brand-700 shadow-xl animate-float-fast [animation-delay:1s]">
+        <div className="absolute -bottom-2 left-1/4 z-10 rounded-2xl bg-white px-3 py-2 text-xs font-semibold text-brand-700 shadow-xl ring-1 ring-[var(--hairline)] animate-float-fast [animation-delay:1s]">
           <span className="flex items-center gap-2">
             <IconDownload className="h-4 w-4 text-brand-500" />
             Acces immediat

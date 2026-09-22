@@ -19,8 +19,10 @@ const LINKS = [
 /**
  * En-tete de la marketplace publique.
  *
- * Volontairement court : le menu mobile se deplie sous l'en-tete plutot qu'en
- * tiroir lateral, pour rester atteignable au pouce.
+ * Detachee des bords plutot que collee en bandeau plein largeur : une
+ * capsule qui flotte au-dessus du canevas, avec le papier qui respire tout
+ * autour. Le menu mobile se deplie sous cette capsule, en carte propre,
+ * plutot qu'en bandeau qui reprendrait la largeur entiere de l'ecran.
  */
 export function SiteHeader() {
   const pathname = usePathname();
@@ -29,9 +31,9 @@ export function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="no-print sticky top-0 z-30 border-b border-[var(--hairline)] bg-[var(--surface)]/85 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-        <Link href="/" className="rounded-sm" aria-label="Promptory, accueil">
+    <header className="no-print sticky top-3 z-30 px-3 sm:top-4 sm:px-6">
+      <div className="mx-auto flex h-14 max-w-5xl items-center justify-between gap-4 rounded-full border border-[var(--hairline)] bg-[var(--surface)]/90 px-3 shadow-card backdrop-blur-md sm:px-4">
+        <Link href="/" className="rounded-full pl-1" aria-label="Promptory, accueil">
           <Logo />
         </Link>
 
@@ -42,7 +44,7 @@ export function SiteHeader() {
               href={link.href}
               aria-current={pathname === link.href ? "page" : undefined}
               className={cn(
-                "rounded-sm px-3 py-2 text-sm font-semibold transition-colors",
+                "rounded-full px-3.5 py-2 text-sm font-semibold transition-colors",
                 pathname === link.href
                   ? "grad-brand-soft text-brand-700 dark:text-brand-300"
                   : "text-stone-600 hover:text-stone-900 dark:text-stone-300 dark:hover:text-stone-50",
@@ -53,7 +55,7 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden items-center gap-2 md:flex">
           <CartLink count={count} />
           <ThemeToggle />
           {user ? (
@@ -82,21 +84,21 @@ export function SiteHeader() {
       </div>
 
       {isOpen ? (
-        <div className="animate-fade-rise border-t border-[var(--hairline)] bg-[var(--surface)] px-4 py-4 md:hidden">
+        <div className="animate-fade-rise mx-auto mt-2 max-w-5xl rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-4 shadow-card md:hidden">
           <nav aria-label="Navigation mobile" className="flex flex-col gap-1">
             {LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 rounded-sm px-3 py-3 text-sm font-semibold text-stone-700 hover:bg-brand-50 dark:text-stone-200 dark:hover:bg-stone-800"
+                className="flex items-center gap-3 rounded-full px-3 py-3 text-sm font-semibold text-stone-700 hover:bg-brand-50 dark:text-stone-200 dark:hover:bg-stone-800"
               >
                 <IconPackage className="h-4 w-4 text-brand-600" />
                 {link.label}
               </Link>
             ))}
           </nav>
-          <div className="mt-4 flex items-center justify-between gap-3 border-t border-[var(--hairline)] pt-4">
+          <div className="mt-3 flex items-center justify-between gap-3 border-t border-[var(--hairline)] pt-3">
             <ThemeToggle showLabels />
             {user ? (
               <LinkButton href="/espace" variant="secondary" size="sm" onClick={() => setIsOpen(false)}>
