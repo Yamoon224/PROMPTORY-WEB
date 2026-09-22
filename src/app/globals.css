@@ -100,6 +100,10 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  /* Le hero s'echappe de son conteneur centre via `100vw` (full-bleed) :
+     sans cette ligne, l'ecart entre `100vw` et la largeur reelle (barre de
+     defilement verticale deduite) ouvre un mini defilement horizontal. */
+  overflow-x: clip;
 }
 
 /* L'indigo de marque en aplat, jamais en degrade decoratif : repris par les

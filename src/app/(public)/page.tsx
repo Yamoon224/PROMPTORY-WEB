@@ -33,8 +33,8 @@ const CREATOR_STEPS = [
 export default function HomePage() {
   return (
     <>
-      <section className="relative">
-        <div className="grid items-center gap-10 py-4 sm:py-8 md:grid-cols-[1.1fr_1fr] md:gap-16">
+      <section className="relative left-1/2 right-1/2 -mx-[50vw] w-screen bg-[var(--surface-muted)]">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-12 sm:px-8 sm:py-16 md:grid-cols-[1.1fr_1fr] md:gap-16 lg:px-12">
           <div className="animate-fade-rise text-center md:text-left">
             <p className="flex items-center justify-center gap-2 text-sm font-semibold text-brand-600 dark:text-brand-400 md:justify-start">
               <IconSparkle className="h-4 w-4" />
