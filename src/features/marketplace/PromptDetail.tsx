@@ -85,7 +85,9 @@ export function PromptDetail({ slug }: { slug: string }) {
                 <p className="mt-1 text-sm text-[var(--muted)]">Par {prompt.creator?.name ?? "Createur inconnu"}</p>
               </div>
               {prompt.status !== "published" ? (
-                <Badge tone={PROMPT_STATUS_TONE[prompt.status]}>{PROMPT_STATUS_LABEL[prompt.status]}</Badge>
+                <Badge dot tone={PROMPT_STATUS_TONE[prompt.status]}>
+                  {PROMPT_STATUS_LABEL[prompt.status]}
+                </Badge>
               ) : null}
             </div>
 

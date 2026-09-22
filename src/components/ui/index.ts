@@ -1,5 +1,5 @@
 export { Avatar, initialsOf } from "./Avatar";
-export { Badge } from "./Badge";
+export { Badge, DOT_CLASSES } from "./Badge";
 export type { Tone } from "./Badge";
 export { Button, Spinner, buttonClasses } from "./Button";
 export type { ButtonProps, ButtonSize, ButtonVariant } from "./Button";

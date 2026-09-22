@@ -1,22 +1,23 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { Button } from "@/components/ui";
 import { IconLogout, IconMenu, IconPanelLeft } from "@/components/ui/icons";
 import { useAuth } from "@/features/auth/AuthContext";
-import { findNavItem } from "./nav-config";
 
-/** En-tete de l'espace : ou l'on est, le theme, la deconnexion. */
+/**
+ * Barre d'outils de l'espace : sans fond ni bordure propres, elle se fond
+ * dans le canevas de la page plutot que de dessiner un bandeau au-dessus —
+ * le titre de chaque ecran vit deja dans son `PageHeader`, cette barre ne
+ * porte donc que les commandes (navigation, theme, deconnexion).
+ */
 export function Topbar({ onOpenNavigation, onToggleSidebar }: { onOpenNavigation: () => void; onToggleSidebar: () => void }) {
-  const pathname = usePathname();
   const router = useRouter();
   const { logout } = useAuth();
   const [isLeaving, setIsLeaving] = useState(false);
-
-  const current = findNavItem(pathname);
 
   async function leave() {
     setIsLeaving(true);
@@ -25,7 +26,7 @@ export function Topbar({ onOpenNavigation, onToggleSidebar }: { onOpenNavigation
   }
 
   return (
-    <header className="no-print sticky top-0 z-20 flex h-16 items-center justify-between gap-3 border-b border-[var(--hairline)] bg-[var(--surface)]/85 px-4 backdrop-blur-md sm:px-6">
+    <header className="no-print sticky top-0 z-20 flex h-16 shrink-0 items-center justify-between gap-3 px-4 sm:px-6">
       <div className="flex min-w-0 items-center gap-2">
         <button
           type="button"
@@ -43,12 +44,6 @@ export function Topbar({ onOpenNavigation, onToggleSidebar }: { onOpenNavigation
         >
           <IconPanelLeft className="h-5 w-5" />
         </button>
-        <div className="min-w-0">
-          <p className="truncate text-sm font-bold">{current?.label ?? "Mon profil"}</p>
-          <p className="hidden truncate text-xs text-[var(--muted)] sm:block">
-            {current?.description ?? "Compte et preferences d'affichage"}
-          </p>
-        </div>
       </div>
 
       <div className="flex items-center gap-2 sm:gap-3">

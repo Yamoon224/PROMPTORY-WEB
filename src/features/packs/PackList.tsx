@@ -43,7 +43,15 @@ export function PackList() {
         </div>
       ),
     },
-    { key: "status", header: "Statut", cell: (pack) => <Badge tone={PACK_STATUS_TONE[pack.status]}>{PACK_STATUS_LABEL[pack.status]}</Badge> },
+    {
+      key: "status",
+      header: "Statut",
+      cell: (pack) => (
+        <Badge dot tone={PACK_STATUS_TONE[pack.status]}>
+          {PACK_STATUS_LABEL[pack.status]}
+        </Badge>
+      ),
+    },
     { key: "price", header: "Prix", cell: (pack) => formatMoney(pack.price), hideOnMobile: true },
     { key: "prompts", header: "Prompts", cell: (pack) => pack.prompts_count ?? 0, hideOnMobile: true },
     {

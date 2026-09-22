@@ -63,7 +63,11 @@ export function UserList() {
     {
       key: "status",
       header: "Statut",
-      cell: (user) => <Badge tone={user.status === "active" ? "success" : "danger"}>{user.status === "active" ? "Actif" : "Inactif"}</Badge>,
+      cell: (user) => (
+        <Badge dot tone={user.status === "active" ? "success" : "danger"}>
+          {user.status === "active" ? "Actif" : "Inactif"}
+        </Badge>
+      ),
     },
     {
       key: "actions",

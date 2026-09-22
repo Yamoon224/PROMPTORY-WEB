@@ -76,7 +76,7 @@ export function Sidebar({
             <div key={group} className="mb-3">
               <p
                 className={cn(
-                  "px-3 pb-1.5 pt-2 text-[10px] font-bold uppercase tracking-[0.14em] text-[var(--muted)]",
+                  "px-3 pb-1.5 pt-2 text-xs font-semibold text-[var(--muted)]",
                   isCollapsed && "sr-only",
                 )}
               >
@@ -97,16 +97,13 @@ export function Sidebar({
                           aria-current={isActive ? "page" : undefined}
                           title={isCollapsed ? item.label : undefined}
                           className={cn(
-                            "group relative flex items-center rounded-sm text-sm transition-colors",
+                            "group flex items-center rounded-xl text-sm transition-colors",
                             isCollapsed ? "justify-center py-2.5" : "gap-3 px-3 py-2.5",
                             isActive
-                              ? "grad-brand-soft font-bold text-brand-700 dark:text-brand-300"
+                              ? "grad-brand-soft font-semibold text-brand-700 dark:text-brand-300"
                               : "font-medium text-stone-600 hover:bg-stone-100 hover:text-stone-900 dark:text-stone-400 dark:hover:bg-stone-800/70 dark:hover:text-stone-100",
                           )}
                         >
-                          {isActive ? (
-                            <span aria-hidden="true" className="grad-brand absolute inset-y-1 left-0 w-[3px] rounded-full" />
-                          ) : null}
                           <Icon
                             className={cn(
                               "h-[18px] w-[18px] shrink-0 transition-transform",

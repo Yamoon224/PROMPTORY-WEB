@@ -63,7 +63,11 @@ export function PromptList() {
     {
       key: "status",
       header: "Statut",
-      cell: (prompt) => <Badge tone={PROMPT_STATUS_TONE[prompt.status]}>{PROMPT_STATUS_LABEL[prompt.status]}</Badge>,
+      cell: (prompt) => (
+        <Badge dot tone={PROMPT_STATUS_TONE[prompt.status]}>
+          {PROMPT_STATUS_LABEL[prompt.status]}
+        </Badge>
+      ),
     },
     {
       key: "price",

@@ -3,8 +3,15 @@
 import { useCallback } from "react";
 import { LinkButton, LoadingState, StatCard } from "@/components/ui";
 import { IconCart, IconCoins, IconCreditCard, IconPrompt } from "@/components/ui/icons";
+import { useAuth } from "@/features/auth/AuthContext";
 import { useAsyncData } from "@/hooks/useAsyncData";
+import { ROLE_LABEL } from "@/lib/labels";
 import { promptService, saleService, subscriptionService } from "@/services";
+
+/** "mardi 22 septembre" — jamais d'annee : la date du jour n'en a pas besoin. */
+function formatGreetingDate(): string {
+  return new Intl.DateTimeFormat("fr-FR", { weekday: "long", day: "numeric", month: "long" }).format(new Date());
+}
 
 /**
  * Vue d'ensemble de l'espace createur.
@@ -14,6 +21,8 @@ import { promptService, saleService, subscriptionService } from "@/services";
  * decompte serait le meme gaspillage qu'une pagination inutile.
  */
 export function DashboardOverview() {
+  const { user } = useAuth();
+
   const loadCounts = useCallback(async () => {
     const [prompts, publishedPrompts, purchases, sales, subscriptions] = await Promise.all([
       promptService.listMyPrompts({ per_page: 1 }),
@@ -38,6 +47,20 @@ export function DashboardOverview() {
 
   return (
     <div className="flex flex-col gap-6">
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h1 className="font-display text-2xl font-semibold tracking-tight text-[var(--foreground)] sm:text-[1.75rem]">
+            Bonjour{user ? `, ${user.name}` : ""} <span aria-hidden="true">👋</span>
+          </h1>
+          <p className="mt-1.5 text-sm text-[var(--muted)]">{formatGreetingDate()}</p>
+        </div>
+        {user ? (
+          <p className="text-sm text-[var(--muted)]">
+            {user.name} <span className="text-[var(--card-border-top)]">·</span> {ROLE_LABEL[user.role] ?? user.role}
+          </p>
+        ) : null}
+      </div>
+
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard
           label="Prompts publies"

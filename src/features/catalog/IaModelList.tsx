@@ -30,7 +30,15 @@ export function IaModelList() {
 
   const columns: Array<Column<IaModel>> = [
     { key: "name", header: "Nom", sortKey: "name", cell: (model) => <span className="font-semibold">{model.name}</span> },
-    { key: "status", header: "Statut", cell: (model) => <Badge tone={model.is_active ? "success" : "neutral"}>{model.is_active ? "Actif" : "Inactif"}</Badge> },
+    {
+      key: "status",
+      header: "Statut",
+      cell: (model) => (
+        <Badge dot tone={model.is_active ? "success" : "neutral"}>
+          {model.is_active ? "Actif" : "Inactif"}
+        </Badge>
+      ),
+    },
     { key: "prompts", header: "Prompts", cell: (model) => model.prompts_count ?? 0, hideOnMobile: true },
     {
       key: "actions",

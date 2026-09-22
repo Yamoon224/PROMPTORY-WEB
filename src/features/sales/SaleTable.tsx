@@ -26,7 +26,11 @@ const PRICE_COLUMN: Column<Sale> = {
 const STATUS_COLUMN: Column<Sale> = {
   key: "status",
   header: "Statut",
-  cell: (sale) => <Badge tone={PAYMENT_STATUS_TONE[sale.payment_status]}>{PAYMENT_STATUS_LABEL[sale.payment_status]}</Badge>,
+  cell: (sale) => (
+    <Badge dot tone={PAYMENT_STATUS_TONE[sale.payment_status]}>
+      {PAYMENT_STATUS_LABEL[sale.payment_status]}
+    </Badge>
+  ),
 };
 
 const DATE_COLUMN: Column<Sale> = {

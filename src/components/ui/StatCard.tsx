@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
+import { DOT_CLASSES } from "./Badge";
 import type { Tone } from "./Badge";
 
 const TONE_VALUE: Record<Tone, string> = {
@@ -20,8 +21,18 @@ const TONE_ICON: Record<Tone, string> = {
   info: "bg-sky-50 text-sky-600 dark:bg-sky-950/60 dark:text-sky-400",
 };
 
-/** Meme habillage que `Card` (rounded-lg, lisere superieur neutre) : une
- * tuile de chiffre reste une carte parmi les autres. */
+const TONE_BLOB: Record<Tone, string> = {
+  neutral: "bg-stone-300/40 dark:bg-stone-600/25",
+  brand: "bg-brand-300/40 dark:bg-brand-700/30",
+  success: "bg-emerald-300/35 dark:bg-emerald-700/25",
+  warning: "bg-amber-300/35 dark:bg-amber-700/25",
+  danger: "bg-rose-300/35 dark:bg-rose-700/25",
+  info: "bg-sky-300/35 dark:bg-sky-700/25",
+};
+
+/** Une tuile de chiffre reste une carte parmi les autres : meme rayon, meme
+ * lisere superieur que `Card`. La tache floue en coin est purement decorative
+ * (jamais porteuse d'information) — un seul repere, discret, jamais anime. */
 export function StatCard({
   label,
   value,
@@ -36,16 +47,23 @@ export function StatCard({
   icon?: ReactNode;
 }) {
   return (
-    <div className="group flex flex-1 items-start justify-between gap-3 overflow-hidden rounded-lg border border-[var(--hairline)] border-t-2 border-t-[var(--card-border-top)] bg-[var(--surface)] px-4 py-4 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card-hover sm:px-5">
-      <div className="min-w-0">
-        <p className="text-[11px] font-bold uppercase tracking-wider text-[var(--muted)]">{label}</p>
-        <p className={cn("mt-2 text-xl font-extrabold tabular-nums tracking-tight", TONE_VALUE[tone])}>{value}</p>
-        {hint ? <p className="mt-1.5 text-xs leading-relaxed text-[var(--muted)]">{hint}</p> : null}
+    <div className="group relative flex flex-1 items-start justify-between gap-3 overflow-hidden rounded-md border border-[var(--hairline)] border-t-[3px] border-t-[var(--card-border-top)] bg-[var(--surface)] px-4 py-4 shadow-card transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card-hover sm:px-5">
+      <span
+        aria-hidden="true"
+        className={cn("pointer-events-none absolute -right-6 -top-8 h-24 w-24 rounded-full blur-2xl", TONE_BLOB[tone])}
+      />
+      <div className="relative min-w-0">
+        <p className="flex items-center gap-1.5 text-xs font-medium text-[var(--muted)]">
+          <span aria-hidden="true" className={cn("h-1.5 w-1.5 shrink-0 rounded-full", DOT_CLASSES[tone])} />
+          {label}
+        </p>
+        <p className={cn("mt-2 text-2xl font-bold tabular-nums tracking-tight", TONE_VALUE[tone])}>{value}</p>
+        {hint ? <p className={cn("mt-1.5 text-xs font-medium leading-relaxed", TONE_VALUE[tone])}>{hint}</p> : null}
       </div>
       {icon ? (
         <span
           className={cn(
-            "flex h-10 w-10 shrink-0 items-center justify-center rounded-sm transition-transform duration-200 group-hover:scale-105",
+            "relative flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-transform duration-200 group-hover:scale-105",
             TONE_ICON[tone],
           )}
         >

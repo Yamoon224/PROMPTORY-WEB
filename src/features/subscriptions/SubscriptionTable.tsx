@@ -22,7 +22,11 @@ export function SubscriptionTable() {
     {
       key: "status",
       header: "Statut",
-      cell: (subscription) => <Badge tone={SUBSCRIPTION_STATUS_TONE[subscription.status]}>{SUBSCRIPTION_STATUS_LABEL[subscription.status]}</Badge>,
+      cell: (subscription) => (
+        <Badge dot tone={SUBSCRIPTION_STATUS_TONE[subscription.status]}>
+          {SUBSCRIPTION_STATUS_LABEL[subscription.status]}
+        </Badge>
+      ),
     },
     { key: "end_date", header: "Echeance", cell: (subscription) => formatDate(subscription.end_date), hideOnMobile: true },
   ];

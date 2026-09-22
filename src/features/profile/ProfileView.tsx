@@ -37,7 +37,9 @@ export function ProfileView() {
             <p className="text-sm text-[var(--muted)]">{user.email}</p>
             <div className="mt-2 flex gap-2">
               <Badge tone="brand">{ROLE_LABEL[user.role] ?? user.role}</Badge>
-              <Badge tone={user.status === "active" ? "success" : "danger"}>{user.status === "active" ? "Actif" : "Inactif"}</Badge>
+              <Badge dot tone={user.status === "active" ? "success" : "danger"}>
+                {user.status === "active" ? "Actif" : "Inactif"}
+              </Badge>
             </div>
           </div>
         </CardBody>

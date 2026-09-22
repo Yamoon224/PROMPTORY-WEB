@@ -60,7 +60,9 @@ export function SubscriptionPanel() {
                 {active ? (
                   <>
                     <p className="text-sm">
-                      <Badge tone={SUBSCRIPTION_STATUS_TONE[active.status]}>{SUBSCRIPTION_STATUS_LABEL[active.status]}</Badge>{" "}
+                      <Badge dot tone={SUBSCRIPTION_STATUS_TONE[active.status]}>
+                        {SUBSCRIPTION_STATUS_LABEL[active.status]}
+                      </Badge>{" "}
                       jusqu&apos;au {formatDate(active.end_date)}
                     </p>
                     <Button variant="secondary" size="sm" className="self-start" onClick={() => setPendingCancelId(active.id)}>
