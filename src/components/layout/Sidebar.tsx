@@ -39,7 +39,7 @@ export function Sidebar({
           type="button"
           aria-label="Fermer la navigation"
           onClick={onCloseMobile}
-          className="fixed inset-0 z-30 bg-zinc-950/50 backdrop-blur-sm md:hidden"
+          className="fixed inset-0 z-30 bg-stone-950/50 backdrop-blur-sm md:hidden"
         />
       ) : null}
 
@@ -65,7 +65,7 @@ export function Sidebar({
             type="button"
             onClick={onCloseMobile}
             aria-label="Fermer la navigation"
-            className="rounded-full p-2 text-zinc-400 hover:bg-zinc-100 md:hidden dark:hover:bg-zinc-800"
+            className="rounded-full p-2 text-stone-400 hover:bg-stone-100 md:hidden dark:hover:bg-stone-800"
           >
             <IconClose />
           </button>
@@ -101,7 +101,7 @@ export function Sidebar({
                             isCollapsed ? "justify-center py-2.5" : "gap-3 px-3 py-2.5",
                             isActive
                               ? "grad-brand-soft font-bold text-brand-700 dark:text-brand-300"
-                              : "font-medium text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800/70 dark:hover:text-zinc-100",
+                              : "font-medium text-stone-600 hover:bg-stone-100 hover:text-stone-900 dark:text-stone-400 dark:hover:bg-stone-800/70 dark:hover:text-stone-100",
                           )}
                         >
                           {isActive ? (
@@ -129,7 +129,7 @@ export function Sidebar({
             onClick={onCloseMobile}
             title={isCollapsed ? "Mon profil" : undefined}
             className={cn(
-              "flex shrink-0 items-center border-t border-[var(--hairline)] p-3 transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-800/50",
+              "flex shrink-0 items-center border-t border-[var(--hairline)] p-3 transition-colors hover:bg-stone-50 dark:hover:bg-stone-800/50",
               isCollapsed ? "justify-center" : "gap-3",
             )}
           >

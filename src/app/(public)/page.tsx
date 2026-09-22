@@ -33,27 +33,16 @@ const CREATOR_STEPS = [
 export default function HomePage() {
   return (
     <>
-      <section className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-brand-700 via-brand-800 to-brand-900 text-white">
-        {/* Formes de marque qui derivent lentement derriere le contenu :
-            donne du mouvement au fond degrade sans jamais distraire du texte. */}
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-          <div className="animate-blob absolute -left-32 top-10 h-96 w-96 rounded-full bg-brand-400/30 blur-3xl" />
-          <div className="animate-blob absolute right-0 top-40 h-[28rem] w-[28rem] rounded-full bg-brand-300/20 blur-3xl [animation-delay:3s]" />
-          <div className="animate-blob absolute -bottom-32 left-1/3 h-80 w-80 rounded-full bg-brand-500/25 blur-3xl [animation-delay:6s]" />
-        </div>
-
+      <section className="relative overflow-hidden rounded-2xl bg-brand-900 text-white">
         <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-14 sm:px-10 sm:py-16 md:grid-cols-2">
           <div className="animate-fade-rise text-center md:text-left">
-            <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-xs font-bold uppercase tracking-wider backdrop-blur">
-              <IconSparkle className="h-3.5 w-3.5 text-brand-200" />
+            <p className="flex items-center justify-center gap-2 text-sm font-semibold text-brand-200 md:justify-start">
+              <IconSparkle className="h-4 w-4" />
               Marketplace de prompts IA
             </p>
 
-            <h1 className="mt-5 text-4xl font-extrabold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-              Bienvenue sur Promptory
-              <span className="mt-2 block text-2xl font-bold sm:text-3xl">
-                Des prompts qui marchent, <span className="text-brand-200">prets a copier-coller</span>
-              </span>
+            <h1 className="font-display mt-4 text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.4rem]">
+              Des prompts qui marchent, prets a copier-coller
             </h1>
             <p className="mx-auto mt-4 max-w-xl text-base text-white/90 sm:text-lg md:mx-0">
               Les acheteurs trouvent le prompt qu&apos;il leur faut, les createurs le fournissent. Paiement securise
@@ -104,8 +93,7 @@ export default function HomePage() {
       </section>
 
       <section id="browser" className="scroll-mt-20 pb-10">
-        <h2 className="text-xl font-extrabold tracking-tight">Explorer tous les prompts</h2>
-        <span aria-hidden="true" className="grad-brand mt-2 block h-[3px] w-12 rounded-full" />
+        <h2 className="font-display text-2xl font-semibold tracking-tight">Explorer tous les prompts</h2>
         <div className="mt-6">
           <Suspense fallback={null}>
             <PromptBrowser />
@@ -126,33 +114,32 @@ export default function HomePage() {
       </section>
 
       <section className="rounded-2xl bg-[var(--surface-muted)] px-4 py-10 sm:px-8">
-        <h2 className="text-xl font-extrabold tracking-tight">Comment ca marche</h2>
-        <span aria-hidden="true" className="grad-brand mt-2 block h-[3px] w-12 rounded-full" />
+        <h2 className="font-display text-2xl font-semibold tracking-tight">Comment ca marche</h2>
 
         <div className="mt-7 grid gap-8 md:grid-cols-2">
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400">Cote acheteur</h3>
+            <h3 className="font-display text-lg font-semibold text-brand-700 dark:text-brand-400">Cote acheteur</h3>
             <ol className="mt-4 flex flex-col gap-4">
               {BUYER_STEPS.map((step, index) => (
                 <li key={step} className="flex items-start gap-3">
-                  <span className="grad-brand flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white">
+                  <span className="font-display flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-brand-700 ring-1 ring-inset ring-brand-300 dark:text-brand-300 dark:ring-brand-700">
                     {index + 1}
                   </span>
-                  <p className="pt-0.5 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">{step}</p>
+                  <p className="pt-0.5 text-sm leading-relaxed text-stone-700 dark:text-stone-300">{step}</p>
                 </li>
               ))}
             </ol>
           </div>
 
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400">Cote createur</h3>
+            <h3 className="font-display text-lg font-semibold text-brand-700 dark:text-brand-400">Cote createur</h3>
             <ol className="mt-4 flex flex-col gap-4">
               {CREATOR_STEPS.map((step, index) => (
                 <li key={step} className="flex items-start gap-3">
-                  <span className="grad-brand flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white">
+                  <span className="font-display flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-brand-700 ring-1 ring-inset ring-brand-300 dark:text-brand-300 dark:ring-brand-700">
                     {index + 1}
                   </span>
-                  <p className="pt-0.5 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">{step}</p>
+                  <p className="pt-0.5 text-sm leading-relaxed text-stone-700 dark:text-stone-300">{step}</p>
                 </li>
               ))}
             </ol>

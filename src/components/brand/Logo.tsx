@@ -46,7 +46,7 @@ export function Logo({
         <span
           className={cn(
             "font-extrabold lowercase tracking-tight",
-            tone === "onBrand" ? "text-white" : "text-zinc-900 dark:text-zinc-50",
+            tone === "onBrand" ? "text-white" : "text-stone-900 dark:text-stone-50",
             size === "lg" ? "text-2xl" : "text-lg",
           )}
         >

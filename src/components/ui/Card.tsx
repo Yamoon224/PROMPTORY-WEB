@@ -27,7 +27,7 @@ export function Card({
   return (
     <section
       className={cn(
-        "flex flex-col overflow-hidden rounded-lg border border-[var(--hairline)] border-t-2 border-t-[var(--card-border-top)] bg-[var(--surface)] shadow-card",
+        "flex flex-col overflow-hidden rounded-md border border-[var(--hairline)] border-t-[3px] border-t-[var(--card-border-top)] bg-[var(--surface)] shadow-card",
         interactive && "transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card-hover",
         className,
       )}
@@ -35,11 +35,6 @@ export function Card({
       <div className="flex min-w-0 flex-1 flex-col">{children}</div>
     </section>
   );
-}
-
-/** Trait de marque intercale entre un titre et son sous-titre. */
-export function TitleRule({ className }: { className?: string }) {
-  return <span aria-hidden="true" className={cn("grad-brand mt-2 block h-[3px] w-10 rounded-full", className)} />;
 }
 
 export function CardHeader({
@@ -62,9 +57,8 @@ export function CardHeader({
           </span>
         ) : null}
         <div className="min-w-0">
-          <h2 className="text-sm font-bold tracking-tight text-zinc-900 dark:text-zinc-50">{title}</h2>
-          <TitleRule />
-          {description ? <p className="mt-2 text-sm text-[var(--muted)]">{description}</p> : null}
+          <h2 className="text-sm font-bold tracking-tight text-stone-900 dark:text-stone-50">{title}</h2>
+          {description ? <p className="mt-1.5 text-sm text-[var(--muted)]">{description}</p> : null}
         </div>
       </div>
       {actions ? <div className="flex flex-wrap items-center gap-2">{actions}</div> : null}

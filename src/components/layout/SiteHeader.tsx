@@ -45,7 +45,7 @@ export function SiteHeader() {
                 "rounded-sm px-3 py-2 text-sm font-semibold transition-colors",
                 pathname === link.href
                   ? "grad-brand-soft text-brand-700 dark:text-brand-300"
-                  : "text-zinc-600 hover:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-50",
+                  : "text-stone-600 hover:text-stone-900 dark:text-stone-300 dark:hover:text-stone-50",
               )}
             >
               {link.label}
@@ -74,7 +74,7 @@ export function SiteHeader() {
             onClick={() => setIsOpen((open) => !open)}
             aria-expanded={isOpen}
             aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
-            className="rounded-full p-2 text-zinc-600 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
+            className="rounded-full p-2 text-stone-600 hover:bg-stone-100 dark:text-stone-300 dark:hover:bg-stone-800"
           >
             {isOpen ? <IconClose className="h-5 w-5" /> : <IconMenu className="h-5 w-5" />}
           </button>
@@ -89,7 +89,7 @@ export function SiteHeader() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 rounded-sm px-3 py-3 text-sm font-semibold text-zinc-700 hover:bg-brand-50 dark:text-zinc-200 dark:hover:bg-zinc-800"
+                className="flex items-center gap-3 rounded-sm px-3 py-3 text-sm font-semibold text-stone-700 hover:bg-brand-50 dark:text-stone-200 dark:hover:bg-stone-800"
               >
                 <IconPackage className="h-4 w-4 text-brand-600" />
                 {link.label}
@@ -120,7 +120,7 @@ function CartLink({ count }: { count: number }) {
     <Link
       href="/panier"
       aria-label={count > 0 ? `Panier, ${count} article${count > 1 ? "s" : ""}` : "Panier"}
-      className="relative flex h-9 w-9 items-center justify-center rounded-sm text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-zinc-50"
+      className="relative flex h-9 w-9 items-center justify-center rounded-sm text-stone-600 hover:bg-stone-100 hover:text-stone-900 dark:text-stone-300 dark:hover:bg-stone-800 dark:hover:text-stone-50"
     >
       <IconCart className="h-5 w-5" />
       {count > 0 ? (

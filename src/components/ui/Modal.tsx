@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
-import { TitleRule } from "./Card";
 import { IconClose } from "./icons";
 
 /**
@@ -60,22 +59,21 @@ export function Modal({
         "sm:inset-x-auto sm:bottom-auto sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 sm:max-h-[calc(100dvh-2rem)]",
         widthClass,
         "flex-col overflow-hidden rounded-sm border border-[var(--hairline)] bg-[var(--surface)] p-0",
-        "text-[var(--foreground)] shadow-card backdrop:bg-zinc-950/55 backdrop:backdrop-blur-sm",
+        "text-[var(--foreground)] shadow-card backdrop:bg-stone-950/55 backdrop:backdrop-blur-sm",
         "open:flex open:animate-fade-rise",
       )}
     >
       <div className="flex shrink-0 items-start gap-3 border-b border-[var(--hairline)] px-4 py-4 sm:px-5">
         <div className="min-w-0 flex-1">
           <h2 className="text-base font-bold tracking-tight">{title}</h2>
-          <TitleRule />
-          {description ? <p className="mt-2 text-sm text-[var(--muted)]">{description}</p> : null}
+          {description ? <p className="mt-1.5 text-sm text-[var(--muted)]">{description}</p> : null}
         </div>
 
         <button
           type="button"
           onClick={onClose}
           aria-label="Fermer"
-          className="-mr-1 -mt-1 shrink-0 rounded-full p-2 text-zinc-400 transition-colors hover:bg-zinc-100 hover:text-zinc-700 focus-visible:outline-2 focus-visible:outline-brand-500 dark:hover:bg-zinc-800 dark:hover:text-zinc-200"
+          className="-mr-1 -mt-1 shrink-0 rounded-full p-2 text-stone-400 transition-colors hover:bg-stone-100 hover:text-stone-700 focus-visible:outline-2 focus-visible:outline-brand-500 dark:hover:bg-stone-800 dark:hover:text-stone-200"
         >
           <IconClose className="h-4 w-4" />
         </button>
@@ -90,7 +88,6 @@ export function Modal({
           {footer}
         </div>
       ) : null}
-      <span aria-hidden="true" className="grad-brand block h-[3px] w-full shrink-0" />
     </dialog>
   );
 }

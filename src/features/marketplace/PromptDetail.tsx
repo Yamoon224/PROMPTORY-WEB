@@ -81,7 +81,7 @@ export function PromptDetail({ slug }: { slug: string }) {
           <CardBody className="flex flex-col gap-4">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
-                <h1 className="text-2xl font-extrabold tracking-tight">{prompt.title}</h1>
+                <h1 className="font-display text-2xl font-semibold tracking-tight">{prompt.title}</h1>
                 <p className="mt-1 text-sm text-[var(--muted)]">Par {prompt.creator?.name ?? "Createur inconnu"}</p>
               </div>
               {prompt.status !== "published" ? (
@@ -154,7 +154,7 @@ export function PromptDetail({ slug }: { slug: string }) {
                       onClick={() => setRating(value)}
                       className="rounded-full p-0.5"
                     >
-                      <IconStar className={value <= rating ? "h-5 w-5 text-amber-500" : "h-5 w-5 text-zinc-300 dark:text-zinc-700"} />
+                      <IconStar className={value <= rating ? "h-5 w-5 text-amber-500" : "h-5 w-5 text-stone-300 dark:text-stone-700"} />
                     </button>
                   ))}
                 </div>
@@ -198,7 +198,7 @@ export function PromptDetail({ slug }: { slug: string }) {
       <div>
         <Card className="lg:sticky lg:top-24">
           <CardBody className="flex flex-col gap-4">
-            <p className="text-3xl font-extrabold tabular-nums text-brand-700 dark:text-brand-400">
+            <p className="font-display text-3xl font-semibold tabular-nums text-brand-700 dark:text-brand-400">
               {prompt.is_free ? "Gratuit" : formatMoney(prompt.price)}
             </p>
 

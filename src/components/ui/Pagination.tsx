@@ -38,8 +38,8 @@ export function Pagination({
   const pageButton = cn(
     "inline-flex h-8 items-center gap-1 rounded-full px-2.5 text-xs font-semibold transition-all",
     "grad-brand text-white shadow-sm hover:grad-brand-hover active:translate-y-px",
-    "disabled:cursor-not-allowed disabled:bg-none disabled:bg-zinc-200 disabled:text-zinc-400 disabled:shadow-none",
-    "dark:disabled:bg-zinc-800 dark:disabled:text-zinc-500",
+    "disabled:cursor-not-allowed disabled:bg-none disabled:bg-stone-200 disabled:text-stone-400 disabled:shadow-none",
+    "dark:disabled:bg-stone-800 dark:disabled:text-stone-500",
   );
 
   return (
@@ -65,7 +65,7 @@ export function Pagination({
               </option>
             ))}
           </select>
-          <IconChevronDown className="pointer-events-none absolute right-1.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-zinc-400" />
+          <IconChevronDown className="pointer-events-none absolute right-1.5 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-stone-400" />
         </div>
       </div>
 

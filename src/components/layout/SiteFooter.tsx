@@ -35,8 +35,6 @@ export function SiteFooter() {
   return (
     <footer className="no-print relative mt-16 overflow-hidden">
       <div aria-hidden="true" className="grad-brand absolute inset-0" />
-      <div aria-hidden="true" className="absolute -right-16 -top-20 h-64 w-64 rounded-full bg-white/15 blur-3xl" />
-      <div aria-hidden="true" className="absolute -bottom-24 -left-10 h-72 w-72 rounded-full bg-white/10 blur-3xl" />
 
       <div className="relative mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
@@ -48,7 +46,7 @@ export function SiteFooter() {
         </div>
         {COLUMNS.map((column) => (
           <div key={column.title}>
-            <p className="text-xs font-bold uppercase tracking-wider text-white/60">{column.title}</p>
+            <p className="text-sm font-semibold text-white/60">{column.title}</p>
             <ul className="mt-3 space-y-2 text-sm">
               {column.links.map((link) => (
                 <li key={link.href}>
@@ -65,7 +63,7 @@ export function SiteFooter() {
         <div className="mx-auto flex max-w-6xl flex-col-reverse items-center justify-between gap-4 sm:flex-row">
           <p className="text-xs text-white/60">© {year} Promptory. Tous droits reserves.</p>
           <div className="flex items-center gap-3">
-            <span className="text-xs font-semibold uppercase tracking-wider text-white/60">Paiement securise</span>
+            <span className="text-xs font-semibold text-white/60">Paiement securise</span>
             <PaymentLogos />
           </div>
         </div>

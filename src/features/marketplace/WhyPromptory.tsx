@@ -37,8 +37,7 @@ const REASONS = [
 export function WhyPromptory() {
   return (
     <section className="py-10">
-      <h2 className="text-xl font-extrabold tracking-tight">Pourquoi Promptory ?</h2>
-      <span aria-hidden="true" className="grad-brand mt-2 block h-[3px] w-12 rounded-full" />
+      <h2 className="font-display text-2xl font-semibold tracking-tight">Pourquoi Promptory ?</h2>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {REASONS.map((reason) => (

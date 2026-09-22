@@ -75,7 +75,7 @@ export function HeroSlider() {
         </div>
       </div>
 
-      <div className="absolute inset-0 overflow-hidden rounded-[2rem] shadow-2xl ring-1 ring-white/30">
+      <div className="absolute inset-0 overflow-hidden rounded-2xl shadow-2xl ring-1 ring-white/30">
         {SLIDES.map((slide, slideIndex) => (
           <div
             key={slide.title}
@@ -89,14 +89,14 @@ export function HeroSlider() {
             <div className="relative flex h-full flex-col items-center justify-end p-6 text-center text-white">
               <div
                 className={cn(
-                  "mb-3 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-bold uppercase shadow-lg",
+                  "mb-3 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-bold shadow-lg",
                   slide.badge,
                 )}
               >
                 <slide.icon className="h-4 w-4" />
-                Etape {slideIndex + 1}/{SLIDES.length}
+                Etape {slideIndex + 1} sur {SLIDES.length}
               </div>
-              <h3 className="text-2xl font-extrabold drop-shadow-lg">{slide.title}</h3>
+              <h3 className="font-display text-2xl font-semibold drop-shadow-lg">{slide.title}</h3>
               <p className="mt-1 text-sm opacity-95 drop-shadow">{slide.text}</p>
               <ul className="mt-3 w-full space-y-1.5 text-left text-sm">
                 {slide.items.map((item) => (

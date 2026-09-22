@@ -136,7 +136,7 @@ function IaModelFormModal({ model, onClose, onSaved }: { model: IaModel | null; 
       <div className="flex flex-col gap-4">
         <TextField label="Nom" placeholder="ChatGPT" value={name} onChange={(event) => setName(event.target.value)} errors={fieldErrors.name} required autoFocus />
         <TextareaField label="Description (facultatif)" placeholder="Modele conversationnel d'OpenAI" value={description} onChange={(event) => setDescription(event.target.value)} rows={2} />
-        <label className="flex items-center gap-2 text-sm font-medium text-zinc-700 dark:text-zinc-300">
+        <label className="flex items-center gap-2 text-sm font-medium text-stone-700 dark:text-stone-300">
           <input
             type="checkbox"
             checked={isActive}

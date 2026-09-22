@@ -36,7 +36,7 @@ export function PackDetail({ slug }: { slug: string }) {
       <Card>
         <CardBody className="flex flex-col gap-4">
           <div>
-            <h1 className="text-2xl font-extrabold tracking-tight">{pack.title}</h1>
+            <h1 className="font-display text-2xl font-semibold tracking-tight">{pack.title}</h1>
             <p className="mt-1 text-sm text-[var(--muted)]">Par {pack.creator?.name ?? "Createur inconnu"}</p>
           </div>
 
@@ -62,7 +62,9 @@ export function PackDetail({ slug }: { slug: string }) {
 
       <Card>
         <CardBody className="flex flex-col gap-4">
-          <p className="text-3xl font-extrabold tabular-nums text-brand-700 dark:text-brand-400">{formatMoney(pack.price)}</p>
+          <p className="font-display text-3xl font-semibold tabular-nums text-brand-700 dark:text-brand-400">
+            {formatMoney(pack.price)}
+          </p>
 
           {isOwner ? (
             <p className="text-sm text-[var(--muted)]">Vous etes le createur de ce pack.</p>

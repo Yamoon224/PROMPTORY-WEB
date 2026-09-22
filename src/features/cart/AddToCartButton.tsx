@@ -25,7 +25,7 @@ export function AddToCartButton({ item, className }: { item: CartItem; className
         "inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-colors",
         inCart
           ? "bg-brand-500 text-white hover:bg-brand-600"
-          : "bg-[var(--surface-muted)] text-[var(--muted)] hover:bg-brand-50 hover:text-brand-600 dark:hover:bg-zinc-800 dark:hover:text-brand-400",
+          : "bg-[var(--surface-muted)] text-[var(--muted)] hover:bg-brand-50 hover:text-brand-600 dark:hover:bg-stone-800 dark:hover:text-brand-400",
         className,
       )}
     >

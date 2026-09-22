@@ -190,7 +190,7 @@ function UserFormModal({ user, onClose, onSaved }: { user: User | null; onClose:
           onChange={setRoles}
           required
         />
-        <label className="flex items-center gap-2 text-sm font-medium text-zinc-700 dark:text-zinc-300">
+        <label className="flex items-center gap-2 text-sm font-medium text-stone-700 dark:text-stone-300">
           <input
             type="checkbox"
             checked={status === "active"}

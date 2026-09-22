@@ -24,7 +24,7 @@ export function ToolbarSelect({
       >
         {children}
       </select>
-      <IconChevronDown className="pointer-events-none absolute right-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-400" />
+      <IconChevronDown className="pointer-events-none absolute right-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-stone-400" />
     </div>
   );
 }

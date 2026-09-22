@@ -108,12 +108,12 @@ export function PromptBrowser() {
         <div className="flex flex-wrap items-center gap-4">
           {meta ? (
             <p className="text-sm font-medium text-[var(--muted)]">
-              <span className="font-bold text-zinc-800 dark:text-zinc-100">{meta.total}</span> prompt{meta.total > 1 ? "s" : ""}{" "}
+              <span className="font-bold text-stone-800 dark:text-stone-100">{meta.total}</span> prompt{meta.total > 1 ? "s" : ""}{" "}
               disponible{meta.total > 1 ? "s" : ""}
             </p>
           ) : null}
 
-          <label className="flex items-center gap-2 text-sm font-medium text-zinc-700 dark:text-zinc-300">
+          <label className="flex items-center gap-2 text-sm font-medium text-stone-700 dark:text-stone-300">
             <input
               type="checkbox"
               checked={freeOnly}

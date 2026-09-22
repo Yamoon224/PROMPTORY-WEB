@@ -50,7 +50,7 @@ export function ConfirmDialog({
       }
     >
       <div className="flex flex-col gap-4">
-        <div className="text-sm text-zinc-600 dark:text-zinc-300">{children}</div>
+        <div className="text-sm text-stone-600 dark:text-stone-300">{children}</div>
         {error ? <FormAlert>{errorMessage(error, "L'action a echoue.")}</FormAlert> : null}
       </div>
     </Modal>

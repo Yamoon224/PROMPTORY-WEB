@@ -3,7 +3,7 @@ export { Badge } from "./Badge";
 export type { Tone } from "./Badge";
 export { Button, Spinner, buttonClasses } from "./Button";
 export type { ButtonProps, ButtonSize, ButtonVariant } from "./Button";
-export { Card, CardBody, CardFooter, CardHeader, TitleRule } from "./Card";
+export { Card, CardBody, CardFooter, CardHeader } from "./Card";
 export { MultiSelectField, SearchableSelectField } from "./Combobox";
 export type { ComboboxOption } from "./Combobox";
 export { ConfirmDialog } from "./ConfirmDialog";

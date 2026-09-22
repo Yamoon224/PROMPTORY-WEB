@@ -10,6 +10,7 @@
 
 @theme {
   --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, "Times New Roman", serif;
   --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Code", Menlo, monospace;
 
   /*
@@ -36,30 +37,36 @@
   --color-flag-green: #16a34a;
 }
 
+/*
+ * Neutres chauds ("papier"), pas gris froid : c'est ce qui change le plus la
+ * lecture de l'interface a cote de l'indigo, sans toucher a la charte de
+ * marque. Les ombres restent teintees d'encre, jamais d'indigo — le degrade
+ * est reserve a l'action, pas a la lumiere ambiante d'une carte.
+ */
 :root {
   color-scheme: light;
-  --canvas: #ffffff;
-  --surface: #ffffff;
-  --surface-muted: #f4f4f8;
-  --foreground: #0a0a0f;
-  --muted: #6b6b76;
-  --hairline: #e4e4e8;
-  --card-border-top: #d4d4db;
-  --card-shadow: 0 1px 2px rgb(24 24 27 / 0.05), 0 12px 28px -14px rgb(24 24 27 / 0.16);
-  --card-shadow-hover: 0 2px 4px rgb(24 24 27 / 0.06), 0 18px 38px -16px rgb(74 71 193 / 0.28);
+  --canvas: #faf7f0;
+  --surface: #fffdf9;
+  --surface-muted: #f1ead9;
+  --foreground: #221d15;
+  --muted: #79705f;
+  --hairline: #e7dfca;
+  --card-border-top: #d9cfb4;
+  --card-shadow: 0 1px 2px rgb(34 29 21 / 0.05), 0 10px 24px -16px rgb(34 29 21 / 0.18);
+  --card-shadow-hover: 0 2px 4px rgb(34 29 21 / 0.06), 0 16px 32px -16px rgb(34 29 21 / 0.22);
 }
 
 .dark {
   color-scheme: dark;
-  --canvas: #17181c;
-  --surface: #202127;
-  --surface-muted: #26272e;
-  --foreground: #f2f2f5;
-  --muted: #a1a1ac;
-  --hairline: #34343d;
-  --card-border-top: #4a4a56;
-  --card-shadow: 0 1px 2px rgb(0 0 0 / 0.5), 0 12px 30px -14px rgb(0 0 0 / 0.85);
-  --card-shadow-hover: 0 2px 6px rgb(0 0 0 / 0.55), 0 20px 42px -16px rgb(74 71 193 / 0.35);
+  --canvas: #1b1712;
+  --surface: #241f18;
+  --surface-muted: #2b241a;
+  --foreground: #f2ece0;
+  --muted: #a89d89;
+  --hairline: #3b3325;
+  --card-border-top: #4c4230;
+  --card-shadow: 0 1px 2px rgb(0 0 0 / 0.45), 0 12px 28px -16px rgb(0 0 0 / 0.65);
+  --card-shadow-hover: 0 2px 6px rgb(0 0 0 / 0.5), 0 18px 36px -16px rgb(0 0 0 / 0.7);
 }
 
 /*
@@ -74,8 +81,8 @@
   --series-1: #3f3ba3;
   --series-2: #d6862c;
   --series-3: #1baf7a;
-  --chart-grid: #e4e4e8;
-  --chart-axis: #d4d4db;
+  --chart-grid: #e7dfca;
+  --chart-axis: #d9cfb4;
   --meter-track: #dedef4;
 }
 
@@ -83,8 +90,8 @@
   --series-1: #6e6ccd;
   --series-2: #e5993f;
   --series-3: #34c98e;
-  --chart-grid: #34343d;
-  --chart-axis: #4a4a56;
+  --chart-grid: #3b3325;
+  --chart-axis: #4c4230;
   --meter-track: #292567;
 }
 
@@ -95,25 +102,27 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Le degrade de marque, toujours diagonal : une seule definition, reprise par
-   les boutons, les en-tetes de tableau et l'etat actif. */
+/* L'indigo de marque en aplat, jamais en degrade decoratif : repris par les
+   boutons, les en-tetes de tableau et l'etat actif. Un seul ton qui gagne
+   l'oeil plutot qu'un halo. */
 @utility grad-brand {
-  background-image: linear-gradient(135deg, #6e6ccd 0%, #4a47c1 50%, #3f3ba3 100%);
+  background-color: var(--color-brand-600);
 }
 
 @utility grad-brand-hover {
-  background-image: linear-gradient(135deg, #4a47c1 0%, #3f3ba3 50%, #343085 100%);
+  background-color: var(--color-brand-700);
 }
 
 @utility grad-brand-soft {
-  background-image: linear-gradient(135deg, rgb(74 71 193 / 0.14) 0%, rgb(63 60 163 / 0.06) 100%);
+  background-color: color-mix(in srgb, var(--color-brand-500) 10%, transparent);
 }
 
 @utility grad-brand-text {
-  background-image: linear-gradient(135deg, #4a47c1 0%, #343085 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
+  color: var(--color-brand-700);
+}
+
+.dark .grad-brand-text {
+  color: var(--color-brand-400);
 }
 
 @utility shadow-card {
@@ -220,25 +229,25 @@ body {
  */
 
 :root {
-  --field-border: #d4d4db;
-  --field-border-hover: #b0b0ba;
+  --field-border: #d9cfb4;
+  --field-border-hover: #b8ab84;
   --field-border-focus: #4a47c1;
   --field-border-error: #e11d48;
-  --field-label: #71717a;
+  --field-label: #79705f;
   --field-label-focus: #3f3ba3;
-  --field-placeholder: #a1a1ac;
-  --field-disabled-bg: #f4f4f8;
+  --field-placeholder: #a89d89;
+  --field-disabled-bg: #f1ead9;
 }
 
 .dark {
-  --field-border: #4a4a56;
-  --field-border-hover: #63636f;
+  --field-border: #4c4230;
+  --field-border-hover: #665a3f;
   --field-border-focus: #6e6ccd;
   --field-border-error: #fb7185;
-  --field-label: #a1a1ac;
+  --field-label: #a89d89;
   --field-label-focus: #9291da;
-  --field-placeholder: #71717a;
-  --field-disabled-bg: #26272e;
+  --field-placeholder: #79705f;
+  --field-disabled-bg: #2b241a;
 }
 
 @layer components {

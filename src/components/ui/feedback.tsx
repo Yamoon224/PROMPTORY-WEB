@@ -18,14 +18,14 @@ export function LoadingState({ label = "Chargement…", className }: { label?: s
       aria-live="polite"
       className={cn("flex flex-col items-center justify-center gap-3 px-5 py-14 text-sm text-[var(--muted)]", className)}
     >
-      <span className="h-7 w-7 animate-spin rounded-full border-2 border-zinc-200 border-t-brand-500 dark:border-zinc-700 dark:border-t-brand-400" />
+      <span className="h-7 w-7 animate-spin rounded-full border-2 border-stone-200 border-t-brand-500 dark:border-stone-700 dark:border-t-brand-400" />
       {label}
     </div>
   );
 }
 
 export function Skeleton({ className }: { className?: string }) {
-  return <span aria-hidden="true" className={cn("block animate-pulse rounded-sm bg-zinc-200/70 dark:bg-zinc-800", className)} />;
+  return <span aria-hidden="true" className={cn("block animate-pulse rounded-sm bg-stone-200/70 dark:bg-stone-800", className)} />;
 }
 
 export function ErrorState({ error, onRetry }: { error: unknown; onRetry?: () => void }) {
@@ -62,7 +62,7 @@ export function EmptyState({
       <span className="grad-brand-soft mb-3 flex h-12 w-12 items-center justify-center rounded-sm text-brand-600 dark:text-brand-400">
         {icon ?? <IconSearch className="h-5 w-5" />}
       </span>
-      <p className="text-sm font-semibold text-zinc-800 dark:text-zinc-100">{title}</p>
+      <p className="text-sm font-semibold text-stone-800 dark:text-stone-100">{title}</p>
       {description ? (
         <p className="mx-auto mt-1.5 max-w-md text-sm leading-relaxed text-[var(--muted)]">{description}</p>
       ) : null}

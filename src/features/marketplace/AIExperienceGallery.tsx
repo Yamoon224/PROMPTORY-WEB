@@ -27,8 +27,7 @@ const PHOTOS = [
 export function AIExperienceGallery() {
   return (
     <section className="py-10">
-      <h2 className="text-xl font-extrabold tracking-tight">L&apos;IA, un outil du quotidien</h2>
-      <span aria-hidden="true" className="grad-brand mt-2 block h-[3px] w-12 rounded-full" />
+      <h2 className="font-display text-2xl font-semibold tracking-tight">L&apos;IA, un outil du quotidien</h2>
       <p className="mt-3 max-w-2xl text-sm text-[var(--muted)]">
         Des prompts penses pour les memes usages que vous pratiquez deja : assistants conversationnels, generation de
         contenu, automatisation.

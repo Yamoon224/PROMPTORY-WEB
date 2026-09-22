@@ -26,8 +26,7 @@ export function FeaturedPrompts() {
     <section className="pb-10">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <h2 className="text-xl font-extrabold tracking-tight">Prompts populaires</h2>
-          <span aria-hidden="true" className="grad-brand mt-2 block h-[3px] w-12 rounded-full" />
+          <h2 className="font-display text-2xl font-semibold tracking-tight">Prompts populaires</h2>
         </div>
         <Link
           href="/#browser"

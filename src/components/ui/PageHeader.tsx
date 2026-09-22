@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { TitleRule } from "./Card";
 
 export function PageHeader({
   title,
@@ -21,9 +20,10 @@ export function PageHeader({
           </span>
         ) : null}
         <div className="min-w-0">
-          <h1 className="text-xl font-extrabold tracking-tight text-zinc-900 sm:text-2xl dark:text-zinc-50">{title}</h1>
-          <TitleRule className="w-16" />
-          {description ? <p className="mt-2 max-w-2xl text-sm text-[var(--muted)]">{description}</p> : null}
+          <h1 className="font-display text-2xl font-semibold tracking-tight text-stone-900 sm:text-[1.75rem] dark:text-stone-50">
+            {title}
+          </h1>
+          {description ? <p className="mt-1.5 max-w-2xl text-sm text-[var(--muted)]">{description}</p> : null}
         </div>
       </div>
       {actions ? <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">{actions}</div> : null}

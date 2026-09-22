@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Fraunces, Plus_Jakarta_Sans } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { ThemeScript } from "@/components/theme/theme-script";
 import { AuthProvider } from "@/features/auth/AuthContext";
@@ -9,6 +9,15 @@ import "./globals.css";
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
   subsets: ["latin"],
+  display: "swap",
+});
+
+/** Serif chaleureuse reservee aux titres editoriaux : la marketplace parle en
+ * Jakarta, mais s'arrete sur ce second registre quand elle veut convaincre. */
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  axes: ["opsz", "SOFT"],
   display: "swap",
 });
 
@@ -25,8 +34,8 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#17181c" },
+    { media: "(prefers-color-scheme: light)", color: "#faf7f0" },
+    { media: "(prefers-color-scheme: dark)", color: "#1b1712" },
   ],
 };
 
@@ -34,7 +43,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     // `suppressHydrationWarning` : le script de theme modifie la classe de
     // <html> avant l'hydratation, ce qui est precisement son role.
-    <html lang="fr" className={jakarta.variable} suppressHydrationWarning>
+    <html lang="fr" className={`${jakarta.variable} ${fraunces.variable}`} suppressHydrationWarning>
       <head>
         <ThemeScript />
       </head>

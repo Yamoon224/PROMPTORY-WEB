@@ -31,7 +31,7 @@ export function Topbar({ onOpenNavigation, onToggleSidebar }: { onOpenNavigation
           type="button"
           onClick={onOpenNavigation}
           aria-label="Ouvrir la navigation"
-          className="rounded-full p-2 text-zinc-500 hover:bg-zinc-100 md:hidden dark:hover:bg-zinc-800"
+          className="rounded-full p-2 text-stone-500 hover:bg-stone-100 md:hidden dark:hover:bg-stone-800"
         >
           <IconMenu className="h-5 w-5" />
         </button>
@@ -39,7 +39,7 @@ export function Topbar({ onOpenNavigation, onToggleSidebar }: { onOpenNavigation
           type="button"
           onClick={onToggleSidebar}
           aria-label="Replier ou deplier la barre laterale"
-          className="hidden rounded-full p-2 text-zinc-500 hover:bg-zinc-100 md:inline-flex dark:hover:bg-zinc-800"
+          className="hidden rounded-full p-2 text-stone-500 hover:bg-stone-100 md:inline-flex dark:hover:bg-stone-800"
         >
           <IconPanelLeft className="h-5 w-5" />
         </button>

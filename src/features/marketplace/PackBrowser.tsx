@@ -27,7 +27,7 @@ export function PackBrowser() {
         </div>
         {meta ? (
           <p className="pb-2.5 text-sm font-medium text-[var(--muted)]">
-            <span className="font-bold text-zinc-800 dark:text-zinc-100">{meta.total}</span> pack{meta.total > 1 ? "s" : ""}{" "}
+            <span className="font-bold text-stone-800 dark:text-stone-100">{meta.total}</span> pack{meta.total > 1 ? "s" : ""}{" "}
             disponible{meta.total > 1 ? "s" : ""}
           </p>
         ) : null}

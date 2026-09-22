@@ -27,14 +27,14 @@ export function MarketplaceSearchBar() {
       onSubmit={handleSubmit}
       className="mx-auto flex w-full max-w-2xl items-center gap-2 rounded-full border-4 border-brand-500/30 bg-[var(--surface)] p-2 shadow-card dark:border-brand-400/30"
     >
-      <IconSearch className="ml-2.5 h-5 w-5 shrink-0 text-zinc-400" />
+      <IconSearch className="ml-2.5 h-5 w-5 shrink-0 text-stone-400" />
       <input
         type="search"
         value={value}
         onChange={(event) => setValue(event.target.value)}
         placeholder="Rechercher un prompt, une categorie…"
         aria-label="Rechercher un prompt"
-        className="min-w-0 flex-1 bg-transparent py-2.5 text-sm text-zinc-900 outline-none placeholder:text-[var(--field-placeholder)] sm:text-base dark:text-zinc-50"
+        className="min-w-0 flex-1 bg-transparent py-2.5 text-sm text-stone-900 outline-none placeholder:text-[var(--field-placeholder)] sm:text-base dark:text-stone-50"
       />
       <button
         type="submit"

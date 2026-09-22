@@ -16,7 +16,7 @@ export function DualAudience() {
             <span className="grad-brand flex h-11 w-11 items-center justify-center rounded-sm text-white shadow-card">
               <IconCart className="h-5 w-5" />
             </span>
-            <h3 className="mt-1 text-lg font-extrabold tracking-tight">Je veux acheter</h3>
+            <h3 className="font-display mt-1 text-lg font-semibold tracking-tight">Je veux acheter</h3>
             <p className="text-sm leading-relaxed text-[var(--muted)]">
               Parcourez des prompts testes par outil IA, categorie ou tag, et payez en toute securite par carte ou
               PayPal.
@@ -36,7 +36,7 @@ export function DualAudience() {
             <span className="grad-brand flex h-11 w-11 items-center justify-center rounded-sm text-white shadow-card">
               <IconCoins className="h-5 w-5" />
             </span>
-            <h3 className="mt-1 text-lg font-extrabold tracking-tight">Je veux vendre</h3>
+            <h3 className="font-display mt-1 text-lg font-semibold tracking-tight">Je veux vendre</h3>
             <p className="text-sm leading-relaxed text-[var(--muted)]">
               Publiez vos prompts ou packs, fixez votre prix et suivez vos ventes depuis votre espace createur.
             </p>

@@ -169,7 +169,7 @@ export function DataTable<T>({
                     <td
                       key={column.key}
                       className={cn(
-                        "px-4 py-3 align-middle text-zinc-700 dark:text-zinc-300",
+                        "px-4 py-3 align-middle text-stone-700 dark:text-stone-300",
                         column.hideOnMobile && "hidden md:table-cell",
                         column.className,
                       )}

@@ -66,7 +66,7 @@ export function PasswordField({ label, errors, hint, fieldClassName, required, .
           onClick={() => setIsVisible((visible) => !visible)}
           aria-pressed={isVisible}
           aria-label={isVisible ? "masquer le mot de passe" : "afficher le mot de passe"}
-          className="flex h-8 w-8 items-center justify-center rounded-full text-zinc-400 transition-colors hover:text-brand-600"
+          className="flex h-8 w-8 items-center justify-center rounded-full text-stone-400 transition-colors hover:text-brand-600"
         >
           {isVisible ? <IconEyeOff /> : <IconEye />}
         </button>
@@ -163,7 +163,7 @@ export function SelectField({ label, errors, hint, fieldClassName, required, chi
       required={required}
       variant="select"
       className={fieldClassName}
-      adornment={<IconChevronDown className="pointer-events-none mr-1.5 h-4 w-4 text-zinc-400" />}
+      adornment={<IconChevronDown className="pointer-events-none mr-1.5 h-4 w-4 text-stone-400" />}
     >
       {(fieldProps) => (
         <select
@@ -193,7 +193,7 @@ export function SearchInput({
   ...props
 }: Omit<InputHTMLAttributes<HTMLInputElement>, "type" | "placeholder"> & { label?: string; placeholder?: string }) {
   return (
-    <Field label={label} adornment={<IconSearch className="h-4 w-4 text-zinc-400" />}>
+    <Field label={label} adornment={<IconSearch className="h-4 w-4 text-stone-400" />}>
       {(fieldProps) => (
         <input
           {...fieldProps}

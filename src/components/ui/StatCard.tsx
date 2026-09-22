@@ -3,7 +3,7 @@ import { cn } from "@/lib/cn";
 import type { Tone } from "./Badge";
 
 const TONE_VALUE: Record<Tone, string> = {
-  neutral: "text-zinc-900 dark:text-zinc-50",
+  neutral: "text-stone-900 dark:text-stone-50",
   brand: "text-brand-700 dark:text-brand-400",
   success: "text-emerald-700 dark:text-emerald-400",
   warning: "text-amber-700 dark:text-amber-400",
@@ -12,7 +12,7 @@ const TONE_VALUE: Record<Tone, string> = {
 };
 
 const TONE_ICON: Record<Tone, string> = {
-  neutral: "bg-zinc-100 text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300",
+  neutral: "bg-stone-100 text-stone-600 dark:bg-stone-800 dark:text-stone-300",
   brand: "grad-brand-soft text-brand-600 dark:text-brand-400",
   success: "bg-emerald-50 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-400",
   warning: "bg-amber-50 text-amber-600 dark:bg-amber-950/60 dark:text-amber-400",
