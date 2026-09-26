@@ -1,56 +1,74 @@
 import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
-import { PaymentLogos } from "@/components/brand/PaymentLogos";
+import { IconBrandGithub, IconBrandLinkedin, IconBrandX } from "@/components/ui/icons";
 
 const COLUMNS: Array<{ title: string; links: Array<{ href: string; label: string }> }> = [
   {
-    title: "Explorer",
+    title: "Produit",
     links: [
-      { href: "/", label: "Tous les prompts" },
-      { href: "/packs", label: "Packs" },
-      { href: "/#categories", label: "Categories" },
+      { href: "/#marketplace", label: "Marketplace" },
+      { href: "/#fonctionnalites", label: "Fonctionnalités" },
+      { href: "/#tarifs", label: "Tarifs" },
     ],
   },
   {
-    title: "Createurs",
+    title: "Ressources",
     links: [
-      { href: "/inscription", label: "Devenir createur" },
-      { href: "/espace/mes-prompts/nouveau", label: "Publier un prompt" },
-      { href: "/espace/mes-packs/nouveau", label: "Publier un pack" },
+      { href: "#", label: "Documentation API" },
+      { href: "#", label: "Centre d'aide" },
+      { href: "#", label: "Statut du service" },
     ],
   },
   {
-    title: "Compte",
+    title: "Légal",
     links: [
-      { href: "/connexion", label: "Se connecter" },
-      { href: "/espace/mes-achats", label: "Mes achats" },
-      { href: "/espace", label: "Mon espace" },
+      { href: "#", label: "Confidentialité" },
+      { href: "#", label: "Conditions d'utilisation" },
+      { href: "#", label: "Mentions légales" },
     ],
   },
+];
+
+const SOCIALS = [
+  { href: "https://x.com/promptory", label: "X (Twitter)", icon: IconBrandX },
+  { href: "https://linkedin.com", label: "LinkedIn", icon: IconBrandLinkedin },
+  { href: "https://github.com", label: "GitHub", icon: IconBrandGithub },
 ];
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="no-print relative mt-16 overflow-hidden">
-      <div aria-hidden="true" className="grad-brand absolute inset-0" />
-
-      <div className="relative mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+    <footer className="no-print mt-16 border-t border-[var(--hairline)]">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.6fr_1fr_1fr_1fr_1fr]">
         <div>
-          <Logo tagline tone="onBrand" />
-          <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/70">
-            Trouvez, achetez et vendez des prompts IA prets a l&apos;emploi pour
-            ChatGPT, Claude, Midjourney et bien d&apos;autres outils.
+          <Logo />
+          <p className="mt-4 max-w-sm text-sm leading-relaxed text-[var(--muted)]">
+            La plateforme tout-en-un pour créer, organiser et monétiser vos prompts IA — avec une extension Chrome
+            pour les injecter en un clic.
           </p>
+          <div className="mt-4 flex items-center gap-2">
+            {SOCIALS.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={social.label}
+                className="flex h-8 w-8 items-center justify-center rounded-sm border border-[var(--hairline)] text-[var(--muted)] hover:text-[var(--foreground)]"
+              >
+                <social.icon className="h-4 w-4" />
+              </a>
+            ))}
+          </div>
         </div>
         {COLUMNS.map((column) => (
           <div key={column.title}>
-            <p className="text-sm font-semibold text-white/60">{column.title}</p>
+            <p className="text-sm font-semibold text-[var(--foreground)]">{column.title}</p>
             <ul className="mt-3 space-y-2 text-sm">
               {column.links.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className="text-white/80 hover:text-white">
+                <li key={link.label}>
+                  <Link href={link.href} className="text-[var(--muted)] hover:text-[var(--foreground)]">
                     {link.label}
                   </Link>
                 </li>
@@ -58,14 +76,18 @@ export function SiteFooter() {
             </ul>
           </div>
         ))}
+        <div>
+          <p className="text-sm font-semibold text-[var(--foreground)]">Contact</p>
+          <p className="mt-3 text-sm text-[var(--muted)]">Paris, France</p>
+          <a href="mailto:hello@promptory.io" className="mt-2 block text-sm text-[var(--muted)] hover:text-[var(--foreground)]">
+            hello@promptory.io
+          </a>
+        </div>
       </div>
-      <div className="relative border-t border-white/15 px-4 py-4 sm:px-6">
-        <div className="mx-auto flex max-w-6xl flex-col-reverse items-center justify-between gap-4 sm:flex-row">
-          <p className="text-xs text-white/60">© {year} Promptory. Tous droits reserves.</p>
-          <div className="flex items-center gap-3">
-            <span className="text-xs font-semibold text-white/60">Paiement securise</span>
-            <PaymentLogos />
-          </div>
+      <div className="border-t border-[var(--hairline)] px-4 py-4 sm:px-6">
+        <div className="mx-auto flex max-w-6xl flex-col-reverse items-center justify-between gap-2 sm:flex-row">
+          <p className="text-xs text-[var(--muted)]">© {year} Promptory. Tous droits réservés.</p>
+          <p className="text-xs text-[var(--muted)]">Conçu pour les créateurs et développeurs</p>
         </div>
       </div>
     </footer>

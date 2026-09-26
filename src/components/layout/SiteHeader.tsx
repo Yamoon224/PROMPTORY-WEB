@@ -12,8 +12,10 @@ import { useCart } from "@/features/cart/CartContext";
 import { cn } from "@/lib/cn";
 
 const LINKS = [
-  { href: "/", label: "Explorer les prompts" },
-  { href: "/packs", label: "Packs" },
+  { href: "/#marketplace", label: "Marketplace" },
+  { href: "/#fonctionnalites", label: "Fonctionnalités" },
+  { href: "/#tarifs", label: "Tarifs" },
+  { href: "/#faq", label: "FAQ" },
 ];
 
 /**
@@ -63,9 +65,17 @@ export function SiteHeader() {
               Mon espace
             </LinkButton>
           ) : (
-            <LinkButton href="/connexion" size="sm">
-              Se connecter
-            </LinkButton>
+            <>
+              <Link
+                href="/connexion"
+                className="rounded-full px-3.5 py-2 text-sm font-semibold text-stone-600 hover:text-stone-900 dark:text-stone-300 dark:hover:text-stone-50"
+              >
+                Connexion
+              </Link>
+              <LinkButton href="/inscription" size="sm">
+                S&apos;inscrire
+              </LinkButton>
+            </>
           )}
         </div>
 
@@ -105,9 +115,18 @@ export function SiteHeader() {
                 Mon espace
               </LinkButton>
             ) : (
-              <LinkButton href="/connexion" size="sm" onClick={() => setIsOpen(false)}>
-                Se connecter
-              </LinkButton>
+              <div className="flex items-center gap-2">
+                <Link
+                  href="/connexion"
+                  onClick={() => setIsOpen(false)}
+                  className="rounded-full px-3 py-2 text-sm font-semibold text-stone-600 dark:text-stone-300"
+                >
+                  Connexion
+                </Link>
+                <LinkButton href="/inscription" size="sm" onClick={() => setIsOpen(false)}>
+                  S&apos;inscrire
+                </LinkButton>
+              </div>
             )}
           </div>
         </div>

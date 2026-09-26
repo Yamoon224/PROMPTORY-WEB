@@ -475,3 +475,45 @@ export function IconSortDescending(props: IconProps) {
     </Icon>
   );
 }
+
+export function IconBolt(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M12.5 3 5 13.5h5.5L11 21l7.5-10.5H13Z" />
+    </Icon>
+  );
+}
+
+export function IconAward(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <circle cx="12" cy="8.5" r="5" />
+      <path d="m8.5 12.8-1.3 7.2 4.8-2.6 4.8 2.6-1.3-7.2" />
+    </Icon>
+  );
+}
+
+export function IconBrandX(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M5 5l14 14M19 5 5 19" />
+    </Icon>
+  );
+}
+
+export function IconBrandLinkedin(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <rect x="3.5" y="3.5" width="17" height="17" rx="2.5" />
+      <path d="M7.8 10.2v6.3M7.8 7.6h.01M11.8 16.5v-3.6c0-1.5.9-2.6 2.3-2.6 1.3 0 2.1 1 2.1 2.6v3.6M11.8 10.2v6.3" />
+    </Icon>
+  );
+}
+
+export function IconBrandGithub(props: IconProps) {
+  return (
+    <Icon {...props}>
+      <path d="M12 3.5c-4.7 0-8.5 3.8-8.5 8.5 0 3.8 2.4 7 5.8 8.1.4.1.6-.2.6-.4v-1.6c-2.4.5-2.9-1.1-2.9-1.1-.4-1-1-1.3-1-1.3-.8-.5.1-.5.1-.5.9.1 1.4.9 1.4.9.8 1.4 2.1 1 2.6.8.1-.6.3-1 .6-1.3-1.9-.2-4-1-4-4.3 0-.9.3-1.7.9-2.3-.1-.2-.4-1.1.1-2.3 0 0 .7-.2 2.4.9a8 8 0 0 1 4.4 0c1.7-1.1 2.4-.9 2.4-.9.5 1.2.2 2.1.1 2.3.6.6.9 1.4.9 2.3 0 3.3-2.1 4.1-4 4.3.3.3.6.8.6 1.7v2.5c0 .2.2.5.6.4 3.4-1.1 5.8-4.3 5.8-8.1 0-4.7-3.8-8.5-8.5-8.5Z" />
+    </Icon>
+  );
+}
