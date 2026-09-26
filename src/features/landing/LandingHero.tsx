@@ -98,7 +98,7 @@ function AppMockup() {
         </span>
       </div>
 
-      <div className="grid grid-cols-[10rem_1fr] text-left sm:grid-cols-[13rem_1fr]">
+      <div className="grid grid-cols-1 text-left sm:grid-cols-[13rem_1fr]">
         <aside className="hidden border-r border-[var(--hairline)] p-4 sm:block">
           <p className="text-[11px] font-semibold uppercase tracking-wider text-[var(--muted)]">Dossiers</p>
           <ul className="mt-3 space-y-2">

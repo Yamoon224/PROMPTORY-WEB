@@ -56,17 +56,20 @@
   --card-shadow-hover: 0 2px 4px rgb(34 29 21 / 0.06), 0 16px 32px -16px rgb(34 29 21 / 0.22);
 }
 
+/* En sombre, les neutres suivent la teinte de marque (indigo) plutot que le
+   papier chaud du clair : un bleu nuit desature, jamais un gris ou un brun
+   neutre, pour rester dans la charte graphique. */
 .dark {
   color-scheme: dark;
-  --canvas: #1b1712;
-  --surface: #241f18;
-  --surface-muted: #2b241a;
-  --foreground: #f2ece0;
-  --muted: #a89d89;
-  --hairline: #3b3325;
-  --card-border-top: #4c4230;
-  --card-shadow: 0 1px 2px rgb(0 0 0 / 0.45), 0 12px 28px -16px rgb(0 0 0 / 0.65);
-  --card-shadow-hover: 0 2px 6px rgb(0 0 0 / 0.5), 0 18px 36px -16px rgb(0 0 0 / 0.7);
+  --canvas: #100e21;
+  --surface: #191632;
+  --surface-muted: #201c40;
+  --foreground: #f0eefb;
+  --muted: #9c98c4;
+  --hairline: #322c57;
+  --card-border-top: #423c74;
+  --card-shadow: 0 1px 2px rgb(5 4 16 / 0.5), 0 12px 28px -16px rgb(5 4 16 / 0.7);
+  --card-shadow-hover: 0 2px 6px rgb(5 4 16 / 0.55), 0 18px 36px -16px rgb(5 4 16 / 0.75);
 }
 
 /*
@@ -90,8 +93,8 @@
   --series-1: #6e6ccd;
   --series-2: #e5993f;
   --series-3: #34c98e;
-  --chart-grid: #3b3325;
-  --chart-axis: #4c4230;
+  --chart-grid: #322c57;
+  --chart-axis: #423c74;
   --meter-track: #292567;
 }
 
@@ -244,14 +247,14 @@ body {
 }
 
 .dark {
-  --field-border: #4c4230;
-  --field-border-hover: #665a3f;
+  --field-border: #423c74;
+  --field-border-hover: #554e8f;
   --field-border-focus: #6e6ccd;
   --field-border-error: #fb7185;
-  --field-label: #a89d89;
+  --field-label: #9c98c4;
   --field-label-focus: #9291da;
-  --field-placeholder: #79705f;
-  --field-disabled-bg: #2b241a;
+  --field-placeholder: #726c9e;
+  --field-disabled-bg: #201c40;
 }
 
 @layer components {
