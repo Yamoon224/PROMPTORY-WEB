@@ -1,8 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui";
+import type { FormEvent } from "react";
+import { Button, FormAlert, TextField } from "@/components/ui";
 import { IconArrowRight, IconCheck } from "@/components/ui/icons";
+import { errorMessage } from "@/lib/api-client";
+import { useMutation } from "@/hooks/useMutation";
+import { marketingService } from "@/services";
 
 const CHECKLIST = [
   "Créez des prompts illimités",
@@ -13,7 +17,14 @@ const CHECKLIST = [
 
 export function LandingFinalCta() {
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [subscribed, setSubscribed] = useState(false);
+  const mutation = useMutation((value: string) => marketingService.subscribeToNewsletter(value));
+
+  async function submit(event: FormEvent) {
+    event.preventDefault();
+    const result = await mutation.run(email.trim());
+    if (result) setSubscribed(true);
+  }
 
   return (
     <section className="rounded-md border border-[var(--hairline)] bg-[var(--surface)] px-6 py-10 shadow-card sm:px-10">
@@ -36,32 +47,31 @@ export function LandingFinalCta() {
           </ul>
         </div>
 
-        <form
-          onSubmit={(event) => {
-            event.preventDefault();
-            setSubmitted(true);
-          }}
-          className="flex flex-col gap-3"
-        >
-          <label htmlFor="landing-email" className="text-sm font-semibold text-[var(--foreground)]">
-            Email
-          </label>
-          <input
-            id="landing-email"
-            type="email"
-            required
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            placeholder="votre@email.com"
-            className="h-11 rounded-full border border-[var(--hairline)] bg-[var(--surface)] px-4 text-sm text-[var(--foreground)] outline-none focus-visible:border-brand-500 focus-visible:ring-1 focus-visible:ring-brand-500"
-          />
-          <Button type="submit" size="lg" icon={<IconArrowRight className="h-5 w-5" />}>
-            Commencer gratuitement
-          </Button>
-          <p className="text-center text-xs text-[var(--muted)]" role="status">
-            {submitted ? "Merci ! Vérifiez votre boîte mail pour continuer." : "Aucun spam · Gratuit pour toujours"}
-          </p>
-        </form>
+        {subscribed ? (
+          <FormAlert tone="success">
+            Merci ! Un e-mail vient d&apos;être envoyé à <strong>{email.trim()}</strong> pour continuer.
+          </FormAlert>
+        ) : (
+          <form onSubmit={submit} noValidate className="flex flex-col gap-3">
+            <TextField
+              label="Email"
+              type="email"
+              placeholder="votre@email.com"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              errors={mutation.fieldErrors.email}
+              autoComplete="email"
+              required
+            />
+
+            {mutation.error ? <FormAlert>{errorMessage(mutation.error)}</FormAlert> : null}
+
+            <Button type="submit" size="lg" isLoading={mutation.isPending} icon={<IconArrowRight className="h-5 w-5" />}>
+              Commencer gratuitement
+            </Button>
+            <p className="text-center text-xs text-[var(--muted)]">Aucun spam · Gratuit pour toujours</p>
+          </form>
+        )}
       </div>
     </section>
   );

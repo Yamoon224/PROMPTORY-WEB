@@ -16,7 +16,7 @@ export function SubscriptionTable() {
   const { items, meta, setPage, setPerPage, isLoading, error, reload } = usePaginatedData(fetcher);
 
   const columns: Array<Column<Subscription>> = [
-    { key: "user", header: "Compte", cell: (subscription) => subscription.user?.name ?? "—" },
+    { key: "user", header: "Compte", cell: (subscription) => subscription.user?.name ?? "-" },
     { key: "type", header: "Formule", cell: (subscription) => SUBSCRIPTION_TYPE_LABEL[subscription.type] },
     { key: "price", header: "Prix", cell: (subscription) => formatMoney(subscription.price), hideOnMobile: true },
     {

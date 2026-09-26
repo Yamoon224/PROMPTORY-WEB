@@ -10,7 +10,7 @@ import { useAuth } from "@/features/auth/AuthContext";
 
 /**
  * Barre d'outils de l'espace : sans fond ni bordure propres, elle se fond
- * dans le canevas de la page plutot que de dessiner un bandeau au-dessus —
+ * dans le canevas de la page plutot que de dessiner un bandeau au-dessus -
  * le titre de chaque ecran vit deja dans son `PageHeader`, cette barre ne
  * porte donc que les commandes (navigation, theme, deconnexion).
  */

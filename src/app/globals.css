@@ -40,7 +40,7 @@
 /*
  * Neutres chauds ("papier"), pas gris froid : c'est ce qui change le plus la
  * lecture de l'interface a cote de l'indigo, sans toucher a la charte de
- * marque. Les ombres restent teintees d'encre, jamais d'indigo — le degrade
+ * marque. Les ombres restent teintees d'encre, jamais d'indigo - le degrade
  * est reserve a l'action, pas a la lumiere ambiante d'une carte.
  */
 :root {
@@ -265,7 +265,7 @@ body {
     display: block;
     width: 100%;
     border: 0;
-    border-radius: 9999px;
+    border-radius: 0.375rem;
     background-color: transparent;
     padding: 0.75rem 0.8rem;
     font-size: 0.9rem;
@@ -299,7 +299,7 @@ body {
     min-width: 0;
     pointer-events: none;
     border: 1px solid var(--field-border);
-    border-radius: 9999px;
+    border-radius: 0.375rem;
     transition:
       border-color 0.15s ease-out,
       box-shadow 0.15s ease-out;

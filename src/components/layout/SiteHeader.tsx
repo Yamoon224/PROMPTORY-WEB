@@ -33,9 +33,9 @@ export function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="no-print sticky top-3 z-30 px-3 sm:top-4 sm:px-6">
-      <div className="mx-auto flex h-14 max-w-5xl items-center justify-between gap-4 rounded-full border border-[var(--hairline)] bg-[var(--surface)]/90 px-3 shadow-card backdrop-blur-md sm:px-4">
-        <Link href="/" className="rounded-full pl-1" aria-label="Promptory, accueil">
+    <header className="no-print sticky top-3 z-30 sm:top-4">
+      <div className="mx-[5%] flex h-14 items-center justify-between gap-4 rounded-md border border-[var(--hairline)] bg-[var(--surface)]/90 px-3 shadow-card backdrop-blur-md sm:px-4">
+        <Link href="/" className="rounded-md pl-1" aria-label="Promptory, accueil">
           <Logo />
         </Link>
 
@@ -46,7 +46,7 @@ export function SiteHeader() {
               href={link.href}
               aria-current={pathname === link.href ? "page" : undefined}
               className={cn(
-                "rounded-full px-3.5 py-2 text-sm font-semibold transition-colors",
+                "rounded-md px-3.5 py-2 text-sm font-semibold transition-colors",
                 pathname === link.href
                   ? "grad-brand-soft text-brand-700 dark:text-brand-300"
                   : "text-stone-600 hover:text-stone-900 dark:text-stone-300 dark:hover:text-stone-50",
@@ -68,7 +68,7 @@ export function SiteHeader() {
             <>
               <Link
                 href="/connexion"
-                className="rounded-full px-3.5 py-2 text-sm font-semibold text-stone-600 hover:text-stone-900 dark:text-stone-300 dark:hover:text-stone-50"
+                className="rounded-md px-3.5 py-2 text-sm font-semibold text-stone-600 hover:text-stone-900 dark:text-stone-300 dark:hover:text-stone-50"
               >
                 Connexion
               </Link>
@@ -86,7 +86,7 @@ export function SiteHeader() {
             onClick={() => setIsOpen((open) => !open)}
             aria-expanded={isOpen}
             aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"}
-            className="rounded-full p-2 text-stone-600 hover:bg-stone-100 dark:text-stone-300 dark:hover:bg-stone-800"
+            className="rounded-md p-2 text-stone-600 hover:bg-stone-100 dark:text-stone-300 dark:hover:bg-stone-800"
           >
             {isOpen ? <IconClose className="h-5 w-5" /> : <IconMenu className="h-5 w-5" />}
           </button>
@@ -94,14 +94,14 @@ export function SiteHeader() {
       </div>
 
       {isOpen ? (
-        <div className="animate-fade-rise mx-auto mt-2 max-w-5xl rounded-2xl border border-[var(--hairline)] bg-[var(--surface)] p-4 shadow-card md:hidden">
+        <div className="animate-fade-rise mx-[5%] mt-2 rounded-md border border-[var(--hairline)] bg-[var(--surface)] p-4 shadow-card md:hidden">
           <nav aria-label="Navigation mobile" className="flex flex-col gap-1">
             {LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="flex items-center gap-3 rounded-full px-3 py-3 text-sm font-semibold text-stone-700 hover:bg-brand-50 dark:text-stone-200 dark:hover:bg-stone-800"
+                className="flex items-center gap-3 rounded-md px-3 py-3 text-sm font-semibold text-stone-700 hover:bg-brand-50 dark:text-stone-200 dark:hover:bg-stone-800"
               >
                 <IconPackage className="h-4 w-4 text-brand-600" />
                 {link.label}
@@ -119,7 +119,7 @@ export function SiteHeader() {
                 <Link
                   href="/connexion"
                   onClick={() => setIsOpen(false)}
-                  className="rounded-full px-3 py-2 text-sm font-semibold text-stone-600 dark:text-stone-300"
+                  className="rounded-md px-3 py-2 text-sm font-semibold text-stone-600 dark:text-stone-300"
                 >
                   Connexion
                 </Link>

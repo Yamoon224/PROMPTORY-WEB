@@ -18,7 +18,7 @@ export interface PaymentSubmission {
  * PayPal), et saisie des informations correspondantes.
  *
  * **Environnement de demonstration** : sans cles Stripe/PayPal configurees
- * cote backend (voir `.env`), aucune carte ni compte reel n'est debite — le
+ * cote backend (voir `.env`), aucune carte ni compte reel n'est debite - le
  * jeton produit ici est un identifiant synthetique que l'agregateur simule
  * accepte ou refuse (voir `App\Domains\Payments\Gateways`). Une carte se
  * terminant par `0000` simule un refus, ce qui permet de tester le chemin

@@ -50,7 +50,7 @@ const FEATURES: Array<{
     icon: <IconBolt className="h-4 w-4" />,
     title: "Injectez vos prompts en un clic.",
     description:
-      "L'extension Chrome gratuite insère vos prompts directement dans ChatGPT, Claude ou Gemini — sans copier-coller, via le raccourci ALT+P.",
+      "L'extension Chrome gratuite insère vos prompts directement dans ChatGPT, Claude ou Gemini - sans copier-coller, via le raccourci ALT+P.",
     mockup: <InjectMockup />,
   },
 ];
@@ -82,7 +82,7 @@ export function LandingFeatures() {
             <div>
               <div className="flex items-center gap-2 text-sm font-semibold text-[var(--muted)]">
                 <span>{feature.index}</span>
-                <span className="grad-brand-soft rounded-full px-2.5 py-0.5 text-xs font-semibold text-brand-700 dark:text-brand-300">
+                <span className="grad-brand-soft rounded-md px-2.5 py-0.5 text-xs font-semibold text-brand-700 dark:text-brand-300">
                   {feature.tag}
                 </span>
               </div>
@@ -110,7 +110,7 @@ function MockupWindow({ title, children }: { title: string; children: ReactNode 
         <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
         <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
         <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
-        <span className="mx-auto rounded-full bg-[var(--surface-muted)] px-4 py-1 text-xs text-[var(--muted)]">
+        <span className="mx-auto rounded-md bg-[var(--surface-muted)] px-4 py-1 text-xs text-[var(--muted)]">
           {title}
         </span>
       </div>
@@ -135,7 +135,7 @@ function EditorMockup() {
       </p>
       <div className="mt-4 flex items-center justify-between border-t border-[var(--hairline)] pt-3">
         <span className="text-xs text-[var(--muted)]">4 variables · Prêt</span>
-        <span className="grad-brand rounded-full px-3 py-1 text-xs font-semibold text-white">Tester</span>
+        <span className="grad-brand rounded-md px-3 py-1 text-xs font-semibold text-white">Tester</span>
       </div>
     </MockupWindow>
   );
@@ -158,7 +158,7 @@ function OrganizeMockup() {
                 className={cn("h-3.5 w-3.5 shrink-0", item.starred ? "fill-brand-500 text-brand-500" : "text-[var(--muted)]")}
               />
               <span className="truncate text-sm font-medium text-[var(--foreground)]">{item.title}</span>
-              <span className="grad-brand-soft shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold text-brand-700 dark:text-brand-300">
+              <span className="grad-brand-soft shrink-0 rounded-md px-2 py-0.5 text-[10px] font-semibold text-brand-700 dark:text-brand-300">
                 {item.tag}
               </span>
             </span>
@@ -184,7 +184,7 @@ function SellMockup() {
       <div className="flex items-center justify-between border-b border-[var(--hairline)] px-4 py-3">
         <span className="text-sm font-semibold text-[var(--foreground)]">Marketplace</span>
         <div className="flex items-center gap-1 text-[11px] font-semibold text-[var(--muted)]">
-          <span className="grad-brand rounded-full px-2.5 py-1 text-white">Tous</span>
+          <span className="grad-brand rounded-md px-2.5 py-1 text-white">Tous</span>
           <span className="px-2.5 py-1">Premium</span>
           <span className="px-2.5 py-1">Free</span>
         </div>

@@ -85,7 +85,7 @@ export function CartView() {
           <div className="flex flex-col gap-2">
             {outcomes.map((outcome) => (
               <FormAlert key={`${outcome.item.kind}-${outcome.item.id}`} tone={outcome.status === "success" ? "success" : "error"}>
-                <span className="font-semibold">{outcome.item.title}</span> —{" "}
+                <span className="font-semibold">{outcome.item.title}</span> -{" "}
                 {outcome.status === "success" ? "achete avec succes." : outcome.message}
               </FormAlert>
             ))}
@@ -165,7 +165,7 @@ export function CartView() {
               {outcomes.length > 0 && outcomes.every((outcome) => outcome.status === "success") ? (
                 <p className="flex items-center gap-1.5 text-sm font-semibold text-emerald-700 dark:text-emerald-400">
                   <IconCheckCircle className="h-4 w-4" />
-                  Achat termine — retrouvez-le dans{" "}
+                  Achat termine - retrouvez-le dans{" "}
                   <Link href="/espace/mes-achats" className="underline underline-offset-2">
                     mes achats
                   </Link>

@@ -27,8 +27,8 @@ export function AuditList() {
 
   const columns: Array<Column<ActivityLogEntry>> = [
     { key: "action", header: "Action", cell: (entry) => <Badge tone="brand">{ACTION_LABEL[entry.action]}</Badge> },
-    { key: "user", header: "Compte", cell: (entry) => entry.user?.name ?? "—" },
-    { key: "prompt", header: "Prompt", cell: (entry) => entry.prompt?.title ?? "—", hideOnMobile: true },
+    { key: "user", header: "Compte", cell: (entry) => entry.user?.name ?? "-" },
+    { key: "prompt", header: "Prompt", cell: (entry) => entry.prompt?.title ?? "-", hideOnMobile: true },
     { key: "created_at", header: "Date", cell: (entry) => formatDateTime(entry.created_at), hideOnMobile: true },
   ];
 

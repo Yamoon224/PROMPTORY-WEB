@@ -7,6 +7,7 @@ const COLUMNS: Array<{ title: string; links: Array<{ href: string; label: string
     title: "Produit",
     links: [
       { href: "/#marketplace", label: "Marketplace" },
+      { href: "/#packs", label: "Packs" },
       { href: "/#fonctionnalites", label: "Fonctionnalités" },
       { href: "/#tarifs", label: "Tarifs" },
     ],
@@ -14,17 +15,17 @@ const COLUMNS: Array<{ title: string; links: Array<{ href: string; label: string
   {
     title: "Ressources",
     links: [
-      { href: "#", label: "Documentation API" },
-      { href: "#", label: "Centre d'aide" },
-      { href: "#", label: "Statut du service" },
+      { href: "/documentation-api", label: "Documentation API" },
+      { href: "/aide", label: "Centre d'aide" },
+      { href: "/statut", label: "Statut du service" },
     ],
   },
   {
     title: "Légal",
     links: [
-      { href: "#", label: "Confidentialité" },
-      { href: "#", label: "Conditions d'utilisation" },
-      { href: "#", label: "Mentions légales" },
+      { href: "/confidentialite", label: "Confidentialité" },
+      { href: "/conditions-utilisation", label: "Conditions d'utilisation" },
+      { href: "/mentions-legales", label: "Mentions légales" },
     ],
   },
 ];
@@ -44,7 +45,7 @@ export function SiteFooter() {
         <div>
           <Logo />
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-[var(--muted)]">
-            La plateforme tout-en-un pour créer, organiser et monétiser vos prompts IA — avec une extension Chrome
+            La plateforme tout-en-un pour créer, organiser et monétiser vos prompts IA - avec une extension Chrome
             pour les injecter en un clic.
           </p>
           <div className="mt-4 flex items-center gap-2">

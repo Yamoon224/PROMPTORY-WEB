@@ -10,12 +10,12 @@ import { DECORATIVE_ICONS } from "./marketplace-icons";
  * Vignette d'un prompt dans une grille de resultats.
  *
  * Sans photo produit (un prompt n'en a pas), la couverture reprend le
- * dégradé de marque en fond et une icône décorative — le même repère que les
- * chips de catégorie — pour que la carte se lise comme une fiche produit et
+ * dégradé de marque en fond et une icône décorative - le même repère que les
+ * chips de catégorie - pour que la carte se lise comme une fiche produit et
  * non comme une simple ligne de liste.
  *
  * L'ordre de lecture reprend celui d'une fiche produit : titre, createur,
- * outils IA / categories, puis prix — la seule information que l'oeil
+ * outils IA / categories, puis prix - la seule information que l'oeil
  * cherche en dernier, une fois convaincu par le reste.
  *
  * Le bouton panier est un frere du lien de navigation, pas un enfant : un

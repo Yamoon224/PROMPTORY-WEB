@@ -20,7 +20,7 @@ export function PackModerationQueue() {
 
   const columns: Array<Column<Pack>> = [
     { key: "title", header: "Pack", cell: (pack) => <span className="font-semibold">{pack.title}</span> },
-    { key: "creator", header: "Createur", cell: (pack) => pack.creator?.name ?? "—" },
+    { key: "creator", header: "Createur", cell: (pack) => pack.creator?.name ?? "-" },
     { key: "price", header: "Prix", cell: (pack) => formatMoney(pack.price), hideOnMobile: true },
     { key: "prompts", header: "Prompts", cell: (pack) => pack.prompts_count ?? 0, hideOnMobile: true },
     {

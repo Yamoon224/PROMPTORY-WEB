@@ -42,7 +42,7 @@ export function PromptBrowser() {
   // ce composant (meme route), donc l'etat initial seul ne suffit pas : on
   // compare a la derniere URL vue et on ajuste l'etat pendant le rendu
   // (pattern React recommande pour deriver un etat d'un signal externe, sans
-  // passer par un effet) — y compris pour revenir a vide (« Tout »).
+  // passer par un effet) - y compris pour revenir a vide (« Tout »).
   const [lastUrlSearch, setLastUrlSearch] = useState(urlSearch);
   if (urlSearch !== lastUrlSearch) {
     setLastUrlSearch(urlSearch);

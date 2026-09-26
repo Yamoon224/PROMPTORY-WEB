@@ -6,7 +6,7 @@ import { IconSearch } from "@/components/ui/icons";
 
 /**
  * Recherche principale de la marketplace : un seul champ, large et centre,
- * qui renvoie vers `/?q=...#browser` — lu par `PromptBrowser`. Repris de la
+ * qui renvoie vers `/?q=...#browser` - lu par `PromptBrowser`. Repris de la
  * grille de resultats plutot que redondant avec elle : c'est la porte
  * d'entree, la grille garde ses filtres avances (outil IA, tag, tri).
  */

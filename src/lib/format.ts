@@ -38,22 +38,22 @@ function toDate(value: string | null | undefined): Date | null {
 
 export function formatDate(value: string | null | undefined): string {
   const date = toDate(value);
-  if (!date) return "—";
+  if (!date) return "-";
 
   return new Intl.DateTimeFormat(LOCALE, { dateStyle: "medium" }).format(date);
 }
 
 export function formatDateTime(value: string | null | undefined): string {
   const date = toDate(value);
-  if (!date) return "—";
+  if (!date) return "-";
 
   return new Intl.DateTimeFormat(LOCALE, { dateStyle: "medium", timeStyle: "short" }).format(date);
 }
 
-/** « il y a 3 jours » — pour un journal d'activite ou l'ordre importe plus que la date exacte. */
+/** « il y a 3 jours » - pour un journal d'activite ou l'ordre importe plus que la date exacte. */
 export function formatRelative(value: string | null | undefined): string {
   const date = toDate(value);
-  if (!date) return "—";
+  if (!date) return "-";
 
   const diffSeconds = Math.round((date.getTime() - Date.now()) / 1000);
   const formatter = new Intl.RelativeTimeFormat(LOCALE, { numeric: "auto" });

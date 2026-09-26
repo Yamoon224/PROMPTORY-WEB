@@ -6,7 +6,7 @@ export interface AsyncState<T> {
   data: T | null;
   isLoading: boolean;
   error: unknown;
-  /** Relance la requete — apres une mutation, par exemple. */
+  /** Relance la requete - apres une mutation, par exemple. */
   reload: () => void;
 }
 

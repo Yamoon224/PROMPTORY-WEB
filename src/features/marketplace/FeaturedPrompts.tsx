@@ -10,7 +10,7 @@ import { PromptCard } from "./PromptCard";
 
 /**
  * Mini-grille des prompts les plus telecharges, au-dessus de la grille
- * complete filtrable — une porte d'entree rapide, a la maniere des sections
+ * complete filtrable - une porte d'entree rapide, a la maniere des sections
  * "Trending" d'une marketplace, sans dupliquer les filtres du dessous.
  */
 export function FeaturedPrompts() {

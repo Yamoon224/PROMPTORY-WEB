@@ -32,7 +32,7 @@ const TONE_BLOB: Record<Tone, string> = {
 
 /** Une tuile de chiffre reste une carte parmi les autres : meme rayon, meme
  * lisere superieur que `Card`. La tache floue en coin est purement decorative
- * (jamais porteuse d'information) — un seul repere, discret, jamais anime. */
+ * (jamais porteuse d'information) - un seul repere, discret, jamais anime. */
 export function StatCard({
   label,
   value,

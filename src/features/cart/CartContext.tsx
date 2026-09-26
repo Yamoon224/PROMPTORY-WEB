@@ -53,7 +53,7 @@ function parseCart(raw: string): CartItem[] {
  * panier ne fait donc que regrouper ces achats a l'ecran et les rejoue en
  * sequence au moment de payer (voir `CartView`).
  *
- * Persiste via `usePreference` — le meme stockage que le theme — plutot qu'un
+ * Persiste via `usePreference` - le meme stockage que le theme - plutot qu'un
  * `useState` + `useEffect` maison : le rendu serveur et la premiere passe
  * d'hydratation voient donc un panier vide sans jamais diverger du client, et
  * plusieurs onglets restent synchronises.

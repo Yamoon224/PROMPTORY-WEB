@@ -20,7 +20,7 @@ export function PromptModerationQueue() {
 
   const columns: Array<Column<Prompt>> = [
     { key: "title", header: "Prompt", cell: (prompt) => <span className="font-semibold">{prompt.title}</span> },
-    { key: "creator", header: "Createur", cell: (prompt) => prompt.creator?.name ?? "—" },
+    { key: "creator", header: "Createur", cell: (prompt) => prompt.creator?.name ?? "-" },
     { key: "price", header: "Prix", cell: (prompt) => (prompt.is_free ? "Gratuit" : formatMoney(prompt.price)), hideOnMobile: true },
     {
       key: "content",

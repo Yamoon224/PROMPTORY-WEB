@@ -24,14 +24,14 @@ const PROMPTS = [
 /**
  * Hero de la landing publique : la promesse produit a gauche, une
  * reconstitution de l'app (pas une vraie capture) a droite. La maquette est
- * decorative — le contenu utile a un lecteur d'ecran est deja dans le texte
+ * decorative - le contenu utile a un lecteur d'ecran est deja dans le texte
  * qui la precede.
  */
 export function LandingHero() {
   return (
     <section className="relative left-1/2 right-1/2 -mx-[50vw] w-screen bg-[var(--surface-muted)]">
       <div className="mx-auto max-w-5xl px-4 py-16 text-center sm:px-8 sm:py-20 lg:px-12">
-        <p className="grad-brand-soft mx-auto inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-semibold text-brand-700 dark:text-brand-300">
+        <p className="grad-brand-soft mx-auto inline-flex items-center gap-2 rounded-md px-3.5 py-1.5 text-xs font-semibold text-brand-700 dark:text-brand-300">
           <IconSparkle className="h-3.5 w-3.5" />
           Extension Chrome gratuite incluse
         </p>
@@ -49,7 +49,7 @@ export function LandingHero() {
           <LinkButton href="/inscription" size="lg" icon={<IconBolt className="h-5 w-5" />}>
             Installer gratuitement
           </LinkButton>
-          <LinkButton href="/packs" variant="secondary" size="lg" icon={<IconArrowRight className="h-5 w-5" />}>
+          <LinkButton href="/#marketplace" variant="secondary" size="lg" icon={<IconArrowRight className="h-5 w-5" />}>
             Voir la marketplace
           </LinkButton>
         </div>
@@ -93,7 +93,7 @@ function AppMockup() {
         <span className="h-2.5 w-2.5 rounded-full bg-rose-400" />
         <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
         <span className="h-2.5 w-2.5 rounded-full bg-emerald-400" />
-        <span className="mx-auto rounded-full bg-[var(--surface-muted)] px-4 py-1 text-xs text-[var(--muted)]">
+        <span className="mx-auto rounded-md bg-[var(--surface-muted)] px-4 py-1 text-xs text-[var(--muted)]">
           app.promptory.io
         </span>
       </div>
@@ -115,10 +115,10 @@ function AppMockup() {
 
         <div className="min-w-0 p-4">
           <div className="flex items-center gap-2">
-            <span className="flex-1 rounded-full bg-[var(--surface-muted)] px-3.5 py-2 text-sm text-[var(--muted)]">
+            <span className="flex-1 rounded-md bg-[var(--surface-muted)] px-3.5 py-2 text-sm text-[var(--muted)]">
               Rechercher un prompt…
             </span>
-            <span className="grad-brand flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-white">
+            <span className="grad-brand flex h-8 w-8 shrink-0 items-center justify-center rounded-md text-white">
               +
             </span>
           </div>
@@ -132,7 +132,7 @@ function AppMockup() {
                       className={`h-3.5 w-3.5 shrink-0 ${prompt.starred ? "fill-brand-500 text-brand-500" : "text-[var(--muted)]"}`}
                     />
                     <span className="truncate text-sm font-medium text-[var(--foreground)]">{prompt.title}</span>
-                    <span className="grad-brand-soft shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold text-brand-700 dark:text-brand-300">
+                    <span className="grad-brand-soft shrink-0 rounded-md px-2 py-0.5 text-[10px] font-semibold text-brand-700 dark:text-brand-300">
                       {prompt.tag}
                     </span>
                   </span>
@@ -143,7 +143,7 @@ function AppMockup() {
               ))}
             </ul>
 
-            <div className="animate-float-fast absolute -right-3 -top-6 hidden items-center gap-2 rounded-full border border-[var(--hairline)] bg-[var(--surface)] px-3 py-1.5 shadow-card sm:flex">
+            <div className="animate-float-fast absolute -right-3 -top-6 hidden items-center gap-2 rounded-md border border-[var(--hairline)] bg-[var(--surface)] px-3 py-1.5 shadow-card sm:flex">
               <IconBolt className="h-3.5 w-3.5 text-brand-500" />
               <span className="text-xs font-semibold text-[var(--foreground)]">Prompt injecté</span>
               <span className="text-[11px] text-[var(--muted)]">via ALT+P · ChatGPT</span>
@@ -155,7 +155,7 @@ function AppMockup() {
               <p className="text-[11px] font-semibold uppercase tracking-wider text-[var(--muted)]">
                 Aperçu · Machine à emails froids
               </p>
-              <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">
+              <span className="rounded-md bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">
                 Publié
               </span>
             </div>
@@ -168,7 +168,7 @@ function AppMockup() {
                 <IconCheck className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
                 3 variables · Injecté dans ChatGPT
               </span>
-              <span className="rounded-full border border-[var(--hairline)] px-3 py-1 text-xs font-semibold text-[var(--foreground)]">
+              <span className="rounded-md border border-[var(--hairline)] px-3 py-1 text-xs font-semibold text-[var(--foreground)]">
                 ▷ Tester
               </span>
             </div>

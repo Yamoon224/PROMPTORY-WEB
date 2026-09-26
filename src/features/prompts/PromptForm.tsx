@@ -115,7 +115,7 @@ export function PromptForm({ prompt }: { prompt?: Prompt }) {
               onChange={setFolderId}
               disabled={isLocked}
               clearable
-              emptyLabel="Aucun dossier — creez-en un depuis « Mes dossiers »"
+              emptyLabel="Aucun dossier - creez-en un depuis « Mes dossiers »"
             />
           </div>
 

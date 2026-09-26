@@ -62,7 +62,7 @@ export function LandingPricing() {
           Choisissez votre plan créateur.
         </h2>
         <p className="mt-3 text-base leading-relaxed text-[var(--muted)]">
-          De la productivité personnelle à la monétisation professionnelle — un plan pour chaque profil de créateur.
+          De la productivité personnelle à la monétisation professionnelle - un plan pour chaque profil de créateur.
         </p>
       </div>
 
@@ -81,7 +81,7 @@ export function LandingPricing() {
               </span>
               <span
                 className={cn(
-                  "rounded-full px-2.5 py-0.5 text-[11px] font-semibold",
+                  "rounded-md px-2.5 py-0.5 text-[11px] font-semibold",
                   plan.highlighted
                     ? "grad-brand text-white"
                     : "bg-[var(--surface-muted)] text-[var(--muted)]",

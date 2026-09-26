@@ -84,7 +84,7 @@ export function SubscriptionPanel() {
         <PaymentMethodModal
           isOpen
           onClose={() => setSubscribingTo(null)}
-          title={`S'abonner — ${SUBSCRIPTION_TYPE_LABEL[subscribingTo.type]}`}
+          title={`S'abonner - ${SUBSCRIPTION_TYPE_LABEL[subscribingTo.type]}`}
           amountLabel={`${formatMoney(subscribingTo.price)} / mois`}
           onConfirm={onSubscribe}
           isPending={subscribeMutation.isPending}

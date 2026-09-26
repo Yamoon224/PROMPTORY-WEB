@@ -27,7 +27,7 @@ interface ComboboxShellProps {
  *
  * Rendue directement comme enfant de `.field-shell` (jamais dans un `<div>`
  * intermediaire) : elle se positionne grace au `position: relative` deja
- * porte par `.field-shell`, et n'a donc pas besoin d'un conteneur a elle —
+ * porte par `.field-shell`, et n'a donc pas besoin d'un conteneur a elle -
  * conteneur qui casserait la relation de fraternite CSS exigee par le libelle
  * flottant (voir le commentaire sur `.field-control` plus bas).
  */
@@ -106,11 +106,11 @@ interface SearchableSelectFieldProps {
  * valeur (une chaine, comme un `<select>`).
  *
  * Le control est un `<button>` rendu **directement** comme frere de la
- * `<legend>` et du `<label>` flottant de `Field` — jamais enveloppe dans un
+ * `<legend>` et du `<label>` flottant de `Field` - jamais enveloppe dans un
  * `<div>` a soi. `.field-control:not(:placeholder-shown) ~ .field-label` (voir
  * `globals.css`) est un selecteur de **fraternite** : un bouton ne declenche
  * jamais `:placeholder-shown`, ce qui suffit a maintenir le libelle flottant en
- * permanence, exactement comme pour un `<select>` natif — mais seulement si le
+ * permanence, exactement comme pour un `<select>` natif - mais seulement si le
  * bouton et le libelle partagent le meme parent direct.
  */
 export function SearchableSelectField({

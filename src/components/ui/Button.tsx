@@ -35,7 +35,7 @@ const SIZE_CLASSES: Record<ButtonSize, string> = {
 
 /**
  * Habillage partage par le bouton et par le lien qui doit lui ressembler. Un
- * lien de navigation reste un `<a>` — clic milieu, ouverture en onglet —, il
+ * lien de navigation reste un `<a>` - clic milieu, ouverture en onglet -, il
  * reprend seulement ces classes.
  */
 export function buttonClasses({
@@ -48,7 +48,7 @@ export function buttonClasses({
   className?: string;
 } = {}): string {
   return cn(
-    "inline-flex items-center justify-center rounded-full font-semibold whitespace-nowrap select-none",
+    "inline-flex items-center justify-center rounded-md font-semibold whitespace-nowrap select-none",
     "transition-all duration-150",
     "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500",
     "disabled:cursor-not-allowed disabled:opacity-55 disabled:shadow-none disabled:active:translate-y-0",

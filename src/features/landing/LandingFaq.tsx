@@ -14,7 +14,7 @@ const FAQ_ITEMS = [
   {
     question: "Comment fonctionne l'extension Chrome ?",
     answer:
-      "Une fois installée, l'extension ajoute un raccourci (ALT+P) qui insère instantanément un prompt de votre bibliothèque dans la zone de saisie de ChatGPT, Claude ou Gemini, variables déjà remplies — sans copier-coller.",
+      "Une fois installée, l'extension ajoute un raccourci (ALT+P) qui insère instantanément un prompt de votre bibliothèque dans la zone de saisie de ChatGPT, Claude ou Gemini, variables déjà remplies - sans copier-coller.",
   },
   {
     question: "Puis-je vendre mes prompts ?",
@@ -86,7 +86,7 @@ export function LandingFaq() {
         <div className="mt-8 flex flex-col items-center justify-between gap-4 rounded-md border border-[var(--hairline)] bg-[var(--surface)] px-5 py-4 sm:flex-row">
           <div>
             <p className="text-sm font-semibold text-[var(--foreground)]">Une question spécifique ?</p>
-            <p className="text-sm text-[var(--muted)]">Notre équipe répond sous 12h — sans ticket, sans jargon.</p>
+            <p className="text-sm text-[var(--muted)]">Notre équipe répond sous 12h - sans ticket, sans jargon.</p>
           </div>
           <LinkButton href="mailto:hello@promptory.io" variant="secondary" size="sm">
             Nous contacter

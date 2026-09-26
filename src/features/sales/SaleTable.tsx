@@ -13,7 +13,7 @@ import type { Sale } from "@/types/api";
 const ITEM_COLUMN: Column<Sale> = {
   key: "item",
   header: "Article",
-  cell: (sale) => sale.prompt?.title ?? sale.pack?.title ?? "—",
+  cell: (sale) => sale.prompt?.title ?? sale.pack?.title ?? "-",
 };
 
 const PRICE_COLUMN: Column<Sale> = {
@@ -48,7 +48,7 @@ export function MyPurchasesTable() {
 
   const columns: Array<Column<Sale>> = [
     ITEM_COLUMN,
-    { key: "creator", header: "Createur", cell: (sale) => sale.creator?.name ?? "—", hideOnMobile: true },
+    { key: "creator", header: "Createur", cell: (sale) => sale.creator?.name ?? "-", hideOnMobile: true },
     PRICE_COLUMN,
     STATUS_COLUMN,
     DATE_COLUMN,
@@ -80,7 +80,7 @@ export function MyEarningsTable() {
 
   const columns: Array<Column<Sale>> = [
     ITEM_COLUMN,
-    { key: "buyer", header: "Acheteur", cell: (sale) => sale.buyer?.name ?? "—", hideOnMobile: true },
+    { key: "buyer", header: "Acheteur", cell: (sale) => sale.buyer?.name ?? "-", hideOnMobile: true },
     PRICE_COLUMN,
     { key: "commission", header: "Commission", cell: (sale) => formatMoney(sale.commission), hideOnMobile: true },
     { key: "net", header: "Net", cell: (sale) => <span className="font-semibold">{formatMoney(sale.net_amount)}</span> },
@@ -118,8 +118,8 @@ export function AllSalesTable() {
 
   const columns: Array<Column<Sale>> = [
     ITEM_COLUMN,
-    { key: "buyer", header: "Acheteur", cell: (sale) => sale.buyer?.name ?? "—" },
-    { key: "creator", header: "Createur", cell: (sale) => sale.creator?.name ?? "—", hideOnMobile: true },
+    { key: "buyer", header: "Acheteur", cell: (sale) => sale.buyer?.name ?? "-" },
+    { key: "creator", header: "Createur", cell: (sale) => sale.creator?.name ?? "-", hideOnMobile: true },
     PRICE_COLUMN,
     { key: "commission", header: "Commission", cell: (sale) => formatMoney(sale.commission), hideOnMobile: true },
     STATUS_COLUMN,

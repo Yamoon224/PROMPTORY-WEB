@@ -16,3 +16,5 @@ export * as subscriptionService from "./subscription-service";
 export * as reviewService from "./review-service";
 export * as userService from "./user-service";
 export * as activityService from "./activity-service";
+export * as marketingService from "./marketing-service";
+export * as systemService from "./system-service";

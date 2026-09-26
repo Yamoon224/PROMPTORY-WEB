@@ -8,7 +8,7 @@ import { Modal } from "./Modal";
 
 /**
  * Confirmation d'une action irreversible : archiver un prompt, revoquer un
- * abonnement. Le refus metier (409) s'affiche ici plutot que de disparaitre —
+ * abonnement. Le refus metier (409) s'affiche ici plutot que de disparaitre -
  * c'est souvent la reponse la plus utile de l'ecran.
  */
 export function ConfirmDialog({

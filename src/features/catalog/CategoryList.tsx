@@ -34,7 +34,7 @@ export function CategoryList() {
 
   const columns: Array<Column<Category>> = [
     { key: "name", header: "Nom", sortKey: "name", cell: (category) => <span className="font-semibold">{category.name}</span> },
-    { key: "parent", header: "Parent", cell: (category) => category.parent?.name ?? "—", hideOnMobile: true },
+    { key: "parent", header: "Parent", cell: (category) => category.parent?.name ?? "-", hideOnMobile: true },
     { key: "prompts", header: "Prompts", cell: (category) => category.prompts_count ?? 0, hideOnMobile: true },
     {
       key: "actions",
