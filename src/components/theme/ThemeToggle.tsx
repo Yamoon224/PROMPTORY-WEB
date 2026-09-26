@@ -25,7 +25,7 @@ export function ThemeToggle({ showLabels = false, className }: { showLabels?: bo
       role="radiogroup"
       aria-label="Theme de l'interface"
       className={cn(
-        "inline-flex items-center gap-0.5 rounded-full border border-[var(--hairline)] bg-[var(--surface)] p-0.5",
+        "inline-flex items-center gap-0.5 rounded-md border border-[var(--hairline)] bg-[var(--surface)] p-0.5",
         className,
       )}
     >
@@ -42,7 +42,7 @@ export function ThemeToggle({ showLabels = false, className }: { showLabels?: bo
             title={label}
             onClick={() => setTheme(value)}
             className={cn(
-              "inline-flex items-center gap-1.5 rounded-full px-2 py-1.5 text-xs font-semibold transition-colors",
+              "inline-flex items-center gap-1.5 rounded-md px-2 py-1.5 text-xs font-semibold transition-colors",
               isActive
                 ? "grad-brand text-white shadow-sm"
                 : "text-stone-500 hover:bg-stone-100 hover:text-stone-800 dark:text-stone-400 dark:hover:bg-stone-800 dark:hover:text-stone-100",

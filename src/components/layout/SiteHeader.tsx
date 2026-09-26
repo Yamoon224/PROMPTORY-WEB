@@ -108,7 +108,7 @@ export function SiteHeader() {
               </Link>
             ))}
           </nav>
-          <div className="mt-3 flex items-center justify-between gap-3 border-t border-[var(--hairline)] pt-3">
+          <div className="mt-3 flex flex-col gap-3 border-t border-[var(--hairline)] pt-3">
             <ThemeToggle showLabels />
             {user ? (
               <LinkButton href="/espace" variant="secondary" size="sm" onClick={() => setIsOpen(false)}>
