@@ -59,7 +59,7 @@ const ComboboxPanel = forwardRef<HTMLDivElement, ComboboxShellProps>(function Co
           className="w-full rounded-full bg-transparent py-1.5 pl-7 pr-2 text-sm text-[var(--foreground)] outline-none placeholder:text-stone-400"
         />
       </div>
-      <ul role="listbox" className="max-h-56 overflow-y-auto py-1">
+      <ul role="listbox" className="max-h-80 overflow-y-auto py-1">
         {children}
       </ul>
     </div>

@@ -1,22 +1,83 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Button, Card, CardBody, CardHeader, ConfirmDialog, EmptyState, ErrorState, FormAlert, LoadingState, Modal, TextField } from "@/components/ui";
 import { SearchableSelectField } from "@/components/ui/Combobox";
 import { IconFolder, IconPencil, IconPlus, IconTrash } from "@/components/ui/icons";
 import { useAsyncData } from "@/hooks/useAsyncData";
 import { useMutation } from "@/hooks/useMutation";
 import { ApiError } from "@/lib/api-client";
+import { cn } from "@/lib/cn";
 import { folderService } from "@/services";
 import type { FolderInput } from "@/services/folder-service";
 import type { Folder } from "@/types/api";
 
-/** Dossiers personnels : liste plate suffit ici, la profondeur reelle se voit au parent affiche entre parentheses. */
+interface FolderNode {
+  folder: Folder;
+  depth: number;
+  /** Pour chaque niveau d'ancetre au-dessus de celui-ci, la ligne verticale doit-elle se poursuivre (cet ancetre a encore un frere apres lui) ? */
+  ancestorContinues: boolean[];
+}
+
+/** Aplatit les dossiers en ordre d'affichage (parent avant enfants, enfants tries par nom), avec de quoi dessiner les guides de l'arbre. */
+function buildFolderTree(folders: Folder[]): FolderNode[] {
+  const validIds = new Set(folders.map((folder) => folder.id));
+  const childrenByParent = new Map<number | "root", Folder[]>();
+
+  for (const folder of folders) {
+    const key = folder.parent_id !== null && validIds.has(folder.parent_id) ? folder.parent_id : "root";
+    const siblings = childrenByParent.get(key) ?? [];
+    siblings.push(folder);
+    childrenByParent.set(key, siblings);
+  }
+  for (const siblings of childrenByParent.values()) siblings.sort((a, b) => a.name.localeCompare(b.name));
+
+  const nodes: FolderNode[] = [];
+  function walk(parentKey: number | "root", depth: number, ancestorContinues: boolean[]) {
+    const siblings = childrenByParent.get(parentKey) ?? [];
+    siblings.forEach((folder, index) => {
+      const isLast = index === siblings.length - 1;
+      nodes.push({ folder, depth, ancestorContinues });
+      walk(folder.id, depth + 1, [...ancestorContinues, !isLast]);
+    });
+  }
+  walk("root", 0, []);
+  return nodes;
+}
+
+/** Guides verticaux (type arborescence de fichiers) montrant a quel dossier parent chaque ligne appartient, sans texte repetitif. */
+function FolderTreeGuides({ ancestorContinues }: { ancestorContinues: boolean[] }) {
+  if (ancestorContinues.length === 0) return null;
+
+  return (
+    <span className="flex shrink-0 self-stretch">
+      {ancestorContinues.map((continues, index) => {
+        const isLast = index === ancestorContinues.length - 1;
+        return (
+          <span key={index} className="relative w-5 shrink-0 self-stretch">
+            {isLast ? (
+              <>
+                <span className="absolute left-1/2 top-0 h-1/2 w-px -translate-x-1/2 bg-[var(--hairline)]" />
+                <span className="absolute left-1/2 top-1/2 h-px w-1/2 bg-[var(--hairline)]" />
+                {continues ? <span className="absolute left-1/2 top-1/2 h-1/2 w-px -translate-x-1/2 bg-[var(--hairline)]" /> : null}
+              </>
+            ) : continues ? (
+              <span className="absolute inset-y-0 left-1/2 w-px -translate-x-1/2 bg-[var(--hairline)]" />
+            ) : null}
+          </span>
+        );
+      })}
+    </span>
+  );
+}
+
+/** Dossiers personnels : vue en arbre avec guides de hierarchie, pour voir d'un coup d'oeil quel dossier contient quoi. */
 export function FolderList() {
   const { data: folders, isLoading, error, reload } = useAsyncData(folderService.listFolders);
   const [editing, setEditing] = useState<Folder | "new" | null>(null);
   const [pendingDelete, setPendingDelete] = useState<Folder | null>(null);
   const deleteMutation = useMutation((id: number) => folderService.deleteFolder(id));
+  const tree = useMemo(() => buildFolderTree(folders ?? []), [folders]);
 
   if (isLoading) return <LoadingState label="Chargement des dossiers…" />;
   if (error) return <ErrorState error={error} onRetry={reload} />;
@@ -37,24 +98,22 @@ export function FolderList() {
         <CardBody>
           {folders && folders.length > 0 ? (
             <ul className="flex flex-col divide-y divide-[var(--hairline)]">
-              {folders.map((folder) => {
-                const parent = folders.find((candidate) => candidate.id === folder.parent_id);
-
-                return (
-                  <li key={folder.id} className="flex items-center justify-between gap-3 py-3">
-                    <div className="min-w-0">
+              {tree.map(({ folder, depth, ancestorContinues }) => (
+                <li key={folder.id} className="flex items-stretch justify-between gap-3 py-1">
+                  <div className="flex min-w-0 items-center gap-2">
+                    <FolderTreeGuides ancestorContinues={ancestorContinues} />
+                    <IconFolder className={cn("h-4 w-4 shrink-0", depth === 0 ? "text-stone-500" : "text-stone-400")} />
+                    <div className="min-w-0 py-2">
                       <p className="truncate text-sm font-semibold">{folder.name}</p>
-                      <p className="text-xs text-[var(--muted)]">
-                        {folder.prompts_count ?? 0} prompt(s){parent ? ` · dans ${parent.name}` : ""}
-                      </p>
+                      <p className="text-xs text-[var(--muted)]">{folder.prompts_count ?? 0} prompt(s)</p>
                     </div>
-                    <div className="flex shrink-0 gap-1.5">
-                      <Button variant="secondary" size="sm" onClick={() => setEditing(folder)} icon={<IconPencil className="h-3.5 w-3.5" />} />
-                      <Button variant="danger" size="sm" onClick={() => setPendingDelete(folder)} icon={<IconTrash className="h-3.5 w-3.5" />} />
-                    </div>
-                  </li>
-                );
-              })}
+                  </div>
+                  <div className="flex shrink-0 items-center gap-1.5">
+                    <Button variant="secondary" size="sm" onClick={() => setEditing(folder)} icon={<IconPencil className="h-3.5 w-3.5" />} />
+                    <Button variant="danger" size="sm" onClick={() => setPendingDelete(folder)} icon={<IconTrash className="h-3.5 w-3.5" />} />
+                  </div>
+                </li>
+              ))}
             </ul>
           ) : (
             <EmptyState icon={<IconFolder className="h-5 w-5" />} title="Aucun dossier pour l'instant" />
@@ -119,6 +178,7 @@ function FolderFormModal({
       isOpen
       onClose={onClose}
       title={folder ? "Modifier le dossier" : "Nouveau dossier"}
+      size="lg"
       footer={
         <>
           <Button variant="secondary" onClick={onClose}>
