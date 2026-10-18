@@ -18,16 +18,26 @@ export function Card({
   children,
   className,
   interactive = false,
+  allowOverflow = false,
 }: {
   children: ReactNode;
   className?: string;
   /** Survol accentue, pour une carte cliquable (resultat de recherche). */
   interactive?: boolean;
+  /**
+   * Desactive le `overflow-hidden` de la carte (defaut : clippe, pour les
+   * coins arrondis et les en-tetes image qui touchent le bord). A activer
+   * pour toute carte contenant un `SearchableSelectField`/`MultiSelectField`
+   * dont le panneau deroulant doit pouvoir deborder de la carte au lieu
+   * d'etre coupe net.
+   */
+  allowOverflow?: boolean;
 }) {
   return (
     <section
       className={cn(
-        "flex flex-col overflow-hidden rounded-md border border-[var(--hairline)] border-t-[3px] border-t-[var(--card-border-top)] bg-[var(--surface)] shadow-card",
+        "flex flex-col rounded-md border border-[var(--hairline)] border-t-[3px] border-t-[var(--card-border-top)] bg-[var(--surface)] shadow-card",
+        allowOverflow ? "overflow-visible" : "overflow-hidden",
         interactive && "transition-all duration-200 hover:-translate-y-0.5 hover:shadow-card-hover",
         className,
       )}

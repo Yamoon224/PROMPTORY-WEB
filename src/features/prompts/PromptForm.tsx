@@ -64,7 +64,7 @@ export function PromptForm({ prompt }: { prompt?: Prompt }) {
 
   return (
     <form onSubmit={submit} noValidate>
-      <Card>
+      <Card allowOverflow>
         <CardHeader
           icon={<IconPrompt className="h-4 w-4" />}
           title={isEditing ? "Modifier le prompt" : "Nouveau prompt"}

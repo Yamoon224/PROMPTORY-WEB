@@ -45,7 +45,7 @@ export function PackForm({ pack }: { pack?: Pack }) {
 
   return (
     <form onSubmit={submit} noValidate>
-      <Card>
+      <Card allowOverflow>
         <CardHeader
           icon={<IconPackage className="h-4 w-4" />}
           title={isEditing ? "Modifier le pack" : "Nouveau pack"}
